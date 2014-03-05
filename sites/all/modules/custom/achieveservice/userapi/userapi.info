@@ -1,0 +1,6 @@
+name           = "UserAPI"
+description    = "Provides an API to create users."
+core           = "7.x"
+dependencies[] = profile
+dependencies[] = govplatform_user
+dependencies[] = achieveservice_core

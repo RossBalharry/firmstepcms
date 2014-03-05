@@ -1,0 +1,14 @@
+name = "Menu Block"
+description = "Provides configurable blocks of menu items."
+
+core = 7.x
+dependencies[] = menu (>7.11)
+
+configure = admin/config/user-interface/menu-block
+
+; Information added by  packaging script on 2013-11-07
+version = "7.x-2.3+38-dev"
+core = "7.x"
+project = "menu_block"
+datestamp = "1383837832"
+

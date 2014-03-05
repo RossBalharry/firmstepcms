@@ -1,0 +1,274 @@
+<?php
+
+function userapi_menu() {
+  $items = array();
+  $items['admin/settings/userapi'] = array(
+    'title'            => 'UserAPI',
+    'description'      => 'The UserAPI settings',
+    'page callback'    => 'drupal_get_form',
+    'page arguments'   => array('userapi_settings'),
+    'access arguments' => array('administer userapi'),
+    'type'             => MENU_NORMAL_ITEM,
+  );
+  $items['userapi_createuser'] = array(
+    'title'            => 'UserAPI create user',
+    'description'      => t('API to create a user'),
+    'page callback'    => 'userapi_createuser',
+    'access arguments' => array('access content'),
+    'type'             => MENU_CALLBACK
+  );
+  $items['userapi_deleteuser'] = array(
+    'title'            => 'UserAPI delete user',
+    'description'      => t('API to delete a user'),
+    'page callback'    => 'userapi_deleteuser',
+    'access arguments' => array('access content'),
+    'type'             => MENU_CALLBACK
+  );
+  $items['userapi_updateuser'] = array(
+    'title'            => 'UserAPI update user',
+    'description'      => t('API to update a user'),
+    'page callback'    => 'userapi_updateuser',
+    'access arguments' => array('access content'),
+    'type'             => MENU_CALLBACK
+  );
+  $items['userapi_checkuser'] = array(
+    'title'            => 'UserAPI check user',
+    'description'      => t('API to check a user'),
+    'page callback'    => 'userapi_checkuser',
+    'access arguments' => array('access content'),
+    'type'             => MENU_CALLBACK
+  );
+  $items['userapi_setpassword'] = array(
+    'title'            => 'UserAPI set password',
+    'description'      => t('set the password for a new user'),
+    'page callback'    => 'userapi_createuser',
+    'access arguments' => array('access content'),
+    'type'             => MENU_CALLBACK
+  );
+  $items['userapi/query'] = array(
+    'title'            => 'User API Query',
+    'page callback'    => 'userapi_query',
+    'access arguments' => array('access content'),
+    'type'             => MENU_CALLBACK);
+  return $items;
+}
+
+function userapi_perm() {
+  return array('administer userapi');
+}
+
+function userapi_settings() {
+  $form = array();
+  $form['userapi_key'] = array(
+    '#type'          => 'textfield',
+    '#title'         => t('UserAPI key'),
+    '#size'          => 15,
+    '#default_value' => variable_get('userapi_key', ''),
+    '#description'   => t('UserAPI key that has to be provided to create a user'),
+    '#required'      => TRUE,
+  );
+  return system_settings_form($form);
+}
+
+function userapi_query() {
+  global $user;
+  $user = user_load($user->uid);
+  
+  ob_end_clean();
+
+  if ($user->uid==0) {
+    /* Anonymous */
+    echo "<?xml version='1.0' encoding='UTF-8' ?>\n<response><user>Anonymous</user><loginfam>".url('userfam/login',array('absolute'=>true))."</loginfam><loginweb>".url('user',array('absolute'=>true))."</loginweb></response>";
+    exit;
+  }
+
+  echo "<?xml version='1.0' encoding='UTF-8' ?>\n<response>";
+  echo "<user>".$user->name."</user>";
+  echo "<email>".$user->mail."</email>";
+  if (isset($user->field_user_fam_username)) {
+    echo "<useralias>".$user->field_user_fam_username['und'][0]['safe_value']."</useralias>";
+  }
+  echo "<roles>";
+  foreach ($user->roles as $role) {
+    echo "<role>".$role."</role>";
+  }
+  echo "</roles>";
+  $as_config = achieveservice_core_getconfig();
+  $as_user = achieveservice_core_getuser($as_config);
+  $profile = achieveservice_core_getprofile($as_config, $as_user);
+  echo "<profile>";
+
+
+  foreach ($profile as $k=>$field) {
+    if($k=="email" && strlen($field)==0) { $field = $user->mail; }
+    if($k=="surname" && strlen($field)==0) { $field = $user->field_last_name['und'][0]['value']; }
+    if($k=="firstname" && strlen($field)==0) { $field = $user->field_first_name['und'][0]['value']; }
+    echo "<field><name>".$k."</name><value>".$field."</value></field>";
+  }
+  $fam_fullname = '';
+  if (isset($user->field_user_fam_fullname) && $user->field_user_fam_fullname['und'][0]['safe_value']!='')
+    $fam_fullname = $user->field_user_fam_fullname['und'][0]['safe_value'];
+  echo "<field><name>fam_fullname</name><value>".$fam_fullname."</value></field>";
+  echo "</profile>";
+  echo "<logout>".url('user/logout',array('absolute'=>true))."</logout>";
+  echo "</response>";
+
+  drupal_add_http_header('Content-Type', 'text/xml');
+
+  return;
+}
+
+function userapi_user_login(&$edit, $account) {
+  $r = drupal_get_destination();
+  if(substr($r['destination'],0,5)=='http:') {
+    header('Location: '. $r['destination'], TRUE, 302);
+    exit;
+  }
+}
+
+/* Allow redirects to other locations */
+function userapi_user_logout($account) {
+  $r = drupal_get_destination();
+  if(substr($r['destination'],0,5)=='http:') {
+    // this should be done by user_logout but it's not 
+    global $user;
+    session_destroy();
+    $user = drupal_anonymous_user();
+    drupal_goto($r['destination']);
+  }
+}
+
+function userapi_createuser() {
+  echo '<result>';
+  if(isset($_GET['key']) && $_GET['key'] == variable_get('userapi_key', '') && variable_get('userapi_key', '') != '') {
+    if(isset($_GET['user']) && isset($_GET['mail']) && isset($_GET['as_id'])) {
+      $newUser = array(
+        'name'                      => $_GET['user'], 
+        'pass'                      => user_password(),
+        'mail'                      => $_GET['mail'],
+        'status'                    => 1,
+        'profile_achieveservice_id' => $_GET['as_id']
+      );
+      $user = user_save('', $newUser);
+      if($user === FALSE) {
+        echo 'user_save failed. the user probably already exists.';
+      } else {
+        $result = achieveservice_core_saveprofile('profile_achieveservice_id', $_GET['as_id'], $user->uid);
+        if($result === FALSE) {
+          echo 'unable to save as_id.';
+        }
+
+        global $language;
+        $result = _user_mail_notify('password_reset', $user, $language);
+        if ($result === FALSE) {
+          echo 'unable to send email to new user.';
+        }
+
+        $result = achieveservice_core_updateprofile(achieveservice_core_getconfig(), $_GET['as_id'], 'SelfServiceAccount', 'Yes');
+        if ($result === FALSE) {
+          echo 'unable to set SelfServiceAccount in as profile.';
+        }
+      }
+    } else {
+      echo 'parameter missing. user, mail and as_id are required.';
+    }
+  } else {
+    echo 'authentication failed';
+  }
+  echo '</result>';
+  exit;
+}
+
+function userapi_deleteuser() {
+  echo '<result>';
+  if (isset($_GET['key']) && $_GET['key'] == variable_get('userapi_key', '') && variable_get('userapi_key', '') != '') {
+    if (isset($_GET['as_id'])) {
+      
+     $uid = _userapi_user_by_asid($_GET['as_id']);
+     
+      if ($uid == FALSE) {
+        echo 'User does not exist';
+      } else {
+        user_delete(array(), $uid);
+        echo 'probably worked';
+      }
+      
+    } else {
+      echo 'as_id parameter missing';
+    }
+  } else {
+    echo 'authentication failed';
+  }
+  echo '</result>';
+  exit;
+}
+
+function _userapi_user_by_asid($as_id) {
+  $query = new EntityFieldQuery;
+  $query
+    ->entityCondition('entity_type', 'user')
+    ->fieldCondition('field_achieveservice_id', 'value', $_GET['as_id'], '=');
+    
+  $users = $query->execute();
+  
+  if (isset($users['user']) && count($users['user']) > 0 && isset($users['user'][1]->uid))
+    return $users['user'][1]->uid;
+  return;
+}
+
+function userapi_updateuser() {
+  echo '<result>';
+  if (isset($_GET['key']) && $_GET['key'] == variable_get('userapi_key', '') && variable_get('userapi_key', '') != '') {
+    if (isset($_GET['as_id'])) {
+      //$result = db_query("SELECT uid FROM profile_values WHERE fid = (SELECT fid FROM profile_fields WHERE name = 'profile_achieveservice_id') AND value = '".$_GET['as_id']."'");
+      
+      $uid = _userapi_user_by_asid($_GET['as_id']);
+      
+      if ($uid == FALSE) {
+        $return = 'User does not exist';
+      } else {
+        $user = user_load($uid);
+        $edit = array();
+        if (isset($_GET['name'])) {
+          $edit['name'] = $_GET['name'];
+        }
+        if (isset($_GET['mail'])) {
+          $edit['mail'] = $_GET['mail'];
+        }
+        $result = user_save($user, $edit);
+        if ($result !== FALSE) {
+          echo 'probably worked';
+        } else {
+          echo 'unable to save the user for some reason';
+        }
+      
+      }
+    } else {
+      echo 'as_id parameter missing';
+    }
+  } else {
+    echo 'authentication failed';
+  }
+  echo '</result>';
+  exit;
+}
+
+function userapi_checkuser() {
+  echo '<result>';
+  if(isset($_GET['key']) && $_GET['key'] == variable_get('userapi_key', '') && variable_get('userapi_key', '') != '') {
+    if(isset($_GET['user'])) {
+      $result = user_load_by_name($_GET['user']);
+      if($result === FALSE) {
+        echo 'user does not exist';
+      } else {
+        echo 'user exists';
+      }
+    } else {
+      echo 'parameter missing. user is required.';
+    }
+  } else {
+    echo 'authentication failed';
+  }
+  echo '</result>';
+  exit;
+}

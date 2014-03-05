@@ -1,0 +1,15 @@
+/* 
+    Document   : tablet
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+img { width: 100%; }
+.featured-professors .views-field-field-image img { max-width: 96%; }
+.front #panel-third-wrapper { margin-top: 53px; }
+#main-content > .grid-inner,
+#sidebar-home-wrapper .block,
+#panel-first-wrapper,
+#panel-second-wrapper .panel-second-2 .block { margin-bottom: 22px; }
+#sidebar-second-wrapper .views-field-field-image { margin-bottom: 10px; }
+#sidebar-second-wrapper .views-field-title, #sidebar-second-wrapper .views-field-name { clear:both; }

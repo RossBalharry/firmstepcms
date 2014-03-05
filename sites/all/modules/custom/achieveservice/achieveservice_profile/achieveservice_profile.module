@@ -1,0 +1,367 @@
+<?php
+
+require("achieveservice_profile.block.inc");
+require("achieveservice_profile.validation.inc");
+
+function achieveservice_profile_menu() {
+  $items['admin/settings/achieveservice_profile'] = array(
+    'title'            => 'AchieveService Profile',
+    'description'      => 'The settings needed to display and synchronize the AchieveService profile',
+    'page callback'    => 'drupal_get_form',
+    'page arguments'   => array('achieveservice_profile_settings'),
+    'access arguments' => array('administer achieveservice'),
+    'type'             => MENU_NORMAL_ITEM,
+    );
+  $items['user/account/profile'] = array(
+    'title' => 'Profile',
+    'page callback' => 'achieveservice_profile_load_profile',
+    'access callback' => 'user_edit_access',
+    'type' => MENU_NORMAL_ITEM,
+    );
+  
+  $items['user/%user/profile'] = array(
+    'title' => 'Profile',
+    'page callback' => 'achieveservice_profile_load_profile',
+    'access callback' => 'user_edit_access',
+    'access arguments' => array(1),
+    'type' => MENU_DEFAULT_LOCAL_TASK,
+    //'tab_parent' => 'user/%user',
+    'weight' => -99,
+    );
+ 
+  if (variable_get('achieveservice_subscriptions_formid', FALSE)) { 
+    $items['user/%user/subscriptions'] = array(
+      'title' => 'Subscriptions',
+      'page callback' => 'achieveservice_profile_load_profile',
+      'page arguments' => array('subscriptions'),
+      'access callback' => 'user_edit_access',
+      'access arguments' => array(1),
+      'type' => MENU_LOCAL_TASK,
+      //'tab_parent' => 'user/%user',
+    );
+  }
+  return $items;
+}
+
+
+function achieveservice_profile_menu_alter(&$items) {
+  $items['user/%user/edit']['title'] = "Account";
+  // $items['user/%user/view']['type'] = MENU_LOCAL_TASK;
+  $items['user/%user']['page callback'] = 'achieveservice_profile_load_profile';
+  $items['user/%user']['page arguments'] = array('profile');
+  $items['user/%user']['access callback'] = 'user_edit_access';
+  $items['user/%user']['access arguments'] = array(1);
+  if (!variable_get('achieveservice_show_default_view_profile', '1')) {
+    unset($items['user/%user/view']);
+    //$items['user/%user/view'] = array(
+    //  'title' => 'View',
+    //  'page callback' => 'user_view_page',
+    //  'page arguments' => array(1),
+    //  'access callback' => 'user_view_access',
+    //  'access arguments' => array(1),
+    //  'type' => MENU_LOCAL_TASK,
+    //  );
+    }
+  
+}
+
+function achieveservice_profile_settings() {
+  $form = array();
+  $form['achieveservice_profile_formid'] = array(
+    '#type'          => 'textfield',
+    '#title'         => t('AchieveService profile form id'),
+    '#size'          => 10,
+    '#default_value' => variable_get('achieveservice_profile_formid', ''),
+    '#description'   => t('ID of the AchieveService profile form'),
+    '#required'      => TRUE,
+  );
+  $form['achieveservice_subscriptions_formid'] = array(
+    '#type'          => 'textfield',
+    '#title'         => t('AchieveService subscriptions form id'),
+    '#size'          => 10,
+    '#default_value' => variable_get('achieveservice_subscriptions_formid', ''),
+    '#description'   => t('ID of the AchieveService subscriptions form'),
+    '#required'      => TRUE,
+  );
+  
+  $form['achieveservice_profile_require_unique_username'] = array(
+    '#type'          => 'checkbox',
+    '#title'         => t('Require unique username rather than email address'),
+    '#default_value' => variable_get('achieveservice_profile_require_unique_username', '0'),
+  );
+  $form['achieveservice_profile_hide_username'] = array(
+    '#type'          => 'checkbox',
+    '#title'         => t('Hide username field'),
+    '#description'   => t('Not compatible with "Require unique username". Requires LoginToboggan.'),
+    '#default_value' => variable_get('achieveservice_profile_hide_username', '0'),
+  );
+  
+  $form['achieveservice_show_firstname_surname'] = array(
+    '#type'          => 'checkbox',
+    '#title'         => t('Show Firstname and Surname fields in Drupal Profile'),
+    '#default_value' => variable_get('achieveservice_show_firstname_surname', '1'),
+    '#description'   => t('Drupal to capture the Firstname and Surname in registration form and profile form.'),
+  );
+  $form['achieveservice_show_default_view_profile'] = array(
+    '#type'          => 'checkbox',
+    '#title'         => t('Show Default View tab in Drupal Profile'),
+    '#default_value' => variable_get('achieveservice_show_default_view_profile', '1'),
+  );
+  return system_settings_form($form);
+}
+
+function achieveservice_profile_form_submit($form, &$form_state) {
+  if (variable_get('achieveservice_profile_hide_username', '0')) {
+    _achieveservice_profile_set_username_to_email($form, $form_state);
+  }
+}
+
+function _achieveservice_profile_set_username_to_email($form, &$form_state) {
+  if ($form_state['values']['name']=='' || ($form_state['complete form']['account']['mail']['default_value'] == $form_state['account']['name'])) {
+    $form_state['values']['name'] = $form_state['values']['mail'];
+  }
+}
+
+function achieveservice_profile_form_alter(&$form, $form_state, $form_id) {
+
+  if ($form_id === 'user_profile_form' || $form_id === 'user_register_form' || $form_id === 'user_pass') {
+
+    if (variable_get('achieveservice_profile_require_unique_username', '0')) {
+      foreach ($form['#validate'] as $key => $value) {
+        if ($value == 'user_account_form_validate') 
+          $form['#validate'][$key] = 'achieveservice_profile_user_account_form_validate';
+      }
+    }
+
+    if (variable_get('achieveservice_profile_hide_username', '0')) {
+
+      // reorder some things
+      $form['account']['mail']['#weight'] = 0;
+      $form['account']['pass']['#weight'] = 1;
+      $form['account']['current_pass_required_values']['#weight'] = 1;
+      $form['account']['current_pass']['#weight'] = 1;
+      $form['account']['status']['#weight'] = 1;
+      $form['account']['roles']['#weight'] = 1;
+      $form['account']['access']['#weight'] = 1;
+      $form['account']['name']['#weight'] = 3;
+
+      if(!user_access('administer users')) 
+        unset($form['account']['name']);
+      else {
+        $form['account']['name']['#disabled'] = true;
+      }
+
+      // add extra submit action
+      array_unshift($form['#submit'], 'achieveservice_profile_form_submit');
+
+      foreach ($form['#validate'] as $key => $value) {
+        if ($value == 'user_account_form_validate') 
+          $form['#validate'][$key] = 'achieveservice_profile_user_account_form_validate_no_username';
+        elseif ($value == 'user_register_validate')
+          $form['#validate'][$key] = 'achieveservice_profile_user_register_validate_no_username';
+      }
+    }
+
+
+
+  }
+
+  if ($form_id === 'user_profile_form') {
+
+    #$form['account']['mail']['#type'] = 'hidden';
+    if(!user_access('administer users')) {
+      $form['field_achieveservice_id']['und'][0]['value']['#type'] = 'hidden';
+    }
+    
+    $form['account']['#title'] = '';
+    if (isset($form['achieveservice_profile']['whatever']) || isset($form['achieveservice_subscriptions']['whatever'])) {
+      unset($form['submit']);
+      unset($form['delete']);
+    }
+  }
+  elseif ($form_id === 'user_register_form') {
+
+    if (!variable_get('achieveservice_show_firstname_surname', '1')) {
+      unset($form['field_first_name']);
+      unset($form['field_last_name']);
+    }
+  }
+  elseif ($form_id === 'user_pass') {
+    if (variable_get('achieveservice_profile_require_unique_username', '0'))
+    {
+      $form['#validate'][] = '_achieveservice_profile_user_profile_validate';
+      $form["name"]["#title"] = 'Username';
+    }
+  }
+}
+
+function achieveservice_profile_form_user_profile_form_alter(&$form, &$form_state) {
+  
+  if(!user_access('administer users')) {
+    unset($form['field_achieveservice_id']);
+  }
+  unset($form['field_phone']);
+  unset($form['field_address1']);
+  unset($form['field_address2']);
+  unset($form['field_town']);
+  unset($form['field_county']);
+  unset($form['field_postcode']);
+  if (!variable_get('achieveservice_show_firstname_surname', '1'))
+  {
+    unset($form['field_first_name']);
+    unset($form['field_last_name']);
+  }
+}
+
+
+
+
+function achieveservice_profile_load_profile($form_type = 'profile') {
+  if ($form_type == 'view') {
+
+    return $result;
+  }
+  $config = achieveservice_core_getconfig();
+  if ($config === FALSE) {
+    $result = 'See error above.';
+  }
+  $result = achieveservice_profile_content($config, FALSE, $form_type);
+  if ($result == FALSE)
+    return array();
+  return $result;
+}
+
+//returns the AchieveService profile form
+//$currentuser: TRUE: authenticate the currently logged in user, FALSE: authenticate the user who's profile page is being viewed
+//returns false in case of an error and outputs an error message to drupal by itself
+function achieveservice_profile_content($config, $currentuser = FALSE, $form_type = 'profile') {
+  $allowed_form_types = array('profile', 'subscriptions');
+  if(!in_array($form_type, $allowed_form_types)) {
+    return FALSE;
+  }
+  
+  if ($currentuser === FALSE) {
+    $duid = arg(1);
+    if ($duid == 'account') {
+      global $user;
+      $duid = $user->uid;
+    }
+  } else {
+    global $user;
+    $duid = $user->uid;
+  }
+  
+  //get profile form id
+  switch($form_type) {
+    case 'subscriptions':
+      $formid = variable_get('achieveservice_subscriptions_formid', FALSE);
+      break;
+      
+    default:
+      $formid = variable_get('achieveservice_profile_formid', FALSE);
+      break;
+  }
+
+  if ($formid === FALSE) {
+    achieveservice_core_error(t('achieveservice_profile_content: Profile form id not set in AchieveService Profile settings.'));
+    return FALSE;
+  }
+
+  //assemble request path
+  // XXX: because new profile form has specific URL check for path-like ID instead
+  if (strpos($formid, '/') !== FALSE) {
+    $request_path = $formid.'?';
+  } else {
+    $request_path = '/RenderForm/?F.Name='.$formid;
+  }
+
+  foreach (array('ID', 'fs2s', 'fs2hb', 'random') as $part) {
+    if (!isset($_GET[$part])) continue;
+    $request_path .= "&$part={$_GET[$part]}";
+  }
+
+  //make request to AchieveService
+  $result = achieveservice_core_display($config, $request_path, $duid);
+  
+  if ($result === FALSE) {
+    return FALSE;
+  }
+
+  //redirect if necessary
+  if ($result['location'] !== FALSE) {
+    $redirect = 'Location: /'.$_GET['q'];
+    $query_string = textbetween($result['location'], '?', -1);
+    if ($query_string !== FALSE) {
+      $redirect .= '?'.$result['location'];
+    }
+    header($redirect);
+    exit;
+  }
+
+  //retrieve new profile data from AchieveService
+  $userextra = user_uid_optional_load($duid);
+  $profile_info = achieveservice_core_getprofile($config, $userextra->field_achieveservice_id['und'][0]['value']);
+  if ($profile_info === FALSE) {
+    return FALSE;
+  }
+
+  if (isset($profile_info['firstname']) && $profile_info['firstname'] !== FALSE) {
+    $sql_result = achieveservice_core_saveprofile('profile_firstname', $profile_info['firstname'], $duid);
+    if ($sql_result === FALSE) return FALSE;
+  }
+  if (isset($profile_info['surname']) && $profile_info['surname'] !== FALSE) {
+    $sql_result = achieveservice_core_saveprofile('profile_lastname', $profile_info['surname'], $duid);
+    if ($sql_result === FALSE) return FALSE;
+  }
+  if (isset($profile_info['postcode']) && $profile_info['postcode'] !== FALSE) {
+    $sql_result = achieveservice_core_saveprofile('profile_postcode', $profile_info['postcode'], $duid);
+    if ($sql_result === FALSE) return FALSE;
+  }
+
+  //email
+  if ($profile_info['email'] !== FALSE && strlen($profile_info['email'])>0) {
+    $user = user_load($duid);
+
+    $edit = Array();
+    $edit["mail"] = $profile_info['email'];
+    
+    if (!user_save($user,$edit)) {
+      achieveservice_core_error(t('achieveservice_profile_content: user email update error'));
+      return FALSE;
+    }
+  }
+
+  //return AchieveService page and close surrounding forms
+  // FIXME: we must find a better way than this
+  return '</form>'.$result['body'].'<form action="/">';
+}
+
+
+/**
+ * 
+ * Implementation of hook token alter
+ * As the username is now a random string we need to return the firstname & surname
+ * @param unknown_type $replacements
+ * @param unknown_type $context
+ */
+function achieveservice_profile_tokens_alter(&$replacements, $context) {
+  if ($context['type']==='user'){
+    $user = $context['data']['user'];
+    $replacements['[user:name]'] = ($user->field_first_name['und'][0]['safe_value']!='')?$user->field_first_name['und'][0]['safe_value'].' '.$user->field_last_name['und'][0]['safe_value']:$user->name;
+  }
+}
+
+
+function achieveservice_profile_getprofile($uid = NULL) {
+  if ($uid == NULL) {
+    global $user;
+    $uid = $user->uid;
+  }
+  $config = achieveservice_core_getconfig();
+  if ($config === FALSE) {
+    return NULL;
+  }
+  $userextra = user_uid_optional_load($uid);
+  $profile_info = achieveservice_core_getprofile($config, $userextra->field_achieveservice_id['und'][0]['value']);
+  return $profile_info;
+}

@@ -1,0 +1,1229 @@
+<?php
+
+/**
+ * @file
+ * Implements core AchieveService functionality
+ */
+
+define('AS_NOTIFICATION', 1);
+define('AS_WARNING',      2);
+define('AS_NOSETMSG',     4);
+define('AS_NOWATCHDOG',   8);
+
+/**
+  * Implementation of hook_help().
+  */
+function achieveservice_core_help($path, $arg) {
+  switch($path) {
+    case 'admin/help#achieveservice_core':
+      return '<p>' . t('Implements core achieve service functionality') . '</p>';
+      break;
+  }
+}
+
+/**
+  * Implementation of hook_menu().
+  */
+function achieveservice_core_menu() {
+  $items = array();
+  $items['admin/config/system/achieveservice/achieveservice_core'] = array(
+    'title'            => 'AchieveService Core',
+    'description'      => 'The settings needed to connect to AchieveService',
+    'page callback'    => 'drupal_get_form',
+    'page arguments'   => array('achieveservice_core_settings'),
+    'access arguments' => array('administer achieveservice'),
+    'type'             => MENU_NORMAL_ITEM,
+  );
+  $items['default.aspx'] = array(
+    'title'            => 'AchieveService main page',
+    'description'      => t('Display AchieveService pages'),
+    'page callback'    => 'achieveservice_core_defaultaspx',
+    'access arguments' => array('access content'),
+    'type'             => MENU_CALLBACK
+  );
+
+  return $items;
+}
+
+/**
+  * Implementation of hook_perm().
+  */
+function achieveservice_core_permission() {
+  return array('access eforms'=>array('title'=>'access eforms','description'=>'Access AchieveForms'), 'administer achieveservice'=>array('title'=>'administer achieveservice', 'description'=>'Administer AchieveService'));
+}
+
+/**
+  * Implementation of hook_form().
+  */
+function achieveservice_core_settings() {
+  $form = array();
+  $form['achieveservice_core_host'] = array(
+    '#type'          => 'textfield',
+    '#title'         => t('AchieveService hostname'),
+    '#size'          => 15,
+    '#default_value' => variable_get('achieveservice_core_host', ''),
+    '#description'   => t('Hostname used to connect to AchieveService.'),
+    '#required'      => TRUE,
+  );
+  $form['achieveservice_core_port'] = array(
+    '#type'          => 'textfield',
+    '#title'         => t('AchieveService port'),
+    '#default_value' => variable_get('achieveservice_core_port', '82'),
+    '#size'          => 4,
+    '#description'   => t('Port used to connect to AchieveService.'),
+    '#required'      => TRUE,
+  );
+  $form['achieveservice_core_sitehost'] = array(
+    '#type'          => 'textfield',
+    '#title'         => t('AchieveService site hostname'),
+    '#size'          => 15,
+    '#default_value' => variable_get('achieveservice_core_sitehost', ''),
+    '#description'   => t('Hostname beeing sent to AchieveService in the HTTP header.'),
+    '#required'      => TRUE,
+  );
+  $form['achieveservice_core_user_api_key'] = array(
+    '#type'          => 'textfield',
+    '#title'         => t('AchieveService user API key'),
+    '#size'          => 15,
+    '#default_value' => variable_get('achieveservice_core_user_api_key', ''),
+    '#description'   => t('Key used to get access to the AchieveService user api.'),
+    '#required'      => TRUE,
+  );
+  $form['achieveservice_core_denied_url'] = array(
+    '#type'          => 'textfield',
+    '#title'         => t('AchieveService access denied URL'),
+    '#size'          => 15,
+    '#default_value' => variable_get('achieveservice_core_denied_url', ''),
+    '#description'   => t('URL to redirect to in case the user does not have the permission to access forms.'),
+    '#required'      => TRUE,
+  );
+  $options = array('1' => t('Yes'), '0' => t('No'));
+  $form['achieveservice_core_clear'] = array(
+    '#type'          => 'radios',
+    '#title'         => t('Clear AchieveService IDs'),
+    '#default_value' => 0,
+    '#options'       => $options,
+    '#description'   => t('Deletes all AchieveService IDs in the database.'),
+  );
+  $form['achieveservice_core_clear_confirm'] = array(
+    '#type'          => 'radios',
+    '#title'         => t('Clear AchieveService IDs Confirmation'),
+    '#default_value' => 0,
+    '#options'       => $options,
+    '#description'   => t('Deletes all AchieveService IDs in the database.'),
+  );
+
+  $form['buttons']['submit'] = array('#type' => 'submit', '#value' => t('Save configuration') );
+  $form['buttons']['reset']  = array('#type' => 'submit', '#value' => t('Reset to defaults') );
+  if (!empty($_POST) && form_get_errors()) {
+    achieveservice_core_error(t('achieveservice_core_settings: The settings have not been saved because of the errors.'));
+  }
+  $form['#submit'][] = 'achieveservice_core_settings_submit';
+  $form['#submit'][] = 'system_settings_form_submit';
+  $form['#theme']    = 'system_settings_form';
+
+  return $form;
+}
+
+/**
+  * Implementation of hook_form_submit().
+  */
+function achieveservice_core_settings_submit($form, &$form_state) {
+  if ($form_state['values']['achieveservice_core_clear'] == 1 && $form_state['values']['achieveservice_core_clear_confirm'] == 1) {
+    db_delete('field_data_field_achieveservice_id')
+      ->execute();
+    db_delete('field_revision_field_achieveservice_id')
+      ->execute();
+    achieveservice_core_error(t('achieveservice_core_settings_submit: AchieveService IDs cleared.'), AS_NOTIFICATION);
+  }
+  unset($form_state['values']['achieveservice_core_clear']);
+  unset($form_state['values']['achieveservice_core_clear_confirm']);
+}
+
+/**
+  * Checks that a config array contains all the required values.
+  *
+  * @param $config
+  * Config array being validated
+  * @param $expected_keys
+  * Array of required keys.
+  */
+function achieveservice_core_checkconfig($config, $expected_keys = array(
+  'host',
+  'port',
+  'sitehost',
+  'apikey',
+  'deniedurl'
+)) {
+  foreach ($expected_keys as $value) {
+    if (!array_key_exists($value, $config)) {
+      achieveservice_core_error(t('achieveservice_core_checkconfig: config missing key @key', array('@key' => $value)));
+      return FALSE;
+    }
+  }
+  return TRUE;
+}
+
+/**
+  * Returns an array with the settings or FALSE on error.
+  */
+function achieveservice_core_getconfig() {
+  $host = variable_get('achieveservice_core_host', FALSE);
+  if ($host === FALSE) {
+    achieveservice_core_error(t('achieveservice_core_getconfig: AchieveService host is not set.'));
+    return FALSE;
+  }
+  $port = variable_get('achieveservice_core_port', FALSE);
+  if ($port === FALSE) {
+    achieveservice_core_error(t('achieveservice_core_getconfig: AchieveService port is not set.'));
+    return FALSE;
+  }
+  $sitehost = variable_get('achieveservice_core_sitehost', FALSE);
+  if ($sitehost === FALSE) {
+    achieveservice_core_error(t('achieveservice_core_getconfig: AchieveService sitehost is not set.'));
+    return FALSE;
+  }
+  $apikey = variable_get('achieveservice_core_user_api_key', FALSE);
+  if ($apikey === FALSE) {
+    achieveservice_core_error(t('achieveservice_core_getconfig: AchieveService user api key is not set.'));
+    return FALSE;
+  }
+  $deniedurl = variable_get('achieveservice_core_denied_url', FALSE);
+  if ($deniedurl === FALSE) {
+    achieveservice_core_error(t('achieveservice_core_getconfig: AchieveService access denied url is not set.'));
+    return FALSE;
+  }
+  return array(
+    'host'      => $host,
+    'port'      => $port,
+    'sitehost'  => $sitehost,
+    'apikey'    => $apikey,
+    'deniedurl' => $deniedurl
+  );
+}
+
+/**
+  * Outputs an error/warning/notification message to the screen and records the message in watchdog.
+  *
+  * @param $message
+  * Error message
+  * @param $options
+  * Constant value indicating type of message.
+  */
+function achieveservice_core_error($message, $options = 0) {
+  if (!($options & AS_NOSETMSG)) {
+    if ($options & AS_NOTIFICATION) {
+      drupal_set_message($message, 'status');
+    } else if ($options & AS_WARNING) {
+      drupal_set_message($message, 'warning');
+    } else {
+      drupal_set_message($message, 'error');
+    }
+  }
+  if (!($options & !AS_NOWATCHDOG)) {
+    if ($options & AS_NOTIFICATION) {
+      watchdog('achieveservice', $message, array(), WATCHDOG_NOTICE);
+    } else if ($options & AS_WARNING) {
+      watchdog('achieveservice', $message, array(), WATCHDOG_WARNING);
+    } else {
+      watchdog('achieveservice', $message, array(), WATCHDOG_ERROR);
+    }
+  }
+}
+
+/**
+  * Rewrites image URLs to the AchieveService server.
+  *
+  * @param $config
+  * Config array
+  * @param $content
+  * Content being rewritten.
+  */
+function achieveservice_core_rewrite_urls($config, $content) {
+  global $is_https;
+  $content = preg_replace('/http:\/default\.aspx\/ImageResource/', 'http://'.$config['sitehost'].'/default.aspx/ImageResource', $content);
+  $content = preg_replace("/(src|href)=(['\"])(?:.*?:8082)?\/(js|icons|Images)\//", "$1=$2http".($is_https?'s':'')."://".$config['sitehost'].'/$3/', $content);
+
+  return $content;
+}
+
+/**
+  * Returns text between $start and $end strings in $content skipping $skip characters from the beginning
+  * If an integer is passed for $start or $end or both, it's used as the string position
+  * If -1 is passed for $end, the string end is used for $end
+  * If reverseend is TRUE the function will use the last occurence of $end and not the first
+  *.Returns FALSE if $start or $end don't exist, if a supplied integer is out of range, or if end is before start
+  *
+  * @param $content
+  * See above.
+  * @param $start
+  * See above.
+  * @param $end
+  * See above.
+  * @param $reverseend
+  * See above.
+  * @param $skip
+  * See above.
+  */
+function textbetween($content, $start, $end, $reverseend = FALSE, $skip = 0) {
+//   print "$content<br/>";
+//   print "$start<br/>";
+//   print "$end<br/>";
+//   print "$reverseend<br/>";
+//   print "$skip<br/>";
+//   exit;
+  if (is_string($start)) {
+    $index = strpos($content, $start, $skip);
+    if ($index === FALSE) {
+      return FALSE;
+    }
+    $index += strlen($start);
+  } else {
+    $index = $start;
+  }
+  if (is_string($end)) {
+    if ($reverseend) {
+      $end = strrpos($content, $end, $index);
+    } else {
+      $end = strpos($content, $end, $index);
+    }
+    if ($end === FALSE) {
+      return FALSE;
+    }
+  } else if ($end === -1) {
+    $end = strlen($content);
+  }
+  if ($index === $end) {
+    return '';
+  }
+  return substr($content, $index, $end-$index);
+}
+
+/**
+  * Makes http requests to achieveservice
+  *.Returns reply or FALSE on error
+  *
+  * @param $config
+  * Config array.
+  * @param $path
+  * Request path.
+  * @param $addkey
+  * Adds &Key=[apikey] to request path if TRUE.
+  * @param $headers
+  * Array with additional http headers.
+  * @param $post
+  * Post data, or GET if FALSE.
+  */
+function achieveservice_core_http($config, $path, $addkey = FALSE, $headers = array(), $post = FALSE) {
+	if (achieveservice_core_checkconfig($config) === FALSE) {
+    return FALSE;
+  }
+
+
+
+
+  if ($addkey) {
+    $path .= '&Key='.$config['apikey'];
+  }
+
+  if ($post === FALSE) {
+    $method = 'GET';
+  } else {
+    $method = 'POST';
+  }
+
+  $request  = $method.' '.$path." HTTP/1.1\r\n";
+  $request .= 'Host: '.$config['sitehost']."\r\n";
+  $request .= 'X-Customer-Key: '.$config['apikey']."\r\n";
+  $request .= "Connection: close\r\n";
+  foreach ($headers as $key => $value) {
+    $request .= $key.': '.$value."\r\n";
+  }
+  $request .= "\r\n";
+  if ($post !== FALSE) {
+    $request .= $post;
+  }
+  //die($config['host']);
+  //die($request);
+  $socket = fsockopen($config['host'], $config['port'], $errno, $errstr, 25);
+  if ($socket === FALSE) {
+    achieveservice_core_error(t('achieveservice_core_http: Unable to establish socket connection to @host on port @port. @errstr', array('@host'   => $config['host'],
+                                                                                                                                         '@port'   => $config['port'],
+                                                                                                                                         '@errstr' => $errstr)));
+    return FALSE;
+  }
+  
+//   print '<pre>';
+//   print_r($request);
+//   exit;
+
+  stream_set_timeout($socket, 25);
+  $result = fwrite($socket, $request);
+  $meta = stream_get_meta_data($socket);
+  if ($result === FALSE) {
+    achieveservice_core_error(t('achieveservice_core_http: Unable to send data through socket to @host on @port.', array('@host'   => $config['host'],
+                                                                                                                         '@port'   => $config['port'])));
+    return FALSE;
+  }
+  if ($meta['timed_out'] == TRUE) {
+    achieveservice_core_error(t('achieveservice_core_http: Write to @host on @port timed out.', array('@host'   => $config['host'],
+                                                                                                      '@port'   => $config['port'])));
+    return FALSE;
+  }
+
+  stream_set_timeout($socket, 45);
+  $response = stream_get_contents($socket);
+//     print '<pre>';
+//     print_r($response);
+//     exit;
+  $meta = stream_get_meta_data($socket);
+  if ($response === FALSE) {
+    achieveservice_core_error(t('achieveservice_core_http: Unable to read data from socket to @host on @port.', array('@host'   => $config['host'],
+                                                                                                                      '@port'   => $config['port'])));
+    return FALSE;
+  }
+  if ($meta['timed_out'] == TRUE) {
+    achieveservice_core_error(t('achieveservice_core_http: Read to @host on @port timed out.', array('@host'   => $config['host'],
+                                                                                                     '@port'   => $config['port'])));
+    return FALSE;
+  }
+
+  fclose($socket);
+  return $response;
+}
+
+/**
+  * Assigns the citizen role to an achieveservice user, so that the user shows up in achieveservice searches.
+  *
+  * @param $config
+  * Config array
+  * @param $asuserid
+  * The AS id of the user.
+  */
+function achieveservice_core_setcitizen($config, $asuserid) {
+  if (achieveservice_core_checkconfig($config) === FALSE) {
+    return FALSE;
+  }
+  $response = achieveservice_core_http($config, '/Home/API/DataManager/?m=GiveIdentityTypesToUser&IDTypeName=citizen&UserID='.$asuserid, TRUE);
+  if ($response === FALSE) {
+    return FALSE;
+  }
+
+  $response = achieveservice_core_http($config, '/Home/API/DataManager/?m=GiveIdentityTypesToUser&IDTypeName=Customer&UserID='.$asuserid, TRUE);
+  if ($response === FALSE) {
+    return FALSE;
+  }
+  return TRUE;
+}
+
+/**
+  * Sets profile information in the new user api.
+  * Returns TRUE on success and FALSE on failure, outputs error messages to drupal by itself.
+  *
+  * @param $config
+  * Config array.
+  * @param $asuserid
+  * The AS id of the user.
+  * @param $key
+  * Name of item being updated.
+  * @param $value
+  * Value of item being updated.
+  */
+function achieveservice_core_updateprofile($config, $asuserid, $key, $value) {
+  if (achieveservice_core_checkconfig($config) === FALSE) {
+    return FALSE;
+  }
+  $response = achieveservice_core_http($config, '/Home/API/DataManager/?m=UpdateProfile&UserID='.$asuserid.'&Name='.urlencode($key).'&Value='.urlencode($value).'&Type=1', TRUE);
+  if ($response === FALSE) {
+    return FALSE;
+  }
+
+  return TRUE;
+}
+
+/**
+  * Retrieves user profile from AchieveService.
+  * Returns array on success
+  *
+  * @param $config
+  * Config array
+  * @param $asuserid
+  * The AS id of the user.
+  */
+function achieveservice_core_getprofile($config, $asuserid) {
+  //die('id = '.$asuserid);
+  if (achieveservice_core_checkconfig($config) === FALSE) {
+    return FALSE;
+  }
+  $response = achieveservice_core_http($config, '/Home/API/DataManager/?m=GetProfile&UserID='.$asuserid, TRUE);
+  //die('response = '.$response);
+  if ($response === FALSE) {
+    return FALSE;
+  }
+
+  //check if we received a http error
+  if (($status = textbetween($response, ' ', ' ')) !== '200') {
+    //die('Here');
+    achieveservice_core_error(t('achieveservice_core_getprofile: HTTP status not 200. code: @status', array('@status' => $status)));
+    return FALSE;
+  }
+
+  //locate profile information
+  $response = textbetween($response, "\r\n\r\n", -1);
+  $xml = new SimpleXMLElement($response);
+
+  $mapping = array(
+    'First_Name' => 'firstname', 
+    'Surname' => 'surname', 
+    'Title' => 'title', 
+    'Email_Address' => 'email', 
+    'postcode' => 'postcode', 
+    'Combined_House_And_Street' => 'address_first_line', 
+    'house' => 'house', 
+    'street' => 'street', 
+    'locality' => 'locality', 
+    'town' => 'town', 
+    'uprn' => 'uprn', 
+    'upen' => 'upen', 
+    'flat' => 'flat'
+    );
+  $result = array();
+  foreach ($mapping as $source => $target) {
+    $result[$target] = isset($xml->$source) ? $xml->$source : FALSE;
+  }
+
+  return $result;
+}
+
+/**
+  * Handles authentication.
+  * Returns custom profile field AS_Id, if it doesn't exist it creates a new AS user and sets the AS_Id.
+  * Returns false in case of an error and outputs an error message to drupal by itself.
+  *
+  * @param $config
+  * Config array
+  * @param $dsuserid
+  * Optional drupal user id.
+  */
+function achieveservice_core_getuser($config, $duserid = FALSE) {
+  if (achieveservice_core_checkconfig($config) === FALSE) {
+    return FALSE;
+  }
+  
+  $lockname = 'getCreateUserASIdLock';
+  while (!lock_acquire($lockname, 45)) {
+    lock_wait($lockname, 5);
+  }
+
+  // Check if user already has an AchieveService ID, if yes return it
+  if ($duserid === FALSE) 
+    $duserid = $GLOBALS['user']->uid;
+  $user = user_load($duserid, TRUE);
+
+  //if (isset($user->profile_achieveservice_id) && $user->profile_achieveservice_id !== '') {
+  if(isset($user->field_achieveservice_id['und'][0]['value']) && $user->field_achieveservice_id['und'][0]['value'] != '') {
+    // Check if user was merged
+
+    $response = achieveservice_core_http($config,
+'/Home/API/DataManager/?m=GetProfile&UserID='.$user->field_achieveservice_id['und'][0]['safe_value'], TRUE);
+    if ($response === FALSE) {
+      lock_release($lockname);
+      return FALSE;
+    }
+
+    if (strpos($response, 'mergedwith') !== FALSE) {
+      $newid = textbetween($response, 'mergedwith="', '"');
+
+      // Save new AchieveService ID
+      $result = achieveservice_core_saveprofile('achieveservice_id', $newid, $duserid);
+      if ($result === FALSE) {
+        lock_release($lockname);
+        return FALSE;
+      }
+
+      achieveservice_core_error(t('achieveservice_core_getuser: as_user @oldid was merged with as_user @newid', array('@oldid' =>
+$user->field_achieveservice_id['und'][0]['value'],
+                                                                                                                      '@newid' => $newid)),
+                                FALSE, FALSE);
+      lock_release($lockname);
+      return $newid;
+    }
+
+    //return $user->profile_achieveservice_id;
+    lock_release($lockname);
+    return $user->field_achieveservice_id['und'][0]['safe_value'];
+  }
+
+  $response = achieveservice_core_http($config, '/Home/API/DataManager/?m=CreateUser&profile_type_id=1&email='.urlencode($user->mail).'&display_name='.urlencode($user->name), TRUE);
+  if ($response === FALSE) {
+    lock_release($lockname);
+    return FALSE;
+  }
+
+  // Check if AS returned an error message
+  $error = textbetween($response, 'Errorcode="', '"');
+  if ($error !== FALSE) {
+    $errormsg = textbetween($response, 'Message="', '"');
+    achieveservice_core_error(t('achieveservice_core_getuser: User API Error @error: @errormsg', array('@error'    => $error,
+                                                                                                       '@errormsg' => $errormsg)));
+    lock_release($lockname);
+    return FALSE;
+  }
+
+  // Locate id in output
+  $asuserid = textbetween($response, '<id>', '</id>');
+  if ($asuserid === FALSE) {
+    achieveservice_core_error(t('achieveservice_core_getuser: Unable to locate new user id in user API response.'));
+    lock_release($lockname);
+    return FALSE;
+  }
+
+  // Set user information in seperate user API
+
+  // First name
+  if (isset($user->field_first_name['und'][0]['value']) && $user->field_first_name['und'][0]['value'] !== '') {
+    $result = achieveservice_core_updateprofile($config, $asuserid, 'First_Name', $user->field_first_name['und'][0]['safe_value']);
+    if ($result === FALSE) {
+      lock_release($lockname);
+      return FALSE;
+    }
+  }
+
+  // Last name
+  if (isset($user->field_last_name['und'][0]['value']) && $user->field_last_name['und'][0]['value'] !== '') {
+    $result = achieveservice_core_updateprofile($config, $asuserid, 'Surname', $user->field_last_name['und'][0]['safe_value']);
+    if ($result === FALSE) {
+      lock_release($lockname);
+      return FALSE;
+    }
+  }
+
+  if (isset($user->field_last_name['und'][0]['value']) && $user->field_last_name['und'][0]['value'] !== '') {
+    $result = achieveservice_core_updateprofile($config, $asuserid, 'Full_Name', $user->field_first_name['und'][0]['safe_value'].' '.$user->field_last_name['und'][0]['safe_value']);
+    if ($result === FALSE) {
+      lock_release($lockname);
+      return FALSE;
+    }
+  }
+
+  $result = achieveservice_core_updateprofile($config, $asuserid, 'SelfServiceAccount', 'Yes');
+
+  // Email address
+  $result = achieveservice_core_updateprofile($config, $asuserid, 'Email_Address', $user->mail);
+  if ($result === FALSE) {
+    lock_release($lockname);
+    return FALSE;
+  }
+
+  // Postcode
+  if (isset($user->field_postcode['und'][0]['value']) && $user->field_postcode['und'][0]['value'] !== '') {
+    $result = achieveservice_core_updateprofile($config, $asuserid, 'postcode', $user->field_postcode['und'][0]['safe_value']);
+    if ($result === FALSE) {
+     lock_release($lockname);
+      return FALSE;
+    }
+  }
+
+  // Set citizen role
+  $result = achieveservice_core_setcitizen($config, $asuserid);
+  if ($result === FALSE) {
+    lock_release($lockname);
+    return FALSE;
+  }
+
+  // Save new AchieveService ID
+  $result = achieveservice_core_saveprofile('achieveservice_id', $asuserid, $duserid);
+  if ($result === FALSE) {
+    lock_release($lockname);
+    return FALSE;
+  }
+  lock_release($lockname);
+  // Return user id
+  return $asuserid;
+}
+
+/**
+  * When a user is updated in drupal, if they have a linked AS account - update it
+  *
+  **/
+
+function achieveservice_core_user_update(&$edit, $account, $category) {
+   if (isset($account->field_achieveservice_id['und'][0]['value'])) { 
+    $config = achieveservice_core_getconfig();
+    $asuserid = $account->field_achieveservice_id['und'][0]['value'];
+
+    $user = $account;
+
+  foreach ($user as $name=>$value) {
+    if(substr($name,0,5)=="field") {
+      switch($name) {
+	case "field_first_name":
+	break;
+	case "field_last_name":
+	break;
+	default:
+	  achieveservice_core_updateprofile($config, $asuserid, $name, $value['und'][0]['value']);
+      }
+    }
+  }
+
+    achieveservice_core_updateprofile($config, $asuserid, 'Email_Address', $user->mail);
+
+    // First name
+    if (isset($user->field_first_name['und'][0]['value']) && $user->field_first_name['und'][0]['value'] !== '') {
+      $result = achieveservice_core_updateprofile($config, $asuserid, 'First_Name', $user->field_first_name['und'][0]['value']);
+    }
+
+    // Last name
+    if (isset($user->field_last_name['und'][0]['value']) && $user->field_last_name['und'][0]['value'] !== '') {
+      $result = achieveservice_core_updateprofile($config, $asuserid, 'Surname', $user->field_last_name['und'][0]['value']);
+    }
+
+    if (isset($user->field_last_name['und'][0]['value']) && $user->field_last_name['und'][0]['value'] !== '') {
+      $result = achieveservice_core_updateprofile($config, $asuserid, 'Full_Name', $user->field_first_name['und'][0]['value'].' '.$user->field_last_name['und'][0]['value']);
+    }
+  }
+}
+
+
+/**
+  * Saves profile information to drupal database, because the save function is broken.
+  * Returns true or false on error, outputs error to drupal by itself.
+  *
+  * @param $key
+  * Name of item being updated.
+  * @param $value
+  * Value of item being updated.
+  * @param $dsuserid
+  * Optional drupal user id.
+  */
+function achieveservice_core_saveprofile($key, $value, $duserid = FALSE) {
+  if ($duserid === FALSE) {
+    $account = user_uid_optional_load();
+  } else {
+    $account = user_uid_optional_load($duserid);
+  }
+  
+  // Mike - 18/04/11
+  // In D6 the profile field would be  for example profile_achieveservice_id
+  // D& tables are different
+  // The 2 lines below convert this value to deal with D7 tables
+  // Essentially we remove the 'profile' part and substitute the table prefix
+  $table1 = 'field_data_field_' . $key;
+  $table2 = 'field_revision_field_' . $key;
+  $tables = array($table1, $table2);
+  $returnValue = TRUE;
+
+  $e['field_'.$key] =
+      array(
+       'und' => array(
+         0 => array(
+          'value' => $value
+         ),
+       ),
+  );
+
+  user_save($account, $e);
+ 
+  if ($returnValue === FALSE) {
+    achieveservice_core_error(t('achieveservice_core_saveprofile: SQL update error'));
+    return FALSE;
+  }
+
+  /*$result = db_fetch_array(db_query("SELECT 0 FROM {profile_fields} WHERE name = '%s'", $key));
+
+  if ($result !== FALSE) {
+    $result = db_query("INSERT INTO {profile_values} (fid, uid, value)
+                        VALUES ((SELECT fid FROM {profile_fields} pf
+                        WHERE pf.name = '%s'), %d, '%s')
+                        ON DUPLICATE KEY UPDATE value = '%s'",
+                        array($key, $user->uid, $value, $value));
+    if ($result === FALSE) {
+      achieveservice_core_error(t('achieveservice_core_saveprofile: SQL update error'));
+      return FALSE;
+    }
+  }*/
+ 
+  return TRUE;
+}
+
+/**
+  * Default.aspx hook to display forms and stuff.
+  * Tells the client to follow redirects.
+  *
+  */
+function achieveservice_core_defaultaspx() {
+  // Redirect the user to an error page if he doesn't have the permission to access forms
+  $config = achieveservice_core_getconfig();
+  if (user_access('access eforms') === FALSE) {
+    drupal_goto($config['deniedurl'], drupal_get_destination());
+  }
+
+  // Get AchieveService URL from query string
+  //$request_path = textbetween($_SERVER['QUERY_STRING'], 'default.aspx', -1);
+  $request_path = textbetween($_SERVER['REQUEST_URI'], 'default.aspx', -1);
+  if ($request_path === FALSE) {
+    achieveservice_core_error(t('achieveservice_core_defaultaspx: Unable to locate default.aspx in the query string.'));
+    return 'See error above';
+  }
+  
+  // if trying to login, don't swallow form submission into AF
+  if (isset($_POST['form_id']) && $_POST['form_id'] == 'user_login_block') {
+    return '<div/>';
+  }
+  else {
+    return achieveservice_core_afrender($request_path);
+  }
+}
+
+function achieveservice_core_afrender($request_path,$ajax_on = TRUE) {
+
+  $config = achieveservice_core_getconfig();
+  if ($config === FALSE) {
+    return 'error';
+  }
+
+  if (strlen($request_path)<2) {
+    // redirect the AF root to the website root - saves reconfiguring all forms urls
+    drupal_goto('');
+  }
+
+  //replace first & in request_path with ? if at least one & exists and if there isn't already a ?
+  //for drupal the path is a get parameter, that's why it already has a ? and adds all additional parameters with &
+  //but AchieveService needs a ? in front of the first one
+  if (strpos($request_path, '?') === FALSE) {
+    $request_path = preg_replace('/&/', '?', $request_path, 1);
+  }
+
+  //add a slash in front of the query string if there isn't already one
+  if (substr($request_path, 0, 1) !== '/') {
+    $request_path = '/'.$request_path;
+  }
+
+  //request AchieveService page
+  $result = achieveservice_core_display($config, $request_path);
+  if ($result === FALSE) {
+    return 'See error above';
+  }
+  //redirect where AchieveService wants to redirect to
+  if ($result['location'] !== FALSE) {
+    //Andrew wants a log message everytime AS sends us a messed up redirect
+    if ($result['location'] === '/default.aspx') {
+      achieveservice_core_error(t('achieveservice_core_defaultaspx: AchieveService returned redirect with default.aspx in it'), AS_WARNING | AS_NOSETMSG);
+    }
+    // FIXME: eat default.aspx as AS seems to get set in random places
+    $result['location'] = preg_replace('/\/default.aspx/', '', $result['location']);
+    if (substr($result['location'], 0, 6) === 'http:/') {
+      header('Location: '.$result['location']);
+    } else { 
+        $base = preg_replace('/(\?.*)/', '', $_SERVER['REQUEST_URI']);
+        preg_match('/fs2s=([^&]*)/',$result['location'],$fs);
+        if(strlen($fs[1])>0) {
+          header('Location: '.$base.'?fs2s='.$fs[1]);
+        } else {
+          header('Location: '.$result['location']);
+        }
+    }
+    exit;
+  }
+
+  //set drupal title if one was returned
+  if ($result['title'] !== FALSE) {
+    drupal_set_title($result['title']);
+  }
+
+  $ret = '<script>var hbloc="/default.aspx"</script>'.$result['body'];
+  if ($ajax_on == FALSE) {
+    $ret = $ret.'<script type="text/javascript"><!-- window._ajaxmode="None";// --></script>';
+  }
+
+  //return AchieveService response
+  return $ret;
+}
+
+/**
+  * Wrapper for achieveservice_core_request.
+  * Strips unnecessary html tags.
+  * Passes ajax parameters.
+  * Rewrites urls to redirect to AS server.
+  *
+  * @param $config
+  * Config array.
+  * @param $path
+  * URL to request from AchieveService.
+  * @param $dsuserid
+  * Optional drupal user id.
+  */
+function achieveservice_core_display($config, $path, $duserid = FALSE) {
+  if (achieveservice_core_checkconfig($config) === FALSE) {
+    return FALSE;
+  }
+  if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $post = TRUE;
+  } else {
+    $post = FALSE;
+  }
+  
+  //die('here');
+
+  //make HTTP request to AchieveService
+  $result = achieveservice_core_request($config, $path, TRUE, $post, $duserid);
+  if ($result === FALSE) {
+    return FALSE;
+  }
+  //map response to local variables
+  $response     = $result['response'];
+  $location     = $result['location'];
+  $content_type = $result['content_type'];
+  $status       = $result['status'];
+
+  //rewrite image urls to point to AS server
+  $response = achieveservice_core_rewrite_urls($config, $response);
+
+  //follow redirects
+  if ($location !== FALSE) {
+    $return = array(
+      'location' => $location
+      );
+    return $return;
+  } else {
+    $location = FALSE;
+  }
+
+  //return content types other than text/html without drupal stuff around it
+  if ($content_type != FALSE && substr($content_type, 0, 9) != 'text/html') {
+    header('Content-Type: '.$content_type);
+    ob_get_clean();
+    echo $response;
+    exit;
+  }
+
+  //find the title of the AchieveService page
+  $title = textbetween($response, '<title>', '</title>');
+
+  //check the http return code
+  if (textbetween($status, 0, ' ') !== '200') {
+    achieveservice_core_error(t('achieveservice_core_display: HTTP status not 200. code: @status', array('@status' => $status)));
+  }
+
+  //find the body of the AchieveService page
+  //the start body tag can look like <body>, <body id='body'> and <body > or doesn't exist at all
+  //the end tag looks like </body> or doesn't exist at all
+  $end = '';
+  if (strrpos($response,'</body>')) {
+    $end = '<\/body>';  // FIXME: can't remember regexp to optionally match end tag
+  } else {
+    //Andrew wants a log message everytime AS doesn't output a body
+    achieveservice_core_error(t('achieveservice_core_display: AchieveService did not return a html body end tag'), AS_WARNING | AS_NOSETMSG);
+  }
+  if (preg_match("/<body[^>]*>([\s\S]*)$end/is", $response, $matches)) {
+    $body = $matches[1];
+  } else {
+    //Andrew wants a log message everytime AS doesn't output a body
+    achieveservice_core_error(t('achieveservice_core_display: AchieveService did not return a html body start tag'), AS_WARNING | AS_NOSETMSG);
+    $body = $response;
+  }
+
+  //some forms are styled with CSS and divs rather than tables, the widths are set in a style element in the header
+  //so extract it and add to our own header
+
+  $markup = "";
+  preg_match_all('/(?:<!--\[[^\]]*\]>\s*)?<style[^>]*>[\s\S]*?<\/style>(?:\s*<!\[[^\]]*\]-->)?/s', $response, $innermatches,PREG_SET_ORDER);
+  foreach($innermatches as $m) { 
+    if (isset($m[0])) {
+      $markup = $markup . $m[0];
+    }
+  }
+  drupal_add_html_head(array('#type'=>'markup', '#markup'=>$markup), 'as_head');
+
+  /*if (preg_match('/(<!--\[[^\]]*\]>\s*)?<style[^>]*>(.*)<\/style>(\s*<!\[[^\]]*\]-->)?/s', $response, $matches)) {
+    $markup = array('#type'=>'markup', '#markup'=>$matches[0]);
+    drupal_add_html_head($markup, 'as_head');
+  }*/
+
+  //add AchieveService scripts to drupal output
+  $js = achieveservice_core_external_script($config);
+  $body = $js.'<div id="achieveform" class="ajaxform">'.$body.'</div>';
+
+  //add our customised AchieveService CSS
+  drupal_add_css(drupal_get_path('module', 'achieveservice_core').'/as_core.css');
+
+  return array(
+    'body'     => $body,
+    'title'    => $title,
+    'location' => $location
+  );
+}
+
+/**
+  * Returns a string of HTML that outputs a script tag.
+  * Source of script is passed in the config array.
+  *
+  * @param $config
+  * Config array.
+  */
+// TODO: add a comment to explain what this function does.
+function achieveservice_core_external_script($config) {
+  drupal_add_library('system', 'ui.autocomplete');
+  global $is_https;
+  return '<script>$=jQuery</script><script src="'.($is_https?'https':'http').'://'.$config['sitehost'].'/js/0.js"></script>';
+}
+
+/**
+  * Handles all requests to AchieveService.
+  * Strips unnecessary html tags.
+  * Passes ajax parameters.
+  * Rewrites urls to redirect to AS server.
+  *
+  * @param $config
+  * Config array.
+  * @param $path
+  * URL to request from AchieveService.
+  * @param $authenticate
+  * Authenticate with AchieveService if true.
+  * @param $post
+  * Request method: POST if true, GET if false.
+  * @param $dsuserid
+  * Optional drupal user id.
+  */
+function achieveservice_core_request($config, $path, $authenticate = FALSE, $post = FALSE, $duserid = FALSE) {
+  if (achieveservice_core_checkconfig($config) === FALSE) {
+    return FALSE;
+  }
+  
+//   print '<pre>';
+//   print_r(debug_backtrace());
+//   die('here' . $authenticate);
+  
+  //assemble post data
+  if ($post) {
+    $post = '';
+    if (strpos($_SERVER['CONTENT_TYPE'], "multipart/form-data") !== FALSE) {
+      $boundary = substr($_SERVER['CONTENT_TYPE'], 30, strlen($_SERVER['CONTENT_TYPE'])-30);
+      if ($boundary === FALSE) {
+        achieveservice_core_error(t('achieveservice_core_request: Unable to locate POST boundary in the content type.'));
+        return FALSE;
+      }
+      foreach ($_POST as $post_name => $post_value) {
+        $post .= '--'.$boundary."\r\nContent-Disposition: form-data; name=\"".$post_name."\"\r\n\r\n".$post_value."\r\n";
+      }
+      foreach ($_FILES as $name => $value) {
+        $post .= '--'.$boundary."\r\nContent-Disposition: form-data; name=\"".$name."\"; filename=\"".$value['name']."\"\r\nContent-Type: ".$value['type']."\r\n\r\n".file_get_contents($value['tmp_name'])."\r\n";
+      }
+      $post .= '--'.$boundary."--\r\n";
+    }
+    else {
+      $post = file_get_contents('php://input');
+      if ($post === FALSE) {
+        achieveservice_core_error(t('achieveservice_core_request: file_get_contents() was unable to get POST data.'));
+        return FALSE;
+      }
+    }
+  }
+  //check if the user id was updated
+  if (user_is_logged_in() === FALSE) {
+    $authenticate = FALSE;
+  }
+  //die('here ' . $authenticate . ' ' . $duserid);
+  if ($authenticate) {
+    $asuserid = achieveservice_core_getuser($config, $duserid);
+    if ($asuserid === FALSE) {
+      //die('here');
+      return FALSE;
+    }
+    achieveservice_core_getprofile($config, $asuserid);
+  }
+
+  $headers = array();
+  if (isset($_SERVER['HTTP_ACCEPT'])) {
+    $headers['Accept'] = $_SERVER['HTTP_ACCEPT'];
+  }
+  if (isset($_SERVER['HTTP_ACCEPT_LANGUAGE'])) {
+    $headers['Accept-Language'] = $_SERVER['HTTP_ACCEPT_LANGUAGE'];
+  }
+  if ($post !== FALSE) {
+    $headers['Content-Length'] = strlen($post);
+    $headers['Content-Type'] = $_SERVER['CONTENT_TYPE'];
+  }
+  if (isset($_COOKIE['fs2']) || isset($_COOKIE['fs2svr'])) {
+    if (isset($_COOKIE['fs2'])) {
+      $headers['Cookie'] = 'fs2='.$_COOKIE['fs2'];
+      if (isset($_COOKIE['fs2svr'])) {
+        $headers['Cookie'] .= '; ';
+      }
+    }
+    if (isset($_COOKIE['fs2svr'])) {
+      $headers['Cookie'] .= 'fs2svr='.$_COOKIE['fs2svr'];
+    }
+  }
+
+  if (isset($_COOKIE['AWSELBFORMS'])) {
+    $headers['Cookie'] .= ';AWSELB='.$_COOKIE['AWSELBFORMS'];
+  }
+
+  if (isset($_SERVER['HTTP_USER_AGENT'])) {
+    $headers['User-Agent'] = $_SERVER['HTTP_USER_AGENT'];
+  }
+  if (isset($_SERVER['HTTP_X_FS2JS'])) {
+    $headers['X-fs2js'] = $_SERVER['HTTP_X_FS2JS'];
+  }
+  if ($authenticate) {
+    $headers['X-Username'] = $asuserid;
+  }
+  $headers['X-CMS-Proto'] = ($is_https ? "https" : "http");
+  $headers['X-CMS-Host'] = $_SERVER["SERVER_NAME"];
+  $headers['X-CMS-Port'] = $_SERVER["SERVER_PORT"];
+  $headers['X-CMS-Path'] = 'default.aspx';
+
+  $actual_link = $headers["X-CMS-Proto"]."://".$_SERVER["HTTP_HOST"].$_SERVER["REQUEST_URI"];
+  $headers['X-Request-Url'] = $actual_link;
+
+  $response = achieveservice_core_http($config, $path, FALSE, $headers, $post);
+  //interpret response headers
+  $lastline = 0;
+  while (TRUE) {
+    $line = textbetween($response, $lastline, "\r\n", FALSE, $lastline);
+    if ($line === FALSE) {
+      achieveservice_core_error(t('achieveservice_core_request: Malformed HTTP response received.'));
+      return FALSE;
+    }
+    $lastline = strpos($response, "\r\n", $lastline);
+    if ($lastline === FALSE) {
+      achieveservice_core_error(t('achieveservice_core_request: Malformed HTTP response received.'));
+      return FALSE;
+    }
+    $lastline += 2;
+
+    switch (textbetween($line, 0, ' ')) {
+      case FALSE:
+        break 2;
+      case 'HTTP/1.1':
+        $status = textbetween($line, ' ', -1);
+        break;
+      case 'Content-Type:':
+        $content_type = textbetween($line, ': ', -1);
+        break;
+      case 'Location:':
+        $location = textbetween($line, ': ', -1);
+        break;
+      case 'Set-Cookie:':
+        $cookie = textbetween($line, 'fs2=', ';');
+        if ($cookie !== FALSE) {
+          setcookie('fs2', $cookie, 0, '/');
+        } 
+        $cookie = textbetween($line, 'fs2svr=', ';');
+        if ($cookie !== FALSE) {
+          setcookie('fs2svr', $cookie, 0, '/');
+        }
+	$cookie = textbetween($line, 'AWSELB=', ';');
+        if ($cookie !== FALSE) {
+	  setcookie('AWSELBFORMS', $cookie, 0, '/');
+        }
+        break;
+      case 'X-Fs2-Pageid:':
+        $xfs2pageid = textbetween($line, ': ', -1);
+        if ($xfs2pageid !== FALSE) {
+          header('X-Fs2-Pageid: '.$xfs2pageid);
+        }
+        break;
+      case 'X-Firmstep-Page:':
+        $xfirmsteppage = textbetween($line, ': ', -1);
+        if ($xfirmsteppage !== FALSE) {
+          header('X-Fs2-Pageid: '.$xfirmsteppage);
+        }
+        break;
+    }
+  }
+
+  //output error if we didn't receive a http status code
+  if (!isset($status)) {
+    achieveservice_core_error(t('achieveservice_core_request: Malformed HTTP response received.'));
+    return FALSE;
+  }
+
+  //set content type to false if we didn't receive it
+  if (!isset($content_type)) {
+    $content_type = FALSE;
+  }
+
+  //set location to false if we didn't receive it
+  if (!isset($location)) {
+    $location = FALSE;
+  }
+
+  //strip headers
+  $response = textbetween($response, $lastline, -1);
+  if ($response === FALSE) {
+    achieveservice_core_error(t('achieveservice_core_request: Malformed HTTP response received.'));
+    return FALSE;
+  }
+
+  //assemble return array
+  $return = array(
+    'response'     => $response,
+    'content_type' => $content_type,
+    'location'     => $location,
+    'status'       => $status
+  );
+  return $return;
+}
+
+/**
+  * Return URL for Drupal pages to use for AS requests.
+  *
+  * @param $path
+  * URL to request from AchieveService.
+  */
+function achieveservice_core_url($path) {
+  return "default.aspx/$path";
+}
+
+/**
+  * Get feed data.
+  * Strips unnecessary html tags.
+  * Passes ajax parameters.
+  * Rewrites urls to redirect to AS server.
+  *
+  * @param $config
+  * Config array.
+  * @param $id
+  * feed ID, e.g. 'F50'.
+  * @param $options
+  * Optional, provide 'tags' array to search for tags, or SearchTerm string to search for a string.
+  */
+function achieveservice_core_fetch_feed($config, $id, $options = array()) {
+  if (achieveservice_core_checkconfig($config) === FALSE) {
+    return FALSE;
+  }
+  //die('here');
+  // Construct AS tag search query
+  $params = array("Subscriptions=$id");
+  if (isset($options['tags']) && !empty($options['tags'])) {
+    $safe_tags = array();
+    foreach ($options['tags'] as $tag) {
+      $safe_tags[] = rawurlencode('"'.$tag.'"');
+    }
+    $params[] = 'SearchTerm=tag:'.implode('%20tag:', $safe_tags);
+  }
+  if (isset($options['SearchTerm']) && !empty($options['SearchTerm'])) {
+    $params[] = 'SearchTerm='.urlencode($options['SearchTerm']);
+  }
+
+  //Request feed
+  $url = '/Home/API/UserSubscriptions/FetchFeeds/?Count=30&'.implode('&', $params);
+  return achieveservice_core_request($config, $url, $options['authenticate']);
+}
+
+
+
+/**
+  * Adds ajaxignore class to form buttons
+  * in order for the AF ajax to ignore
+  * particular actions. 
+  */
+function achieveservice_core_form_alter(&$form, $form_state, $form_id) {
+  if ($form_id === 'user_login_block') {
+    $form['actions']['submit']['#attributes']['class'][] = 'ajaxignore';
+  }
+}
+

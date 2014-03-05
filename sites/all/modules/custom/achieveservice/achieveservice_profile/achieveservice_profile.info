@@ -1,0 +1,7 @@
+name           = "AchieveService Profile"
+description    = "Provides a tab that displays the AchieveService profile form and keeps it synchronized."
+core           = 7.x
+version        = 7.x-1.0
+package        = "AchieveService"
+dependencies[] = achieveservice_core
+files[]        = achieveservice_profile.module

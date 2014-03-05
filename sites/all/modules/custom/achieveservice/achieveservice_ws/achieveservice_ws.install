@@ -1,0 +1,141 @@
+<?php
+
+function achieveservice_ws_install() {
+  drupal_install_schema('achieveservice_ws');
+}
+
+function achieveservice_ws_uninstall() {
+  drupal_uninstall_schema('achieveservice_ws');
+}
+
+function achieveservice_ws_schema() {
+  $schema = array();
+  $schema['achieveservice_ws_stylesheets'] = array(
+    'description' => 'Stores XSL stylesheets.',
+    'fields' => array(
+      'id' => array(
+        'description' => 'Serial primary key',
+        'type' => 'serial',
+        'not null' => TRUE,
+        'unsigned' => TRUE,
+        ),
+      'name' => array(
+        'description' => 'Machine name for referencing stylesheet.',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        ),
+      'description' => array(
+        'description' => 'Description of stylesheet.',
+        'type' => 'text',
+        'size' => 'normal',
+        //'default' => '',
+        ),
+      'source' => array(
+        'description' => 'Optional path or URL to source of XSL.',
+        'type' => 'text',
+        'size' => 'normal',
+        //'default' => '',
+        ),
+      'document' => array(
+        'description' => 'Optional, XSL document data.',
+        'type' => 'text',
+        'size' => 'medium',
+        //'default' => '',
+        ),
+      ),
+    'primary key' => array('id'),
+    'unique keys' => array('name_idx' => array('name')),
+    );
+
+  $schema['achieveservice_ws_services'] = array(
+    'description' => 'Stores XML source, XSL source, and other details for web services.',
+    'fields' => array(
+      'id' => array(
+        'description' => 'Serial primary key',
+        'type' => 'serial',
+        'not null' => TRUE,
+        'unsigned' => TRUE,
+        ),
+      'name' => array(
+        'description' => 'Machine name.',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        ),
+      'title' => array(
+        'description' => 'Admin name of service.',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        ),
+      'xml_source' => array(
+        'description' => 'URL or path to XML data source',
+        'type' => 'text',
+        'size' => 'normal',
+        //'default' => '',
+        ),
+      'xsl_id' => array(
+        'description' => 'ID of stylesheet to apply.',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        ),
+      'renderstyle' => array(
+        'description' => 'Method to use to render the feed content',
+        'type' => 'varchar',
+        'length' => 255,
+        ),
+      'searchable' => array(
+        'description' => 'Set the feed to be searchable',
+        'type' => 'varchar',
+        'length' => 100,
+        ),
+      ),
+    'primary key' => array('id'),
+    'indexes' => array('name_idx' => array('name')),
+    );
+
+  return $schema;
+}
+
+function achieveservice_ws_update_6001() {
+	add_achieveservice_ws_row('council_tax','Council Tax','/Home/API/UserSubscriptions/FetchFeeds/?Subscriptions=F64&format=service','council_tax');
+	add_achieveservice_ws_row('bill_items','Bill Transactions','/Home/API/UserSubscriptions/FetchFeeds/?Subscriptions=F66&format=service','bill_items');
+	add_achieveservice_ws_row('council_tax_summary','Council Tax Summary','/Home/API/UserSubscriptions/FetchFeeds/?Subscriptions=F67&format=service','council_tax_summary');
+	add_achieveservice_ws_row('correspondence_history','Correspondence History','/Home/API/UserSubscriptions/FetchFeeds/?Subscriptions=F64&format=service','correspondence_list');
+	add_achieveservice_ws_row('benefits','Benefits','/Home/API/UserSubscriptions/FetchFeeds/?Subscriptions=F68&format=service','benefits');
+	add_achieveservice_ws_row('benefits_summary','Benefits Summary','/Home/API/UserSubscriptions/FetchFeeds/?Subscriptions=F68&format=service','benefits_summary');
+	add_achieveservice_ws_row('my_tasks','My Cases','/Home/API/UserSubscriptions/FetchFeeds/?Subscriptions=F49&format=service','my_tasks');
+	add_achieveservice_ws_row('frequently_asked_questions','FAQs','/Home/API/UserSubscriptions/FetchFeeds/?Subscriptions=F29&format=service','frequently_asked_questions');
+	add_achieveservice_ws_row('my_casetasks','My Tasks','/Home/API/UserSubscriptions/FetchFeeds/?Subscriptions=F48&format=service','my_casetasks');
+	add_achieveservice_ws_row('refusews','Refuse','/Home/API/UserSubscriptions/FetchFeeds/?Subscriptions=F71&format=service','refuse');
+	
+}
+
+function achieveservice_ws_update_6002() {
+	add_achieveservice_ws_row('housing','Housing','/Home/API/UserSubscriptions/FetchFeeds/?Subscriptions=F72&format=service','housing');
+	
+}
+
+function add_achieveservice_ws_row($name, $title, $xml_source, $xsl_name) {
+	$ret = array();
+	$ret = db_query("SELECT * FROM achieveservice_ws_services WHERE name = '%s'", $name);
+	if (db_fetch_object($ret) === FALSE) {
+		db_query("INSERT INTO achieveservice_ws_services (name, title, xml_source, xsl_id) VALUES ('%s', '%s', '%s', (SELECT id FROM achieveservice_ws_stylesheets WHERE name='%s'))", $name, $title, $xml_source, $xsl_name);
+	}
+	return $ret;
+	
+	$result = db_query("SELECT * FROM {achieveservice_ws_services} WHERE name = :name", array(':name' => $name));
+	if(!$object = $result->fetch()) {
+	  db_insert('achieveservice_ws_services')
+      ->fields(array(
+        'name' => $name,
+        'title' => $title,
+        'xml_source' => $xml_source,
+        'xsl_id' => $xsl_name,
+      ))
+      ->execute();
+	}
+}
+
+

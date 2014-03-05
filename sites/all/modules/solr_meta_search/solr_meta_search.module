@@ -1,0 +1,13 @@
+<?php
+
+function solr_meta_search_apachesolr_index_document_build(ApacheSolrDocument
+ $document, $entity, $entity_type, $env_id) { 
+  $meta_description = $entity->meta_description['und'][0]['metatags_quick'];
+  $document->addField('ts_meta_description', $meta_description);  
+}
+
+function solr_meta_search_form_apachesolr_query_alter($query) { 
+  $query->addParam('fl', 'ts_meta_description');
+}
+
+

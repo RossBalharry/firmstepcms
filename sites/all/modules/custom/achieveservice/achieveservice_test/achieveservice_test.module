@@ -1,0 +1,69 @@
+<?php
+function achieveservice_test_menu() {
+  $items['admin/settings/achieveservice_test'] = array(
+    'title'            => 'AchieveService Test',
+    'description'      => 'This page tests the connection to AchieveService',
+    'page callback'    => 'achieveservice_test_test',
+    'access arguments' => array('administer achieveservice'),
+    'type'             => MENU_CALLBACK,
+  );
+  return $items;
+}
+
+function achieveservice_test_test() {
+  $config['host']        = variable_get('achieveservice_core_host',         '');
+  $config['port']        = variable_get('achieveservice_core_port',         '');
+  $config['sitehost']    = variable_get('achieveservice_core_sitehost',     '');
+  $config['apikey']      = variable_get('achieveservice_core_user_api_key', '');
+  $config['deniedurl']   = variable_get('achieveservice_core_denied_url',   '');
+  $config['profileform'] = variable_get('achieveservice_profile_formid',    '');
+
+  $hostip = gethostbyname($config['host']);
+  if ($hostip == $config['host']) {
+    $hostip = '<b>Broken</b>';
+    $hostconnect = 'Skipped';
+  } else {
+    $socket = fsockopen($hostip, $config['port'], $errno, $errstr, 5);
+    if ($socket === FALSE) {
+      $hostconnect = '<b>'.$errstr.'<b>';
+      $getprofileform = 'Skipped';
+    } else {
+      fclose($socket);
+      $hostconnect = 'Passed';
+      $profileformcontent = achieveservice_profile_content($config, TRUE);
+      if ($profileformcontent === FALSE) {
+        $getprofileform = '<b>See error above.</b>';
+      } else {
+        if (strpos($profileformcontent, 'Surname') !== FALSE) {
+          $getprofileform = 'Passed';
+        } else {
+          $getprofileform = '<b>Sitehost or profile form id seems to be wrong.</b>';
+        }
+      }
+    }
+  }
+
+  $buffer  = '<b>Current AchieveService settings</b>';
+  $buffer .= '<table>';
+  $buffer .= '<tr><td>Host: </td><td>'.$config['host'].'</td></tr>';
+  $buffer .= '<tr><td>Port: </td><td>'.$config['port'].'</td></tr>';
+  $buffer .= '<tr><td>Sitehost: </td><td>'.$config['sitehost'].'</td></tr>';
+  $buffer .= '<tr><td>Apikey: </td><td>'.$config['apikey'].'</td></tr>';
+  $buffer .= '<tr><td>Deniedurl: </td><td>'.$config['deniedurl'].'</td></tr>';
+  $buffer .= '<tr><td>Profileform: </td><td>'.$config['profileform'].'</td></tr>';
+  $buffer .= '</table><br />';
+  $buffer .= '<b>Test results</b>';
+  $buffer .= '<table>';
+  $buffer .= '<tr><td>Resolving Host</td><td>'.$hostip.'</td></tr>';
+  $buffer .= '<tr><td>Host connection</td><td>'.$hostconnect.'</td></tr>';
+  $buffer .= '<tr><td>Getting profile form and testing user API</td><td>'.$getprofileform.'</td></tr>';
+  $buffer .= '</table>';
+
+  return $buffer;
+}
+
+function achieveservice_test_form_alter(&$form, &$form_state, $form_id) {
+  if ($form_id == 'achieveservice_core_settings') {
+    $form['link'] = array('#value' => l('Test settings', 'admin/settings/achieveservice_test'));
+  }
+}

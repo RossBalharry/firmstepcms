@@ -1,0 +1,31 @@
+/**
+  * Responsive Elements
+  */
+img { width: 100%; }
+.featured-professors .views-field-field-image img { max-width: 96%; }
+.front #panel-third-wrapper { margin-top: 53px; }
+#main-content > .grid-inner,
+#sidebar-home-wrapper .block,
+#panel-first-wrapper,
+#panel-second-wrapper .panel-second-2 .block { margin-bottom: 22px; }
+#sidebar-second-wrapper .views-field-field-image { margin-bottom: 10px; }
+
+#main-content { float: none; width: auto;}
+#sidebar-home-wrapper { float: none; width: auto; }
+#panel-second-wrapper .panel-column { width: auto; float: none; margin-bottom: 22px; }
+#panel-second-wrapper  .grid-inner,
+#main-content .grid-inner, 
+#sidebar-second-wrapper .grid-inner,
+#sidebar-featured-wrapper .grid-inner { min-height: auto !important; }
+#panel-second-wrapper .panel-second-2 { margin-bottom: 0; }
+#panel-second-wrapper .grid-inner .views-field-field-image img { width: auto; }
+#panel-second-wrapper .panel-second-2 .grid-inner { float: left; }
+#footer .block { float: none; width: 100%; text-align: center; font-size: 11px; }
+#footer .menu { float: none; padding-top: 5px; width: 100%; text-align: center; }
+#footer .menu li { float: none; display: inline-block; }
+#main-menu-wrapper li a { padding: 15px 12px; }
+#sidebar-second-wrapper { float: none; margin-bottom: 22px; width:auto; }
+#newsletter-subscribe-form .form-item .form-text { width: 250px;}
+.watch-now iframe { width: auto; }
+#sidebar-featured-wrapper { width: auto; float: none; margin-bottom: 22px; }
+.page-contact #panel-first-wrapper { margin-bottom: 54px; } 

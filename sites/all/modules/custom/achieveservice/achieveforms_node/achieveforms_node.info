@@ -1,0 +1,8 @@
+name = AchieveForms Node
+description = Provides AchieveForms content type.
+package = AchieveService
+core = 7.x
+version = 7.x-1.0
+files[] = achieveforms_node.module
+files[] = achieveforms_node.install
+requires[] = achieveservice_core

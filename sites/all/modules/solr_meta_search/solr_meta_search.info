@@ -1,0 +1,5 @@
+name = "Solr Meta Search"
+description = "Allows for searching on the description field which is used to hold meta data"
+package = "Firmstep"
+core = "7.x"
+version = "7.x-1.0"

@@ -1,0 +1,8 @@
+name = "Achieveservice User Block"
+description = Display User Block.
+core = 7.x
+dependencies[] = imagecache_coloractions
+dependencies[] = imagecache_canvasactions
+dependencies[] = ajax_register
+version        = 7.x-1.0
+package        = "AchieveService"

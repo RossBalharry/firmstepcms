@@ -1,0 +1,54 @@
+<?php
+/**
+ * info: achieveservice_main.module, v1.0 2012/7/31 Segei Churilo 
+ * Drupal Jobs tasks:
+ *  #1516 (Segei Churilo)
+ */
+
+/**
+ * Implements hook_init().
+ */
+function achieveservice_main_init() {
+  drupal_add_js(drupal_get_path('module', 'achieveservice_main') .'/js/achieveservice_main.js', 'file');
+  drupal_add_js(array('achieveservice_main' => array('bind' => FALSE)), 'setting');
+}
+
+/**
+ * Implements hook_menu().
+ */
+function achieveservice_main_menu() {
+  $items['ajax_achieveservice_main/calendar/update'] = array(
+    'title' => 'Ajax callback',
+    'page callback' => '_achieveservice_main_update_calendar_results',
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+  );
+  return $items;
+}
+
+/**
+ * Ajax callback for dynamic update of the calendar results
+ */
+function _achieveservice_main_update_calendar_results() {
+  $response = array(
+    'status' => TRUE,
+  );
+
+  if (!isset($_POST['href'])) {
+    $response['status'] = FALSE;
+    $response['message'] = t('Internal error ocured.');
+  }
+  else {
+    $temp = explode('/', $_POST['href']);
+    $date = end($temp);
+    $response['content'] = views_embed_view('calendar', 'attachment_1', $date);
+    $response['date'] = $date;
+    if (!$response['content']) {
+      $response['status'] = FALSE;
+      $response['message'] = t('No results found.');
+    }
+  }
+
+  return drupal_json_output($response);
+  exit;
+}

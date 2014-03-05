@@ -1,0 +1,22 @@
+<?php
+
+/**
+ * Implements hook_install().
+ *
+ * @ingroup achieveservice_ub
+ */
+function achieveservice_ub_install() {
+  // Set a variable containing the name of the style to use when the module
+  // outputs an image.
+  variable_set('achieveservice_ub_style_name', 'achieveservice_ub_style');
+}
+
+/**
+ * Implements hook_uninstall().
+ *
+ * @ingroup achieveservice_ub
+ */
+function achieveservice_ub_uninstall() {
+  variable_del('achieveservice_ub_style_name');
+  variable_del('achieveservice_ub_image_fid');
+}

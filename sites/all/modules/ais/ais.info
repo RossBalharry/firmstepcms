@@ -1,0 +1,21 @@
+; Adaptive Image Styles
+;
+
+name = Adaptive Image Styles
+description = Make any image adaptive.
+core = 7.x
+package = Media
+
+configure = admin/config/media/ais
+
+stylesheets[all][] = assets/css/ais.css
+
+dependencies[] = image
+
+
+; Information added by  packaging script on 2013-11-21
+version = "7.x-1.6+4-dev"
+core = "7.x"
+project = "ais"
+datestamp = "1385004592"
+

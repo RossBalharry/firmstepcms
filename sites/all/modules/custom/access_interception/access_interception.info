@@ -1,0 +1,5 @@
+name = Access Interception
+description = "Intercept access a node of a particular content type"
+package = Warecorp
+core = 7.x
+configure = admin/config/content/access_interception

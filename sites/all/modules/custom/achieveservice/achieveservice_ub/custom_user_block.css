@@ -1,0 +1,22 @@
+#zone-user{
+  background-color: #262a2d;
+}
+.block-achieveservice-ub{
+  float: right;
+  padding-right: 20px;
+}
+.block-achieveservice-ub .content-block-user-custom img{
+  /*width: 30px;*/
+  float: left;
+  padding-right: 6px;
+}
+.block-achieveservice-ub .user-custom{
+  float: right;
+}
+.block-achieveservice-ub span{
+  display: block;
+  color: #fff;
+}
+.block-achieveservice-ub a.user-custom-link{
+  
+}

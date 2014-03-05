@@ -1,0 +1,44 @@
+<?php
+/**
+ * @file
+ * views_slideshow_liquid_slider.views_slideshow.install
+ */
+
+/**
+ * Implements hook_requirements().
+ */
+function views_slideshow_liquid_slider_requirements($phase) {
+  $requirements = array();
+  $t = get_t();
+  module_load_include('module', 'libraries', 'libraries');
+  module_load_include('module', 'views_slideshow_liquid_slider', 'views_slideshow_liquid_slider');
+  $verModule = '2.0.8';
+
+  if ($phase == 'runtime') {
+    $library = libraries_detect('liquidslider');
+
+    $requirements['liquidslider'] = array(
+      'title' => $t('jQuery Liquid Slider'),
+      'value' => $library['installed'] ? $library['version'] : t('Not installed'),
+      'severity' => $library['installed'] ? REQUIREMENT_OK : REQUIREMENT_ERROR,
+    );
+
+    if ($library['installed']) {
+      if (version_compare($library['version'], $verModule, '<')) {
+        $requirements['liquidslider']['severity'] = REQUIREMENT_WARNING;
+        $requirements['liquidslider']['description'] = $t('ATTENTION, the installed version is older than @verModule, (It is probably not good)',
+        array('@verModule' => $verModule));
+      }
+      if (version_compare($library['version'], $verModule, '>')) {
+        $requirements['liquidslider']['description'] = $t('The installed version is newer than @verModule, (It should be good)',
+        array('@verModule' => $verModule));
+      }
+    }
+    else {
+      $requirements['liquidslider']['description'] = _views_slideshow_liquid_slider_get_install_error_message();
+    }
+
+  }
+
+  return $requirements;
+}

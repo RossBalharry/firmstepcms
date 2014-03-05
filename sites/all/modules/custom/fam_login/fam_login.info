@@ -1,0 +1,5 @@
+name = Fam Login
+description = Allows FAM login from a Drupal site to a Firmstep site.
+package = GovPlatform
+core = 7.x
+configure = admin/config/system/fam_login

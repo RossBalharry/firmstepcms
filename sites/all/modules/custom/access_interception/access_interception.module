@@ -1,0 +1,139 @@
+<?php
+
+/**
+ * @file
+ * Intercept access a node of a particular content type
+ */
+
+/**
+ * Implements hook_init().
+ */
+function access_interception_init() {
+    drupal_add_css(drupal_get_path('module', 'access_interception') . '/access_interception.css');
+}
+
+/**
+ * Implements hook_help().
+ */
+function access_interception_help($path, $arg) {
+    switch ($path) {
+        case 'admin/config/content/access_interception':
+            return '<p>' . t('Intercept access a node of a particular content type') . '</p>';
+
+        case 'admin/help#access_interception':
+            $output = '';
+            $output .= '<p>' . t('Coming soon') . '</p>';
+            return $output;
+    }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function access_interception_theme() {
+    return array(
+        'access_interception' => array(
+            'variables' => array('text' => NULL, 'links' => NULL),
+            'template' => 'access-interception',
+        ),
+    );
+}
+
+/**
+ * Implements hook_menu().
+ */
+function access_interception_menu() {
+
+    // Module settings.
+    $items['admin/config/content/access_interception'] = array(
+        'title' => 'Access interception',
+        'description' => 'Adjust Access Interception settings.',
+        'page callback' => 'drupal_get_form',
+        'page arguments' => array('access_interception_settings'),
+        'access arguments' => array('administer site configuration'),
+    );
+    // Menu link callbacks.
+    $items['access_interception'] = array(
+        'title' => 'Access interception',
+        'page callback' => 'access_interception',
+        'access arguments' => array('access content'),
+        'type' => MENU_CALLBACK,
+    );
+    return $items;
+}
+
+/**
+ * Form builder function for module settings.
+ */
+function access_interception_settings() {
+
+    $form['access_interception_text'] = array(
+        '#type' => 'textarea',
+        '#title' => t('Access Interception information text'),
+        '#default_value' => variable_get('access_interception_text', ''),
+
+    );
+
+    $types = node_type_get_types();
+    foreach ($types as $type) {
+        $options[$type->type] = t($type->name);
+    }
+
+    $form['access_interception_type'] = array(
+        '#type' => 'checkboxes',
+        '#title' => t('Content types'),
+        '#options' => $options,
+        '#default_value' => variable_get('access_interception_type', NULL),
+    );
+
+    return system_settings_form($form);
+}
+
+/**
+ * Form builder function for module settings.
+ */
+function access_interception() {
+    $content = '';
+    
+    global $base_url;
+
+    $text = variable_get('access_interception_text', '');
+    
+    $destination = drupal_get_destination();
+
+    $login = l('Login', 'user/login', array('query' => array($destination)));
+    $register = l('Register', 'user/register', array('query' => array($destination)));
+    $anonimous = l('Continue as guest', $base_url . '/' . $destination['destination'], array('query' => array('checked' => '1')));
+
+    $vars = array();
+    $vars['type'] = 'ul';
+    $vars['title'] = '';
+    $vars['attributes'] = array(
+        'id' => 'access_interception_links',
+    );
+    $vars['items'] = array($login, $register, $anonimous);
+    $links = theme_item_list($vars);
+
+    $data = array('text' => $text, 'links' => $links);
+
+    $content = theme('access_interception', $data);
+
+    return $content;
+}
+
+/**
+ * Override or insert vars into the page template.
+ */
+
+function access_interception_preprocess_page(&$vars) {
+
+    global $user;
+
+    if ((arg(0) == 'node') && (is_numeric(arg(1))) && ($user->uid == 0) && (!(isset($_GET['checked'])||(isset($_GET['fs2s'])))) ) {
+        $types = variable_get('access_interception_type');
+        if (in_array($vars['node']->type, $types, TRUE)) {
+            $options = array('query' => array('destination' => $_GET['q']));
+            drupal_goto('access_interception' , $options);
+        }
+    }
+}

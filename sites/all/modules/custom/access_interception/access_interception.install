@@ -1,0 +1,22 @@
+<?php
+
+/**
+ * Implements hook_install().
+ *
+ * @ingroup access_interception
+ */
+function access_interception_install() {
+  // Set a variable containing the name of the style to use when the module
+  // outputs an image.
+  variable_set('access_interception_text', t('Access Interception information text'));
+}
+
+/**
+ * Implements hook_uninstall().
+ *
+ * @ingroup access_interception
+ */
+function access_interception_uninstall() {
+  variable_del('access_interception_text');
+  variable_del('access_interception_type');
+}

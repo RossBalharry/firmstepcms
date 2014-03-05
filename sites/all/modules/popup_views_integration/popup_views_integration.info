@@ -1,0 +1,14 @@
+name = "Popup views integration"
+description = "Integrages the popup module with views"
+core = "7.x"
+dependencies[] = "popup"
+dependencies[] = "views"
+package = "views"
+files[] = popup_views_integration_handler_field_popup.inc
+
+; Information added by drupal.org packaging script on 2013-10-01
+version = "7.x-1.x-dev"
+core = "7.x"
+project = "popup_views_integration"
+datestamp = "1380623527"
+

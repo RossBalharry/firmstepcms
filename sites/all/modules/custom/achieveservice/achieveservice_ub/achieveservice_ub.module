@@ -1,0 +1,229 @@
+<?php
+/*
+ * AchieveService User Block
+ *
+ * Display User Block
+ * 
+ *
+ * 
+ */
+function achieveservice_ub_init() {  
+  drupal_add_css(drupal_get_path('module', 'achieveservice_ub') . '/custom_user_block.css');
+}
+
+/**
+ * Implements hook_menu().
+ */
+
+function achieveservice_ub_menu() { 
+  $items['ajax_user/login'] = array(     
+    'title' => 'User login',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('user_login'),    
+    'access callback' => TRUE,
+    'type' => MENU_NORMAL_ITEM,
+	'modal' => TRUE,
+  );
+  return $items;
+}
+
+/**
+ * Implements hook_block_info().
+ */
+
+function achieveservice_ub_block_info() {  
+  $blocks['achieveservice_user_block'] = array(
+    'info' => t('AchieveService User block'), 
+    'cache' => DRUPAL_NO_CACHE,
+    'status' => TRUE,
+    'region' => 'user_second',
+  );
+  return $blocks;
+}
+
+/**
+ * Implements hook_block_configure().
+ */
+function achieveservice_ub_block_configure($delta = '') {
+  
+  $form = array();
+  
+  switch ($delta) {
+    case 'achieveservice_user_block':
+      $form['achieveservice_ub_enabled_ajax'] = array(
+        '#type' => 'checkbox',
+        '#title' => t('Enabled ajax'),
+        '#default_value' => variable_get('achieveservice_ub_enabled_ajax', TRUE),
+      );  
+ 
+      return $form;
+      
+      break;
+  }
+
+  // User allowed to disable ajax.
+  
+}
+
+/**
+ * Implements hook_block_save().
+ */
+function achieveservice_ub_block_save($delta = '', $edit = array()) {
+  
+  switch ($delta) {
+    case 'achieveservice_user_block':
+      
+      // Save variables to database.
+      variable_set('achieveservice_ub_enabled_ajax', $edit['achieveservice_ub_enabled_ajax']);
+      
+      break;
+  }
+  
+}
+
+/**
+ * Implements hook_block_view().
+ */
+
+function achieveservice_ub_block_view($delta = '') {
+  $block = array();
+
+  switch ($delta) {
+    case 'achieveservice_user_block':
+      $block['subject'] = NULL;      
+      if(user_is_anonymous()){
+        // Check enabled ajax or not.
+        $ajax = variable_get('achieveservice_ub_enabled_ajax', TRUE);
+        
+        if ($ajax) {          
+          // Include css and js for modal dialog.
+          _ajax_register_include_modal();
+          // Add a links to the block.
+          $block['content'] = array(
+            '#theme' => 'item_list',
+            '#items' => _ajax_register_ajax_links(array('login')),
+            '#attributes' => array('class' => array('ajax-register-links'))
+          );
+        } else {
+          $block['content'] = l(t('Login'), 'user');
+        }        
+      }
+      else{
+        global $user;
+        $account = user_load($user->uid);
+        if(isset($account->picture->uri)) {
+        $variables = array(
+          'style_name' => 'achieveservice_ub_style',
+          'path' => $account->picture->uri,
+          'alt' => $account->name,
+          'title' => $account->name,
+          'width' => NULL,
+          'height' => NULL,
+          );
+        $account->image_custom = theme_image_style($variables);
+		}
+        $content = theme('achieveservice_ub', array('account'=>$account));
+        //dpm($content);
+        $block['content'] = $content;
+      }
+      break;    
+  }
+  return $block;
+}
+function achieveservice_ub_theme(){  
+    return array(
+      'achieveservice_ub' => array(
+        'variables' => array('account' => NULL),
+        'template' => 'user-block-custom',
+      ),
+    );  
+}
+
+/**
+ * Implements hook_image_default_styles().
+ *
+ */
+function achieveservice_ub_image_default_styles() { 
+  $styles = array();
+  $styles['achieveservice_ub_style'] = array();  
+  $styles['achieveservice_ub_style']['effects'] = array(
+    array(          
+      'name' => 'coloractions_convert',      
+      'data' => array(
+        'format' => 'image/png',
+      ),
+      'weight' => 0,
+    ),  
+    array(          
+      'name' => 'image_scale_and_crop',      
+      'data' => array(
+        'width' => 30,
+        'height' => 30,
+      ),
+      'weight' => 1,
+    ),    
+    array(
+      'name' => 'canvasactions_roundedcorners',
+      'data' => array(
+        'radius' => '15',
+      ),
+      'weight' => 2,
+    ),
+  );
+
+  return $styles;
+}
+
+/**
+ * Implements hook_block_view_alter(&$data, $block).
+ */
+function achieveservice_ub_block_view_alter(&$data, $block){ 
+  
+  if ($block->delta == 'menu-community-stream-menu-anony') {
+    // Include settings for modal dialog.
+    _ajax_login_include_modal(); 
+    foreach ($data['content'] as $key => &$value) {      
+      if(is_numeric($key)){
+        if (!isset($value['#localized_options']['attributes']['class'])) {
+          $value['#localized_options']['attributes']['class'] = array();
+        }
+        array_push($value['#localized_options']['attributes']['class'], 'ctools-modal-ctools-ajax-login-style');
+      }
+    }  
+  }
+}
+
+/**
+ * Add css and javascript for modal dialog.
+ */
+function _ajax_login_include_modal() {
+
+  static $added = FALSE;
+  if ($added == FALSE) {
+
+    // Do not add css and scripts again.
+    $added = TRUE;
+
+    // Create our own javascript that will be used to theme a modal.
+    $ajax_login_style = array(
+      'ctools-ajax-login-style' => array(
+        'modalSize' => array(
+          'type' => 'fixed',
+          'width' => 550,
+          'height' => 140,
+          'contentRight' => 30,
+          'contentBottom' => 0,
+        ),
+        'modalOptions' => array(
+          'opacity' => 0.8,
+          'background-color' => '#000000',
+        ),
+        'closeText' => '',
+        'throbber' => theme('image', array('path' => ctools_image_path('ajax-loader.gif', 'achieveservice_ub'))),
+        'animation' => 'fadeIn',
+        'animationSpeed' => 'fast',
+      ),
+    );
+    drupal_add_js($ajax_login_style, 'setting');
+  }
+}

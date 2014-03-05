@@ -1,0 +1,545 @@
+<?php
+
+require_once('fam.inc');
+
+/**
+ * Implementation of hook_menu().
+ */
+function fam_login_menu() {
+  $items['userfam/login'] = array(
+    'title' => 'FAM Log in',
+    'access callback' => TRUE,
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('fam_login_page'),
+    'type' => MENU_CALLBACK,
+  );
+
+  $items['userfam/authenticate'] = array(
+    'title' => 'FAM Authenticate',
+    'access callback' => TRUE,
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('fam_login_auth_page'),
+    'type' => MENU_CALLBACK,
+  );
+
+  $items['admin/config/system/fam_login'] = array(
+    'title' => 'FAM Login Settings',
+    'description' => 'The settings needed to log in to a Firmstep system',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('fam_login_settings'),
+    'access arguments' => array('administer fam'),
+    'type' => MENU_NORMAL_ITEM,
+  );
+
+  return $items;
+}
+
+/**
+ * Implementation of hook_perm().
+ */
+function fam_login_permission() {
+  return array('administer fam' => array('title' => 'administer fam', 'description' => 'Administer FAM Settings'));
+}
+
+
+function fam_login_settings() {
+  $form = array();
+  $form['settings'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('FAM Settings'),
+    '#collapsible' => FALSE,
+  );
+  $form['settings']['fam_login_url'] = array(
+    '#type' => 'textfield',
+    '#title' => t('FAM URL'),
+    '#size' => 40,
+    '#default_value' => variable_get('fam_login_url', ''),
+    '#description' => t('e.g. http://example.com/FAM/auth.aspx'),
+    '#required' => TRUE,
+  );
+  $form['settings']['fam_login_key'] = array(
+    '#type' => 'textfield',
+    '#title' => t('FAM Key'),
+    '#size' => 40,
+    '#default_value' => variable_get('fam_login_key', ''),
+    // '#description'   => t('Hostname used to connect to AchieveService.'),
+    '#required' => TRUE,
+  );
+  $form['settings']['fam_login_iv'] = array(
+    '#type' => 'textfield',
+    '#title' => t('FAM IV'),
+    '#size' => 40,
+    '#default_value' => variable_get('fam_login_iv', ''),
+    // '#description'   => t('Hostname used to connect to AchieveService.'),
+    '#required' => TRUE,
+  );
+  $form['settings']['fam_login_cipher'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Fam Cipher'),
+    '#size' => 5,
+    '#default_value' => variable_get('fam_login_cipher', 'AES'),
+    // '#description'   => t('Hostname used to connect to AchieveService.'),
+    '#required' => TRUE,
+  );
+
+  $radios_options = array(1 => t('User fam username'), 2 => t('Mail'),);
+
+  $form['settings']['fam_login_check'] = array(
+    '#type' => 'radios',
+    '#title' => t('Select option to check user by:'),
+    '#default_value' => variable_get('fam_login_check', 1),
+    '#options' => $radios_options,
+    '#description' => t('The selected option will be unique.'),
+  );
+
+  $form['behaviour'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Login Behaviour'),
+    '#collapsible' => FALSE,
+  );
+  $form['behaviour']['fam_login_redirect_url'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Redirect After Login URL'),
+    '#size' => 40,
+    '#default_value' => variable_get('fam_login_redirect_url', ''),
+    '#description' => t('e.g. http://example.com/path/'),
+    '#required' => FALSE,
+  );
+  $form['behaviour']['fam_login_internal_login_text'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Internal Login Link Text'),
+    '#size' => 40,
+    '#default_value' => variable_get('fam_login_internal_login_text', 'Internal Login'),
+    '#description' => t('Leave blank to hide the link'),
+    '#required' => FALSE,
+  );
+
+  $form['ip_range'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('IP Range Behaviour'),
+    '#collapsible' => FALSE,
+  );
+
+  $form['ip_range']['enable_ip_range'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Provide IP range behaviour'),
+    '#default_value' => variable_get('enable_ip_range', 0),
+  );
+
+  $form['ip_range']['start_ip'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Start IP range'),
+    '#size' => 40,
+    '#default_value' => variable_get('start_ip', ''),
+    '#description' => t('Enter starting IP address for the range in the format 127.0.0.0 . In case anonymous user\'s IP address falls into that range, he will be redirected to the FAM login page'),
+    '#required' => FALSE,
+    '#states' => array(
+      'visible' => array(
+        ':input[name="enable_ip_range"]' => array('checked' => TRUE)
+      ),
+      'required' => array(
+        ':input[name="enable_ip_range"]' => array('checked' => TRUE),
+      ),
+    ),
+  );
+
+  $form['ip_range']['end_ip'] = array(
+    '#type' => 'textfield',
+    '#title' => t('End IP range'),
+    '#size' => 40,
+    '#default_value' => variable_get('end_ip', ''),
+    '#description' => t('Enter ending IP address for the range in this format 127.0.0.0 .'),
+    '#states' => array(
+      'visible' => array(
+        ':input[name="enable_ip_range"]' => array('checked' => TRUE)
+      ),
+      'required' => array(
+        ':input[name="enable_ip_range"]' => array('checked' => TRUE),
+      ),
+    ),
+  );
+
+  $form['ip_range']['exclude_ip'] = array(
+    '#type' => 'textarea',
+    '#title' => t('Exclude IP from range'),
+    '#default_value' => variable_get('exclude_ip', ''),
+    '#description' => t('Specify IPs to exclude from range above. Enter each IP address separately by comma in the format 127.0.0.0 .'),
+    '#states' => array(
+      'visible' => array(
+        ':input[name="enable_ip_range"]' => array('checked' => TRUE)
+      ),
+    ),
+  );
+
+  $form['combined_action'] = array(
+    '#type' => 'radios',
+    '#title' => t('Combined action of IP range and URL of pages'),
+    '#default_value' => variable_get('combined_action', 0),
+    '#description' => t('Please choose condition for IP range and URL of pages behaviour.'),
+    '#options' => array(
+      0 => t('OR'),
+      1 => t('AND'),
+    ),
+    '#states' => array(
+      'visible' => array(
+        ':input[name="enable_url_paths"]' => array('checked' => TRUE),
+        ':input[name="enable_ip_range"]' => array('checked' => TRUE),
+      ),
+    ),
+  );
+
+  $form['url_paths'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('URL of pages Behaviour'),
+    '#collapsible' => FALSE,
+  );
+
+  $form['url_paths']['enable_url_paths'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Provide URL of pages behaviour'),
+    '#default_value' => variable_get('enable_url_paths', 0),
+  );
+
+  $form['url_paths']['list_url_paths'] = array(
+    '#type' => 'textarea',
+    '#title' => t('URL of pages'),
+    '#default_value' => variable_get('list_url_paths', ''),
+    '#description' => t('Specify paths of pages. In case anonymous user\'s access these pages, he will be redirected to the FAM login page.  Enter each URL path separately by comma.'),
+    '#states' => array(
+      'visible' => array(
+        ':input[name="enable_url_paths"]' => array('checked' => TRUE)
+      ),
+      'required' => array(
+        ':input[name="enable_url_paths"]' => array('checked' => TRUE),
+      ),
+    ),
+  );
+  $form['#validate'][] = 'fam_login_settings_validate';
+  return system_settings_form($form);
+}
+
+function fam_login_settings_validate($form, &$form_state) {
+  if ($form_state['values']['enable_ip_range'] == 1 && $form_state['values']['start_ip'] == '') {
+    form_set_error('start_ip', t('Start IP range is required.'));
+  }
+  if ($form_state['values']['enable_ip_range'] == 1 && $form_state['values']['end_ip'] == '') {
+    form_set_error('end_ip', t('End IP range is required.'));
+  }
+  if ($form_state['values']['enable_url_paths'] == 1 && $form_state['values']['list_url_paths'] == '') {
+    form_set_error('list_url_paths', t('URL path is required.'));
+  }
+}
+
+function _fam_login_connection_detail() {
+  global $is_https;
+  if (!isset($_SESSION['fam_login'])) {
+    $_SESSION['fam_login'] = array('count' => 0, 'return_url' => NULL);
+  }
+  $fam_connection = & $_SESSION['fam_login'];
+
+  if (!$fam_connection['return_url']) {
+    $return_url = ($is_https ? "https://" : "http://") . $_SERVER["SERVER_NAME"] . "/userfam/authenticate";
+
+    $r = drupal_get_destination();
+    if (isset($r['destination']) && strlen($r['destination']) > 0 && $r['destination'] != "userfam/login") {
+      $return_url = $return_url . "?destination=" . urlencode($r['destination']);
+    }
+
+    $fam_connection['return_url'] = $return_url;
+  }
+
+  return $fam_connection;
+}
+
+function _fam_login_set_connection_detail($fam_connection) {
+  $_SESSION['fam_login'] = $fam_connection;
+}
+
+function fam_login_page() {
+  $fam_url = variable_get('fam_login_url', '');
+  $form['#action'] = url($fam_url, array('external' => TRUE));
+
+  $form['AuthToken'] = array(
+    '#type' => 'hidden',
+    '#title' => t("AuthToken"),
+    '#default_value' => _fam_login_get_fam()->generate_request(),
+  );
+
+  $fam_connection = _fam_login_connection_detail();
+  $fam_connection['count'] = $fam_connection['count'] + 1;
+  _fam_login_set_connection_detail($fam_connection);
+
+  drupal_set_message("Authenticating ...");
+
+  $form['DestPage'] = array(
+    '#type' => 'hidden',
+    '#title' => t("DestPage"),
+    '#default_value' => $fam_connection['return_url'],
+  );
+
+  $form['submit'] = array(
+    '#type' => 'submit',
+    '#value' => t('Authenticate me...'),
+    '#prefix' => '<noscript>',
+    '#suffix' => '</noscript>',
+  );
+  $form["autosubmit"] = array('#markup' => '<script type="text/javascript">document.getElementById("fam-login-page").submit();</script>');
+
+  return $form;
+}
+
+function fam_login_auth_page() {
+  $famuser = array();
+  $fam_connection = _fam_login_connection_detail();
+  if (strlen($_POST['AuthToken']) > 0) {
+    $famuser = _fam_login_get_fam()->decode_response($_POST['AuthToken']);
+  }
+  elseif ($fam_connection['count'] < 3) { // retry it 3 times before failing
+    drupal_goto('userfam/login');
+  }
+  else {
+    drupal_set_message("FAM Error: invalid authentication token returned.", 'error');
+    $fam_connection = _fam_login_set_connection_detail(array('count' => 0, 'return_url' => NULL));
+    return;
+  }
+
+
+  _fam_login_check_field('field_user_fam_username', 'FAM username');
+  _fam_login_check_field('field_user_fam_fullname', 'FAM Fullname');
+  _fam_login_check_field('field_last_name', 'Last Name');
+  _fam_login_check_field('field_first_name', 'First Name');
+
+
+  $query = new EntityFieldQuery;
+  $query->entityCondition('entity_type', 'user');
+  if(variable_get('fam_login_check', 1) == 1){
+    $query->fieldCondition('field_user_fam_username', 'value', $famuser["sAMAccountName"], '=');
+  }
+  else {
+    $query->propertyCondition('mail', $famuser["mail"]);
+  }
+  $users = $query->execute();
+
+//  $dfamuser;
+  if (count($users) > 0) {
+    foreach ($users["user"] as $key => $userrow) {
+      $dfamuser = user_load($userrow->uid);
+      break;
+    }
+  }
+  else {
+    // create user
+    $newUser = array(
+      //'name' => uniqid($famuser["displayname"]."|", true),
+      'name' => $famuser["mail"],
+      'pass' => uniqid("p", TRUE),
+      'mail' => $famuser["mail"],
+      'status' => 1,
+      'init' => $famuser["mail"],
+      'field_user_fam_username' => array(
+        'und' => array(
+          array(
+            'value' => $famuser["sAMAccountName"]
+          )
+        )
+      ),
+      'field_user_fam_fullname' => array(
+        'und' => array(
+          array(
+            'value' => $famuser["displayname"]
+          )
+        )
+      )
+    );
+    $dfamuser = user_save(NULL, $newUser);
+  }
+
+  if (isset($famuser['sn'])) {
+    $dfamuser->field_last_name['und'][0]['value'] = $famuser['sn'];
+  }
+
+  if (isset($famuser['givenName'])) {
+    $dfamuser->field_first_name['und'][0]['value'] = $famuser['givenName'];
+  }
+
+  user_save($dfamuser);
+
+  _fam_login_update_user_permission($dfamuser, $famuser["memberof"]);
+
+  _fam_login_log_user_in($dfamuser->uid);
+
+  $red = variable_get('fam_login_redirect_url', '<front>');
+  if (strlen($red) == 0) {
+    $red = '<front>';
+  }
+  drupal_goto($red);
+}
+
+
+function _fam_login_update_user_permission($user, $new_roles) {
+
+  foreach ($user->roles as $key => $user_role) {
+    if (_fam_login_startsWith($user_role, "FAM ")) {
+      unset($user->roles[$key]);
+    }
+  }
+  foreach ($new_roles as $fam_role_name) {
+    $role_name = "FAM " . $fam_role_name;
+    $role = user_role_load_by_name($role_name);
+    if ($role) {
+      $user->roles[$role->rid] = $role_name;
+    }
+  }
+
+  $role = user_role_load_by_name("FAM Anyone");
+  if ($role) {
+    $user->roles[$role->rid] = "FAM Anyone";
+  }
+
+  user_save($user);
+
+}
+
+function _fam_login_startsWith($haystack, $needle) {
+  $length = strlen($needle);
+  return (substr($haystack, 0, $length) === $needle);
+}
+
+function _fam_login_endsWith($haystack, $needle) {
+  $length = strlen($needle);
+  $start = $length * -1; //negative
+  return (substr($haystack, $start) === $needle);
+}
+
+function _fam_login_log_user_in($uid) {
+  global $user;
+  $user = user_load($uid);
+
+  user_login_finalize($user);
+
+}
+
+function _fam_login_get_fam() {
+
+  $fam_key = variable_get('fam_login_key', '');
+  $fam_iv = variable_get('fam_login_iv', '');
+  $fam_cipher = variable_get('fam_login_cipher', '');
+
+  $fam = array();
+
+//  $fam;
+  try {
+    $fam = new FAM($fam_key, $fam_iv, $fam_cipher);
+  } catch (Exception $e) {
+    drupal_set_message("FAM Error: " . $e->getMessage(), 'error');
+  }
+  return $fam;
+}
+
+function _fam_login_check_field($field, $name) {
+  if (!field_info_field($field)) {
+    $field = array(
+      'field_name' => $field,
+      'type' => 'text',
+      'settings' => array(),
+    );
+    field_create_field($field);
+    $instance = array(
+      'field_name' => $field,
+      'entity_type' => 'user',
+      'label' => $name,
+      'bundle' => 'user',
+      'required' => FALSE,
+      'widget' => array(
+        'active' => 1,
+        'module' => 'text',
+        'settings' => array(
+          'size' => '60',
+        ),
+        'type' => 'text_textfield',
+        'weight' => '9',
+      ),
+    );
+    field_create_instance($instance);
+  }
+}
+
+function fam_login_form_alter(&$form, $form_state, $form_id) {
+
+  if ($form_id === 'user_login' && strlen(variable_get('fam_login_internal_login_text', 'Internal Login')) > 0) {
+
+    $form['internal_login'] = array(
+      "#markup" => "<div class='fam_login_link'><a href='../userfam/login'>" . variable_get('fam_login_internal_login_text', 'Internal Login') . "</a></div>"
+    );
+  }
+  elseif ($form_id === 'user_profile_form') {
+    //$form['field_user_fam_username']['und'][0]['value']['#disabled'] = TRUE;
+    //$form['field_user_fam_fullname']['und'][0]['value']['#disabled'] = TRUE;
+    if (!user_access('administer users')) {
+      $form['field_user_fam_username']['und'][0]['value']['#type'] = 'hidden';
+      $form['field_user_fam_fullname']['und'][0]['value']['#type'] = 'hidden';
+    }
+  }
+}
+
+function fam_login_has_fam_account($account) {
+  return isset($account->field_user_fam_username) && (strlen($account->field_user_fam_username['und'][0]['value']) > 0);
+}
+
+
+function fam_login_preprocess_username(&$variables) {
+  if ($variables['account']->uid > 0) {
+    if (isset($variables['account']->field_user_fam_fullname) && $variables['account']->field_user_fam_fullname['und'][0]['safe_value'] != '') {
+      $variables['name'] = $variables['account']->field_user_fam_fullname['und'][0]['safe_value'];
+    }
+    elseif (isset($variables['account']->field_user_fam_username) && $variables['account']->field_user_fam_username['und'][0]['safe_value'] != '') {
+      $variables['name'] = $variables['account']->field_user_fam_username['und'][0]['safe_value'];
+    }
+  }
+}
+
+/**
+ * Implements hook_url_inbound_alter().
+ */
+function fam_login_url_inbound_alter(&$path, $original_path, $path_language) {
+  if (user_is_anonymous() && _fam_login_prevent_loop($original_path)) {
+    if (variable_get('enable_ip_range') == 1 && variable_get('enable_url_paths') == 0 && fam_login_range_ip()) {
+      fam_login_auth_page();
+    }
+    elseif (variable_get('enable_url_paths') == 1 && variable_get('enable_ip_range') == 0 && fam_login_url_paths($original_path)) {
+      fam_login_auth_page();
+    }
+    elseif (variable_get('enable_ip_range') == 1 && variable_get('enable_url_paths') == 1 && variable_get('combined_action') == 1 &&
+      fam_login_url_paths($original_path) && fam_login_range_ip()
+    ) {
+      fam_login_auth_page();
+    }
+  }
+}
+
+function fam_login_url_paths($original_path) {
+  $paths = variable_get('list_url_paths', '');
+  $paths = explode(',', $paths);
+  return in_array($original_path, $paths);
+}
+
+function fam_login_range_ip() {
+  $from_ip = sprintf('%u', ip2long(variable_get('start_ip'))); //range start
+  $to_ip = sprintf('%u', ip2long(variable_get('end_ip'))); //end of range
+  $ex_ips = explode(',', variable_get('exclude_ip')); //excluded IPs
+  $ip = ip_address();
+  $current_ip = sprintf('%u', ip2long($ip));
+  if ($current_ip >= $from_ip && $current_ip <= $to_ip) {
+    if (isset($ex_ips) && is_array($ex_ips) && !in_array($ip, $ex_ips)) {
+      return TRUE;
+    }
+  }
+  return FALSE;
+}
+
+function _fam_login_prevent_loop($original_path) {
+  if ($original_path == 'userfam/login' || $original_path == 'userfam/authenticate') {
+    return FALSE;
+  }
+  return TRUE;
+}

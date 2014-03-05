@@ -1,0 +1,6 @@
+name = AchieveService Core
+description = Provides core AchieveService functionality.
+package = AchieveService
+core = 7.x
+version = 7.x-1.0
+files[] = achieveservice_core.module

@@ -1,0 +1,15 @@
+name = Views Slideshow: Liquid Slider
+description = Adds a jQuery Liquid Slider option to views slideshow
+dependencies[] = views
+dependencies[] = views_slideshow
+dependencies[] = jqmulti
+dependencies[] = libraries (2.x)
+package = Views
+core = 7.x
+
+; Information added by drupal.org packaging script on 2013-10-19
+version = "7.x-1.0-rc1+0-dev"
+core = "7.x"
+project = "views_slideshow_liquid_slider"
+datestamp = "1382165167"
+

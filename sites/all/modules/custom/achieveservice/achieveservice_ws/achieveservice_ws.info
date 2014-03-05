@@ -1,0 +1,9 @@
+name           = "AchieveService Web Services"
+description    = "Manages fetching and transformation of XML feeds from AchieveService."
+core           = 7.x
+version        = 7.x-1.0
+package        = "AchieveService"
+dependencies[] = achieveservice_core
+files[]        = achieveservice_ws.module
+files[]        = achieveservice_ws.install
+files[]        = achieveservice_ws.admin.inc

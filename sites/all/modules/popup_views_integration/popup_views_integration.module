@@ -1,0 +1,15 @@
+<?php
+
+/**
+ * @file
+ * Views popup integration views declaration.
+ */
+
+/**
+ * Implements hook_views_api().
+ */
+function popup_views_integration_views_api() {
+  return array(
+    'api' => '3.0',
+  );
+}

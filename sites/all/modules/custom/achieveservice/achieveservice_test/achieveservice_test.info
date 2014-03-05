@@ -1,0 +1,8 @@
+name           = "AchieveService Test"
+description    = "Provides a page that allows you to test the connection to AchieveService"
+core           = 7.x
+version        = 7.x-1.0
+package        = "AchieveService"
+dependencies[] = achieveservice_core
+dependencies[] = achieveservice_profile
+files[]        = achieveservice_test.module

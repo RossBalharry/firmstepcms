@@ -1,0 +1,134 @@
+<?php
+
+function achieveforms_node_node_info(){
+  return array(
+    'achieveforms_node' => array(
+      'name'=>'AchieveForms Node',
+      'base'=>'achieveforms_node',
+      'description'=>'A node containing an AchieveForms form',
+      'title_label'=>'Title',
+    ),
+  );
+}
+
+function achieveforms_node_menu() {
+  // $items['admin/settings/achieveforms_node'] = array(
+  //   'title'            => 'AchieveForms Node',
+  //   'description'      => 'The configuration settings for the AchieveForms Node type',
+  //   'page callback'    => 'drupal_get_form',
+  //   'page arguments'   => array('achieveforms_node_settings'),
+  //   'access arguments' => array('administer achieveservice'),
+  //   'type'             => MENU_NORMAL_ITEM,
+  //   );
+  $items['achieveforms_node/forms_autocomplete'] = array(
+    'page callback' => '_achieveforms_node_forms_autocomplete',
+    'access arguments' => TRUE,
+    'type' => MENU_CALLBACK
+  );
+  return $items;
+}
+
+/**
+ * Implement hook_form() with the standard default form.
+ */
+function achieveforms_node_form($node, $form_state) {
+  return node_content_form($node, $form_state);
+}
+
+function _achieveforms_node_get_forms($cache = FALSE) {
+
+  if(!isset($_SESSION['achieveforms_node_forms'])) {
+    $_SESSION['achieveforms_node_forms'] = array();
+  }
+  $forms_arr = $_SESSION['achieveforms_node_forms'];
+
+  if (count($forms_arr) == 0 || !$cache) {
+    $forms_xml = new SimpleXMLElement(achieveservice_ws_get_feed_content("/API/ListPublishedForms/"));
+    $forms_arr = array();
+    foreach ($forms_xml->Forms->form as $afform) {
+      $key = (string)$afform['name']. ' [Form:'.(string)$afform['shortname'].']';
+      $forms_arr[$key] = (string)($afform['name']);
+    }
+    $_SESSION['achieveforms_node_forms'] = $forms_arr;
+  }
+  return $forms_arr;
+}
+
+function _achieveforms_node_forms_autocomplete($search_string) {
+  $matches = array();
+  $forms = _achieveforms_node_get_forms(TRUE);
+  foreach ($forms as $key => $form_name) {
+    if (preg_match("/".$search_string."/i", $form_name)) {
+      $matches[$key] = (string)$form_name;
+    }
+  }
+  // return for JS
+  drupal_json_output($matches);
+}
+
+function achieveforms_node_form_alter(&$form, &$form_state, $form_id) {
+
+  if($form_id=='achieveforms_node_node_form') { 
+
+    $form['title'] = array(
+      '#type' => 'textfield', 
+      '#title' => 'Page Title', 
+      '#required' => TRUE,
+      '#default_value' => $form['#node']->title,
+      '#weight' => -5,
+    );
+    
+    $default_value = '';
+    if (isset($form['#node']->achieveform_name)) {
+      $default_value = $form['#node']->achieveform_name[$form['#node']->language][0]['value'];
+    }  
+    
+    $form['achieveform_name'] = array(
+      '#type' => 'textfield',
+      '#title' => 'Form',
+      '#required' => TRUE,
+      '#description' => 'Start typing the name of the form you want to add and an autocomplete option will appear.',
+      '#default_value' => $default_value,
+      '#autocomplete_path' => 'achieveforms_node/forms_autocomplete',
+    );
+
+    $form['actions']['submit']['#submit'][] = 'achieveforms_node_myform_submit';
+  }
+}
+
+function achieveforms_node_myform_submit($form, &$form_state) {
+  $node = node_load($form['#node']->nid);
+  $node->achieveform_name[$node->language][0]['value'] = $form['achieveform_name']['#value'];
+  node_save($node);
+}
+
+function achieveforms_node_preprocess_node(&$vars) {
+  if($vars['type']=='achieveforms_node' && $vars['elements']['#view_mode'] == 'full') {
+  
+    $form_string = $vars['achieveform_name'][0]['value'];
+
+    $pattern = "/\[Form:([\w\d]*)\]/";
+    if (preg_match($pattern, $form_string, $matches)) {
+      // handle format 'Form Name [Form:aB12aB12aB1]'
+      $form_string = $matches[1];
+    }
+    if(strlen($form_string)==11)  {
+      // handle format 'aB12aB12aB1'
+      // render using F.Name
+      $rp = textbetween($_SERVER['REQUEST_URI'], '?', -1);
+      #$rp = strlen($rp)>0 ? $rp : ('F.Name='.$vars['achieveform_name'][0]['value']);
+      $rp = 'F.Name='.$form_string.'&'.$rp;
+      $achieveform_name = array('#markup'=>achieveservice_core_afrender('/RenderForm/?'.$rp, FALSE));
+    } else {
+      // use the field as a URL to render
+      $rp = textbetween($_SERVER['REQUEST_URI'], '?', -1);
+      $rp = (strpos($form_string,'?')>0?'&':'?') . $rp;
+      $rp = $rp . '&HideToolbar=1';
+      $rp .= '&nodnid';
+      $achieveform_name = array('#markup'=>achieveservice_core_afrender($form_string . $rp, FALSE));
+    }
+    $vars['content']['achieveform_name']["#items"][0]['value'] = $achieveform_name['#markup'];
+    $vars['content']['achieveform_name']["#items"][0]['safe_value'] = $achieveform_name['#markup'];
+    $vars['content']['achieveform_name'][0] = $achieveform_name;
+  }  
+}

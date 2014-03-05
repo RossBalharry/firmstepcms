@@ -1,0 +1,7565 @@
+/* Copy of achieveform-combined.css with #achieveform prefixed */
+
+#achieveform body {
+    background-color:#FFFFFF;
+    font:9pt Arial,Helvetica,Verdana sans-serif;
+    margin:0;
+    padding: 0;
+}
+/*!!!!stages.css!!!!*/
+#achieveform .pdmenu
+{
+	vertical-align: bottom;
+}
+#achieveform .pdtitle
+{
+	padding: 0px;
+	width: 100%;
+	margin: 0px;
+	border: 0px;
+	height: 21px;
+}
+#achieveform .pdbody
+{
+	background-color: White;
+	margin-top: 0px;
+}
+#achieveform .currentprocess 
+{
+   padding-left: 10px;	
+   font-weight: normal;	
+   /*background: url(cssimages/css/f3cssgifs/endbar.gif) no-repeat 4px 50%;	*/
+   background:none;
+   color: #EE4220;
+   vertical-align: middle;
+   height: 20px;
+   line-height: 20px;
+   overflow: hidden;
+}
+#achieveform .navigationtable 
+{
+	border-bottom: 1px solid #808080;
+	border-top: 1px solid white;
+	background: /*url(cssimages/css/f3cssgifs/genericbuttongradblue.gif) repeat-x top*/ #F6F9FB;
+	padding-left: 5px;
+	height: 28px;
+	white-space: nowrap;
+}
+#achieveform .navigationtable div 
+{
+    white-space: nowrap;
+    padding: 0 2px;
+}
+#achieveform .spacer 
+{
+    border-bottom: 1px solid #808080;
+	border-top: 1px solid white;
+	background: /*url(cssimages/css/f3cssgifs/buttongradsilver.gif) repeat-x top*/ #F6F9FB;
+	padding-left: 10px;
+	height: 28px;
+	width: 70% !important;
+	COLOR: #EE4220;
+}
+#achieveform .page_toolbar 
+{
+    background: none/*url(cssimages/css/f3cssgifs/buttongradsilver.gif) repeat-x*/;
+    background-position: bottom;
+    width: 100%;
+    height: 28px;
+    vertical-align: middle;
+}
+#achieveform a
+{
+	color: Black;
+	text-decoration: none;
+
+	
+}
+#achieveform a.uploadlink
+{
+	color: #EE4220;
+	text-decoration: underline;
+}
+
+
+#achieveform a:hover
+{
+	color: #EE4220;
+
+}
+#achieveform img 
+{
+	border: 0
+}
+#achieveform .headerrow TH, .headerlabels
+{
+	background: #E2E0DB;
+	vertical-align: middle;
+	border-top: 1px solid #FFFFFF;
+	border-bottom: 1px solid #808080;
+	color: black;
+	height: 18px;
+	padding-left: 5px;
+	border-left: 1px solid #C1BEB8;
+	text-align: left;
+	font-weight: normal;
+}
+#achieveform .proctable
+{
+	width: 100%;
+}
+#achieveform .procname
+{
+	/*background-image: url(css/f3css/cssgifs/dot.gif);
+	background-repeat: no-repeat;*/
+	background: none;
+	margin-left: 5px;
+	padding-left: 25px;
+	padding-top: 0px;
+}
+/* Item row background */
+#achieveform TR.itemrow, TR.itemrowpublished, TR.itemrowdesign, TR.itemrowpd
+{
+    background-color: #FFFFFF;
+}
+/* Alternating item row background */
+#achieveform TR.itemrowalt, TR.itemrowpublishedalt, TR.itemrowdesignalt, TR.itemrowpdalt 
+{
+    background-color: #DDDDDD;
+}
+/* Hover item row background */
+#achieveform TR.itemrow:hover, TR.itemrowalt:hover, TR.itemrowpublished:hover, TR.itemrowpublishedalt:hover, TR.itemrowdesign:hover, TR.itemrowdesignalt:hover, TR.itemrowpd:hover, TR.itemrowpdalt:hover 
+{
+	background-color: #BBBBBB;
+}
+#achieveform .itemrow TD, .itemrowalt TD, tr.noitems td, td.noitems
+{
+	border-bottom: 1px solid #C4C4C4;
+	padding:2px 0px 2px 4px;
+	padding-right: 8px
+}
+#achieveform .itemrowpublished TD, .itemrowpublishedalt TD
+{
+	border-bottom: 1px solid #C4C4C4;
+	padding:2px 0px 2px 4px;
+	padding-right: 8px;
+}
+#achieveform .itemrowdesign TD, .itemrowdesignalt TD
+{
+	border-bottom: 1px solid #C4C4C4;
+	padding:2px 0px 2px 4px;
+	padding-right: 8px;
+	color: red;
+}
+#achieveform .itemrowdesign TD A, .itemrowdesignalt TD A 
+{
+    color: red;
+}
+#achieveform .itemrowpd TD, .itemrowpdalt TD
+{
+	border-bottom: 1px solid #C4C4C4;
+	padding:2px 0px 2px 4px;
+	padding-right: 8px;
+	text-indent: 10px;
+}
+#achieveform td.uppertoolbar 
+{
+    background-color: #0367A5;
+}
+#achieveform .uppertoolbartableauth 
+{
+	background: /*url(cssimages/css/f3cssgifs/upperheadergradnew.gif) repeat-x top*/ #FFFFFF;
+	height: 21px;
+	width: 100%;
+	border-top: 1px solid #80B2F9;
+}
+#achieveform .listheader 
+{
+    width: 100%;
+    border-bottom:1px solid #9D9D9D;
+    background: /*url(cssimages/css/f3cssgifs/gradsilver.gif) repeat-x */;
+}
+#achieveform TD.newprocess 
+{
+    text-align: right;
+    vertical-align: middle;
+    padding: 3px 9px;
+}
+#achieveform INPUT#AddButton 
+{
+    vertical-align: middle;
+}
+#achieveform A#AddLink 
+{
+    margin-right: 8px;
+}
+#achieveform .gradheader1 
+{
+	color: #1b74ab;
+	font-weight: bold;
+	text-indent: 5px
+}
+#achieveform .standardtable, .standardtablenpd 
+{
+	width: 98%;
+	margin: 1%;
+	border: 1px solid #1B74AB;
+
+}	
+#achieveform .standardtableheader, .standardtableheadernpd 
+{
+	color: white;
+	height: 20px;
+	font-weight: bold;
+	border: 1px solid #0065A4;
+	vertical-align: middle;
+	line-height: 20px;
+}
+#achieveform .standardtableheader + .standardtableheader 
+{
+    border-left: none;
+}
+#achieveform .standardtableheader a 
+{
+    color: #FFFFFF;
+}
+#achieveform .standardtableheadernpd 
+{
+	text-indent: 4px
+}
+#achieveform .standardtable td 
+{
+	padding-left: 4px;
+	padding-right: 4px;
+}
+#achieveform .standardtablenpd td 
+{
+	padding-left: 0
+}
+#achieveform .genericsubmit 
+{
+	overflow: visible;
+	color: #FFFFFF;
+	border: 1px solid #FFFFFF;
+	font-size: 95%;
+	margin-top: 2px;
+	margin-left: 1px;
+	cursor: pointer;
+	padding: 0.2em 0.6em 0.2em 0.6em;
+}
+
+/* Fix for size issues in IE in table cells */
+#achieveform .isie .genericsubmit { width: auto }
+
+#achieveform .generictextinput 
+{
+	border: 1px solid #808080;
+	margin-right: 2px;
+	margin-top: 2px;
+	background: url(cssimages/css/f3cssgifs/fieldgrad.gif) repeat-x top;
+}
+#achieveform .uppertoolbar 
+{
+	background: url(cssimages/css/f3cssgifs/upperheadergradnew.gif) repeat-x top #FFFFFF;
+	height: 21px;
+	width: 100%;
+	border-top:1px solid #80B2F9;
+	color: #fff;
+	font-weight:bold;
+	text-indent: 5px
+}
+#achieveform .slotdivision 
+{
+	border-bottom: 1px solid #C4C4C4;
+	padding:2px 0px 2px 4px;
+
+}
+#achieveform .design TD
+{
+	color: Red;
+}
+#achieveform .stagedesigner {
+	background: url(cssimages/css/f3cssgifs/navtablebevel.gif) repeat-x top;
+}
+#achieveform .savecancel, .toolbarstagename,  .stagesabovetoolbar
+{
+	background: url(cssimages/css/f3cssgifs/navtablebevel.gif) repeat-x top;
+	height:22px;
+}
+#achieveform .toolbarstagename {
+	vertical-align:middle;
+	line-height: 22px;
+	padding-right:10px;
+}
+#achieveform .savecancel .genericsubmit 
+{
+	text-decoration:none;
+	color: #000000;
+	border-width: 0;
+	background: transparent;
+	padding: 0 10px;
+	margin: 0;
+	display: inline;
+	cursor: pointer;
+	width: auto;
+	vertical-align: middle;
+	height: 20px;
+	width: auto;
+	overflow: visible;
+	filter: none !important;
+}
+#achieveform .stagedesigner .outertoolbarcontainer {
+	float: left !important;
+	width: auto !important;
+}
+#achieveform .stagedesigner .lowertabstable {
+	border-bottom: none !important;
+}
+#achieveform .stagedesigner .secondtabunsel, .stagedesigner .secondtabsel {
+	padding-bottom:0;
+}
+#achieveform .warning 
+{
+    color: Red;
+}
+#achieveform .selected A 
+{
+    color: #009F00; 
+    font-weight: bold;
+}
+
+
+/* Toolbar Classes */
+#achieveform .formslogotext {
+	font-weight: bold;
+	color: white;
+	white-space: nowrap;
+	padding-left: 5px;
+
+}
+#achieveform .formslogotextlogin {
+	font-weight: bold;
+	color: white;
+	white-space: nowrap;
+	padding-right: 5px
+}
+#achieveform .formsloginbutton {
+	
+	color: #FFFFFF;
+	background: #1B74AB;
+	border-width: 1px;
+	border-style: solid;
+	border-color: #FFFFFF;
+	font-size: 75%;
+	cursor: pointer;
+	padding: 0px 1px 0px 1px;
+	margin: 0px;
+	outline: 0px none red;
+}
+#achieveform .formsloginlink, .formsloginlink:hover, .formsloginlink:active, .formsloginlink:visited {
+	
+	color: #FFFFFF;
+	background: #1B74AB;
+	border-width: 1px;
+	border-style: solid;
+	border-color: #FFFFFF;
+	font-size: 75%;
+	cursor: pointer;
+	padding: 0px 1px 0px 1px;
+	text-decoration: none;
+}
+#achieveform .notloggedin {
+	color: #dddddd;
+	font-size: 80%;
+	font-weight: bold;
+	white-space: nowrap;
+	
+}
+#achieveform .uppertoolbartableauth {
+	background:/* url(cssimages/css/f3cssgifs/upperheadergradnew.gif) repeat-x top*/ #FFFFFF;
+	height: 24px;
+	width: 100%;
+	border-top:1px solid #80B2F9
+}
+#achieveform .uppertoolbartable {
+	background:/* url(cssimages/css/f3cssgifs/upperheadergradnew.gif) repeat-x scroll center top*/ #FFFFFF;
+	height: 24px;
+	width: 100%;
+	border-top:1px solid #80B2F9;
+}
+#achieveform .outertoolbarcontainer {
+	width: 100%;
+}
+#achieveform .endbar {
+#achieveform background:/*url(cssimages/css/f3cssgifs/endbar.gif) no-repeat 10% 50%*/;
+}
+#achieveform .tabbutton {
+	white-space:nowrap;
+}
+#achieveform .tabbutton .label, .tabbuttonhighlight .label {
+	margin-left: 0.25em;
+	margin-right: 0.25em;
+}
+#achieveform .tabbuttonhighlight .label {
+	color: #EE4220;
+}
+#achieveform .tabbuttonhighlight A {
+	border-top:	2px solid #EE4220;
+	display: block;
+	color: black;
+	text-decoration: none;
+	white-space: nowrap;
+	padding: 3px;
+}
+#achieveform .tabbutton A {
+	border-top:	none;
+	display: block;
+	color: black;
+	text-decoration: none;
+	white-space: nowrap;
+	padding: 3px;
+}
+#achieveform .tabbuttonhighlight A:hover {
+	color: #EE4220;
+}
+#achieveform .tabbutton A:hover , .tabbutton A:active, .tabbutton A:focus {
+	color: #EE4220;
+}
+#achieveform .tabbutton DIV, .tabbuttonhighlight DIV {
+	display: block;
+	margin-right: 0px;
+	margin-left: 0px;
+	font-weight: bold;
+	color: #787878;
+	text-decoration: none;
+	white-space: nowrap;
+	padding-right: 0.5em;
+}
+#achieveform .tabbutton DIV {
+}
+#achieveform .tabbuttonhighlight DIV {
+	
+}
+#achieveform .formselected {
+	width: 90%;
+	padding-left: 10px;
+	color: #EE4220;
+	font-weight: normal;
+}
+#achieveform .blackit {color: black }
+
+#achieveform .tabspacer {
+	width: 70%
+}
+#achieveform .tabspaceremote {
+	width: 50%
+}
+#achieveform .statustext {
+	color: #676767;
+	font-size: 70%;
+	font-weight: bold;
+	text-indent: 0.5em;
+	background-color: #DAE3EE;
+	border-right: 1px solid #A0C4DB;
+	border-top: 1px solid #A0C4DB;
+	white-space: nowrap
+}
+
+#achieveform .surroundtable {
+	background-color: #FFFFFF;
+	color: #000000;
+	width: 100%
+}
+
+#achieveform .statusbarlink {
+	color: #999A9A;
+	font-size: 70%;
+	background: /*url(cssimages/css/f3cssgifs/weedropshadow.gif) repeat-x top*/  #FFFFFF;
+	height: 20px;
+	text-indent: 0.5em
+}
+#achieveform .alignright 
+{
+    text-align: right; 
+}
+#achieveform .aligncentre
+{
+    text-align: center;
+}
+#achieveform .highlightonblue 
+{
+    color: #ccccd0;
+}
+#achieveform .selected_column
+{
+	background-color: #F2F0EB !important;
+}
+#achieveform #toolbar{
+	background: #6688AA url(images/roundedbottomleftblue.jpg) no-repeat 110px bottom;
+	overflow: hidden;
+}
+#achieveform .navbar{
+	float: left;
+	margin: 0 auto;
+	padding:0 1em;
+	height: 32px;
+	font-family: Verdana;
+}
+#achieveform .navbar li {
+	display: inline;
+	color: white;
+	background: transparent none repeat scroll 0 0;
+	border: medium none;
+	padding: 0;
+}
+#achieveform .navbar li a{
+	font-size: 1em;
+	text-transform: uppercase;
+	border-left: 1px solid #aaaaaa;
+	border-right: none;
+	height: auto;
+	vertical-align: middle;
+	line-height: 32px;
+	padding: 0 8px;
+	color: #ffffff;
+	font-family: verdana, sans-serif;
+}
+#achieveform .navbar li:first-child a{
+	border-left: none;
+}
+#achieveform .navbar li a:hover{
+	background-image: none;
+	color: #ffffff;
+	text-decoration: underline;
+}
+#achieveform .navbar li .selected a, .navbar li a:focus {
+	text-decoration: underline;
+	line-height: 24px;
+}
+#achieveform .navbar li.selected {
+	height: 30px;
+	padding-top: 6px;
+}
+#achieveform #logo{
+	float: left;
+	display: block;
+	border: none;
+	height: 32px;
+	width: 110px;
+	background: url(Images/firmsteplogowhite.jpg);
+	text-indent: -9999px;
+}
+#achieveform .profilelink{
+	float: right;
+	margin: 0 auto;
+	padding:0 1em;
+	height: 32px;
+	line-height:32px;
+	font-family: Verdana;
+	color: #EFEFEF;
+}
+#achieveform .profilelink a {
+	color: #EFEFEF;
+}
+#achieveform .profilelink a:hover {
+	color: #FFFFFF;
+}
+#achieveform .cases .menuouter a:hover{
+	text-decoration: underline;
+	color: #5F5F5F;
+}
+#achieveform .draghandle{
+	cursor: move;
+	zoom: 1;
+}
+#achieveform #wrapper{
+	margin: 0 auto !important;
+}
+#achieveform #content{
+	padding: 0 !important;
+	min-height: 1px;
+}
+#achieveform #mainpage{
+	height: 100%;
+	min-height: 500px;
+	padding: 1em 4%;
+	position: relative;
+}
+
+/*!!!!admin.css!!!!*/
+/* Homepage builder */
+#achieveform .cancelbutton {
+	margin: 1px 2px 2px 0px;
+	padding: 2px 8px;
+	font-size: 11px;
+	border-width: 1px;
+	border-style: solid;
+	/*background-image: url('/FileStore/ny/Branding/images/nyss_accordion_tab_bottom_bg.png');*/
+}
+#achieveform .actionpopup {
+	background-color: #FFF;
+	border: 1px solid rgb(51,51,51);
+}
+#achieveform .adminbar{
+	margin: 0;
+	font-size: 11px;
+	font-family: Verdana;
+	position: relative;
+	height: 18px;
+	opacity: 1.0;
+	-moz-opacity: 1.0;
+	filter: alpha(opacity: 100);
+	line-height: 150%;
+	color: #000000 !important;
+	z-index: 1100;
+	overflow: hidden;
+	border: none;
+}
+#achieveform .adminbar a{
+	color: #666666 !important;
+	text-decoration: none;
+}
+#achieveform .adminbar a:hover, .adminbar a:focus{
+	color: #000000 !important;
+}
+#achieveform .adminoptionspanelclose{
+	position: absolute;
+	top: 1px;
+	right: 5px;
+}
+#achieveform .adminoptionspanel{
+	border-bottom: 3px solid #6688AA;
+	position: relative;
+}
+#achieveform #PageOptions, #SiteOptions, #OtherOptions {
+	display: none;
+	background-color: rgb(254, 254, 255);
+}
+#achieveform .adminbar input {
+	background-color: #FFFFFF;
+}
+#achieveform #HidePageOptions, #HideSiteOptions, #HideOtherOptions {
+	float: right;
+	clear: none;
+	color: #FFFFFF;
+	margin: 5px;
+	font-size: 10px;
+}
+#achieveform .admineditmode{
+	margin: 6px 4px 3px 4px;
+}
+#achieveform #adminbarnotice {
+	/*background-image: url(./ccdemo/faqs.gif);
+	background-repeat: no-repeat;
+	background-position: 4px 4px;*/
+	padding: 2px 5px 4px 24px;
+	vertical-align: middle;
+	float: left;
+	clear: left;
+	line-height: 150%;
+	height: 100%;
+}
+#achieveform .admineditmode #adminbarnotice{
+	/*background-image: url(./ccdemo/myprofile.gif);*/
+	padding: 4px 5px 4px 23px;
+}
+#achieveform #adminbarlinks{
+	float: right;
+	clear: right;
+}
+#achieveform .adminbar a {
+	color: #111111;
+	font-weight: bold;
+	text-decoration: none;
+}
+#achieveform .adminbar a:hover {
+	color: rgb(27, 81, 135);
+	font-weight: bold;
+	text-decoration: none;
+}
+#achieveform .adminoptionspanel{
+	clear: both;
+	overflow: hidden;
+}
+#achieveform #AdminOptions {
+	padding: 5px 10px;
+	font-size: 12px;
+	min-height: 30px;
+}
+#achieveform #AdminOptions .fieldlabel {
+	font-size: 13px;
+	color: #333333;
+	margin-top: 5px;
+}
+#achieveform #AdminOptions .genericsubmit + .sectiontitle {
+	padding-top: 5px;
+}
+#achieveform #NewSection {
+	clear: both;
+}
+#achieveform #NewSection + .sectiontitle {
+	padding-top: 15px;
+}
+#achieveform .sectiontitle {
+	clear: both;
+}
+#achieveform .aftertabbuttons {
+	text-align: left;
+	padding: 5px 10px 5px;
+	clear: both;
+}
+#achieveform #PermissionsTable {
+	padding-left: 10px;
+}
+#achieveform #PermissionsTable th {
+	text-align: left;
+}
+#achieveform #PermissionsTable td {
+	padding-right: 10px;
+}
+#achieveform #PermissionsTable tr td:first-child {
+	width: 200px;
+}
+#achieveform .nocheckbox {
+	text-align: center;
+	color: rgb(51,51,51);
+	cursor: default;
+}
+#achieveform .sitesetting {	
+	/*background-image: url(cssimages/css/f3cssgifs/fieldgrad.gif);
+	background-repeat: repeat-x;
+	background-position: 50% top;*/
+	border: 1px solid #808080;
+	padding: 2px;
+}
+#achieveform input.sitesetting {
+	width: 97%;
+}
+#achieveform .field .sitesetting {
+	width: auto;
+}
+#achieveform .field.under .sitesetting {
+	width: 97% !important;
+	padding: 4px 5px 4px 0px;
+	clear: left;
+	float: none !important;
+}
+#achieveform .field.under .fieldlabel {
+	float: none;
+}
+#achieveform textarea.sitesetting {
+	width: 97%;
+	font-family: "Courier New", Courier, mono-space;
+}
+#achieveform .filelist .file .stdbutton {
+	margin-right: 5px;
+	font-size: 10px;
+	font-weight: bold;
+}
+#achieveform .filelist {
+	max-height: 300px;
+	padding-left: 10px;
+	font-size: 12px;
+	overflow-y: scroll;
+}
+#achieveform .filelist.nofiles {
+	font-size: 12px;
+	margin: 3px;
+	font-style: italic;
+}
+#achieveform .field {
+	width: 90%;
+	padding: 1px 5px;
+	margin: 5px;
+	clear:both;
+	min-height: 20px;
+}
+
+#achieveform .searchItem{
+	width: 100%;
+}
+
+#achieveform .fieldgroup p {
+	padding-left: 5px;
+	padding-right: 5px;
+}
+#achieveform .field-children {
+  padding-left: 20px;
+}
+#achieveform .field .fieldlabel {
+	float: left;
+	width: 45%;
+	padding-right: 10px;
+	color: rgb(30,30,30);
+}
+#achieveform .field .buttons {
+  text-align:right;
+}
+#achieveform .field .buttons {
+  text-align:right;
+}
+#achieveform .field .buttons div {
+  text-align: left;
+}
+#achieveform .field .fieldlabel + * {
+	float: right;
+	width: 50%;
+	margin: 0;
+	padding-left: 2px;
+}
+#achieveform .field .generictextinput {
+	padding: 1px 0px;
+}
+#achieveform .field .genericcheckbox {
+	margin: 0;
+	vertical-align: middle;
+}
+#achieveform .field span select {
+	margin: 0;
+}
+#achieveform .field + .sectiontitle {
+	padding-top: 10px;
+}
+#achieveform #BackButton, .BackButton {
+	margin-left: 10px;
+	margin-bottom: 10px;
+	clear: both;
+}
+#achieveform .EditThing {
+	padding: 0 10px;
+	font-size: 12px;
+}
+#achieveform .error {
+	color: red !important;
+}
+#achieveform h3 {
+	font-size: 13px;
+}
+#achieveform .deletemessagetable {
+	width: 300px;
+	margin-bottom: 100px !important;
+	font-size: 12px;
+	padding: 20px 20px 20px 50px !important;
+	background-position: 15px 20px;
+	border: 1px solid #999999;
+	filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color=#29000000, Positive='true');
+	background-color: #FFFFFF;
+}
+#achieveform .referencepagetable tr:first-child td {
+	font-size: 14px;
+	padding: 20px;
+}
+#achieveform label.bws.checkbox {
+	white-space: nowrap;
+}
+#achieveform .bws.checkbox, .bws.radio {
+	vertical-align: middle;
+	display: inline-block;
+	display: inline;
+}
+#achieveform .bws.note {
+	margin: 3px 0 0 15%;
+}
+
+/* BrowseFS */
+#achieveform .child-nodes {
+	padding-left: 11px;
+}
+#achieveform .node {
+	padding: 3px;
+}
+#achieveform .node.childless {
+	padding-left: 11px;
+}
+
+/* Inline form editing */
+#achieveform .tab .uppertoolbartableauth, .tab .uppertoolbartable {
+	display: none;
+}
+#achieveform .tab .surroundtable {
+	display: none;
+}
+#achieveform .tab .abslowertable { /* Form design toolbar */
+	float: right;
+	width: auto;
+}
+#achieveform .tab .lowertabstable {
+	border: none;
+	background: none;
+}
+#achieveform .tab .abslowertable .secondtabsel, .tab .abslowertable .secondtabunsel {
+	background-position: 0% 50%;
+	padding: 4px 7px 3px 9px;
+	background: url(cssimages/css/f3cssgifs/tabseperator.gif) no-repeat 0% 50%;
+}
+#achieveform .tab .abslowertable .secondtabsel a:hover, .tab .abslowertable .secondtabunsel a:hover {
+	text-decoration: none;
+}
+#achieveform .tab .abslowertable .secondtabsel a {
+	color: red;
+}
+#achieveform .tab .outertoolbarcontainer {
+	/*background: url(cssimages/css/f3cssgifs/navtablebevel.gif) repeat-x;*/
+	border-top: 1px solid #EDEDED;
+	border-bottom: 1px solid #9D9D9D;
+	height: 23px;
+	font-size: 11px;
+}
+#achieveform .tab .savebutton {
+	/*background: url(cssimages/css/f3cssgifs/navtablebevel.gif) repeat-x;*/
+	border-top: 1px solid #EDEDED;
+	border-bottom: 1px solid #9D9D9D;
+	height: 23px;
+	float: left;
+	padding: 0;
+	margin: 0;
+}
+#achieveform .tab .savebutton .genericsubmit { /* Save button */
+	border: none;
+	background: none;
+	color: #000000;
+	filter: none;
+	width: auto;
+	overflow: visible;
+	padding: 2px 8px 3px;
+	/*background: url(cssimages/css/f3cssgifs/tabseperator.gif) no-repeat 100% 40%;*/
+}
+#achieveform .tab .df_toolbar {
+	font-size: 11px;
+	width: 100%;
+	border-bottom: #9d9d9d 1px solid;
+	/*background: url(cssimages/css/f3cssgifs/genericbuttongradsilver.gif) repeat-x;*/
+	clear: both;
+}
+#achieveform .tab .df_toolbar td table td:first-child {
+	padding-left: 4px;
+}
+#achieveform .tab .df_toolbar .progress1, .tab .df_toolbar .view1 {
+	border: 1px solid #000000;
+	cursor: pointer;
+	background-color: white;
+	font-size: 100%;
+	margin: 2px;
+	padding: 1px;
+}
+#achieveform .tab .df_toolbar .progress0, .tab .df_toolbar .view0 {
+	border: 1px solid #FFFFFF;
+	cursor: pointer;
+	background-color: white;
+	color: #1b74ab;
+	font-size: 100%;
+	margin: 2px;
+	padding: 1px;
+}
+#achieveform .tab .designformbackgroud {
+	background-color: #a4b5c0;
+	width: 100%;
+}
+#achieveform .tab .outerdesignformtable {
+	background-color: #FFFFFF;
+	width: 98%;
+	margin: 5px auto;
+	padding: 3px;
+	border: 1px solid #000000;
+}
+#achieveform .tab .outerinsertiontable {
+	border: 1px solid #C4C4C4;
+	width: 100%;
+	font-size: 12px;
+}
+#achieveform .tab .ipointtitle {
+	height: 15px;
+	font-weight: bold;
+	padding-left: 20px;
+	border-bottom: 1px solid #6b9eeb;
+	/*background: url(cssimages/css/f3cssgifs/topleftipoint.gif) #1b74ab no-repeat left 50%;*/
+	color: white;
+	font-size: 12px;
+}
+#achieveform .tab .fieldpopupmenu {
+	top: -1000px;
+	left: -1000px;
+	border: 1px solid #1b74ab;
+	position: absolute;
+	font-size: 90%;
+	background: #FFFFFF;
+	text-indent: 1.5em;
+}
+#achieveform .tab .standardtablenpd {
+	font-size: 12px;
+	width: 98%;
+}
+#achieveform .tab .standardtable {
+	width: 98%;
+	border: 1px solid #1b74ab;
+	margin: 1%;
+}
+#achieveform .tab .standardtable td {
+	padding-left: 4px;
+	padding-right: 4px;
+}
+#achieveform .tab .standardtableheader {
+	border: 1px solid #1b74ab;
+	height: 20px;
+	/*background: url(cssimages/css/f3cssgifs/pagetableheader.gif) #1b74ab repeat-x 50% bottom;*/
+	color: white;
+	font-weight: bold;
+	font-size: 12px;
+}
+#achieveform .tab .helparea {
+	padding: 8px 0;
+	background-color: #e4e4e4;
+	font-size: 12px;
+}
+#achieveform .tab .pageheadingtext {
+	font-weight: bold;
+	color: #1b74ab;
+	font-size: 12px;
+}
+#achieveform .tab .slotdivision {
+	padding: 2px 0 2px 4px;
+	border-bottom: 1px solid #C4C4C4;
+}
+#achieveform .tab .fakelink {
+	background: none transparent scroll repeat 0% 0%;
+	border: none;
+	width: auto;
+	cursor: pointer;
+	text-decoration: underline;
+	height: 15px;
+    padding: 0;
+	vertical-align: middle;
+	display: inline;
+	color: red;
+	margin: 0;
+	overflow: hidden;
+}
+#achieveform .tab .attributetextmsv, .tab .attributetextlrg {
+	padding-left: 5px;
+	color: #1b74ab;
+	font-weight: bold;
+}
+#achieveform .tab .headerlabels {
+	height: 18px;
+	border-left: 1px solid #C1beb8;
+	vertical-align: middle;
+	border-bottom: 1px solid #808080;
+	border-top: 1px solid #FFFFFF;
+	padding-left: 5px;
+	font-weight: normal;
+	background-color: #e2e0db;
+}
+#achieveform .hidden {
+	display: none;
+}
+#achieveform a img {
+	border: none;
+}
+#achieveform #userTracking {
+	width: 100%;
+	height: 440px;
+	overflow: auto;
+	margin: 0 auto;
+}
+#achieveform #userTracking table {
+	width: 97.5%;
+	border-collapse: collapse;
+	border: none;
+	border-spacing: 0px;
+	background-color: transparent;
+}
+#achieveform #userTracking table tbody {
+	height: 400px;
+	overflow: auto;
+	overflow-x: hidden;
+}
+#achieveform #userTracking table tbody tr {
+	height: auto;
+}
+#achieveform #userTracking table thead tr {
+	position: relative;
+	top: 0px;
+}
+#achieveform #userTracking th {
+	margin: 0;
+	padding: 3px;
+	font-size: 14px;
+	color: #FFFFFF;
+	background-color: #999999;
+}
+#achieveform #userTracking td {
+	font-size: 12px;
+	padding: 3px;
+}
+#achieveform #userTracking tr.alt {
+	background-color: #EFEFFF;
+}
+#achieveform #userTracking tbody tr:hover {
+	background-color: #0065A4;
+	color: #FFFFFF;
+	filter: progid:DXImageTransform.Microsoft.gradient(StartColorStr='#22FFFFFF',EndColorStr='#22000000');
+}
+
+
+/*!!!!tabs.css!!!!*/
+/* Popup styling */
+#achieveform .dynpopup {
+	position: absolute;
+	padding: 0;
+	border: 1px solid #333333;
+	background-color: #FFFFFF;
+	font-weight: normal;
+	z-index: 1000;
+}
+#achieveform iframe {
+	border: none;
+}
+#achieveform .dynpopup .stdbutton {
+	filter: none;
+}
+#achieveform .dynpopupinner.bordered {
+	border: 1px solid rgb(51,51,51);
+}
+#achieveform form > .dynpopupinner {
+	margin-top: 10px;
+	border: 1px solid rgb(59,59,59);
+}
+#achieveform .dynpopupinner {
+	border: none;
+	padding: 0;
+	margin: 0;
+	background-color: #FFFFFF; 
+}
+#achieveform .dynpopup .dynpopupinner {
+	width: 45em;
+}
+
+/* Tabs */
+#achieveform .tab {
+}
+#achieveform .tabbar{
+	height: auto;
+	background: #6688AA;
+	overflow: hidden;
+	clear: both;
+}
+#achieveform .tabname, .tabname .selected{
+	display: inline-block;
+	overflow: hidden;
+	height: auto;
+	overflow: hidden;
+	padding: 1px 4px;
+	margin: 2px;
+	vertical-align: middle;
+}
+#achieveform .tabname {
+	height: 35px;
+	vertical-align: middle;
+	margin: 0;
+	padding: 0;
+}
+#achieveform .tabname .genericbutton {
+	border: none;
+	border-width: 0;
+	background: none;
+	height: 34px;
+	line-height: 35px;
+	margin: 0;
+	padding: 0 15px;
+	color: #FFFFFF;
+	font-weight: bold;
+	cursor: pointer;
+	width: auto;
+	overflow: visible;
+}
+#achieveform .tabname.selected .genericbutton {
+	/*background-image: url(tabhighlight.gif);*/
+}
+#achieveform .tabnameend {
+	/*background-image: url(tabseparator.gif);*/
+	height: 34px;
+	width: 1px;
+	padding: 0;
+	margin: 0;
+	background-repeat: repeat-x;
+	display: -moz-inline-box;
+	display: inline-block;
+	vertical-align: top;
+}
+#achieveform .tabname.selected {
+	/*background-image: url(tabhighlight.gif);*/
+	height: 35px;
+	background-repeat: repeat-x;
+}
+
+/* Nested Tabs */
+#achieveform .tab .tabbar {
+	height: 20px;
+	background-color: rgb(200,200,200);
+	/*background-image: url('/FileStore/ny/Branding/images/nyss_accordion_tab_bottom_bg.png');
+	background-repeat: repeat-x;*/
+	border-bottom: 1px solid rgb(192,192,192);
+}
+#achieveform .tab .tabname {
+	height: 20px;
+}
+#achieveform .tab .tabname .genericbutton {
+	color: #000000;
+	height: 20px;
+	line-height: 20px;
+	padding: 0 5px;
+	margin: -2px 0 2px 0;
+	vertical-align: middle;
+	font-size: 11px;
+}
+#achieveform .tab .tabname.selected {
+	background-color: #FFF;
+	background-image: none;
+	height: 22px;
+	margin: -1px 0 0 0;
+}
+#achieveform .tab .tabname.selected .genericbutton {
+	background-color: #FFF;
+	background-image: none;
+	height: 22px;
+}
+#achieveform .tab .tabnameend {
+	background-color: rgb(51,51,51);
+	background-image: none;
+	height: 20px;
+}
+	
+#achieveform .tabsstart, .tabbarstart, .tabnamestart, .tabbarend, .tabend {
+	display: none;
+}
+#achieveform .file .stdbutton {
+	filter: none;
+}
+
+/* Tab Contents */
+#achieveform .tab .sectiontitle {
+	color: #0065A4;
+	font-size: 16px;
+	letter-spacing: 0;
+	font-weight: bold;
+	margin: 5px;
+}
+#achieveform .tab .field {
+	margin: 5px;
+}
+#achieveform .tab {
+	margin-bottom: 4px;
+}
+
+
+/*!!!!bws.css!!!!*/
+#achieveform .bws.colspan {
+	display: -moz-inline-box;
+	display: inline-block;
+	float: left;
+	padding: 0;
+	margin: auto -0.3em auto 0;
+	padding-left: 0;
+	padding-right: 0.16em;
+}
+
+#achieveform .bws.colspan IMG {
+	text-indent: 0 !important;
+	margin-top: 0.12em !important;
+	margin-left: 0.25em !important;
+}
+
+#achieveform .bws.clear {
+	clear: both;
+}
+
+* html .colspan {
+	margin-left: -0.08em;
+}
+
+#achieveform .colel {
+	padding-left: 0.1em
+}
+
+#achieveform .dataell {
+	padding-left: 0.41em;
+}
+
+#achieveform .nondatael {
+	padding-left: 0.41em;
+}
+
+#achieveform .dataelr {
+	padding-left: 0.41em;
+	padding-right:0.41em;
+	position: static;
+}
+
+#achieveform .colwiseelel {
+	padding-left: 0.2em;
+	padding-right:0.2em;
+}
+
+#achieveform .colwiseel {
+	padding-left:0.2em;
+	padding-right:0.6em;
+}
+
+/*.renderdisplaytable table {table-layout: fixed;}*/
+
+#achieveform .forceclear {
+	overflow: hidden;
+	clear: both;
+	height: 0;
+}
+#achieveform .ruler {
+	width: 100%;
+	border-bottom: 1px dashed #BBBBFF;
+	background-color: white;
+}
+#achieveform .rulermark {
+	position:relative;
+	left:-0.5em;
+	width:1em;
+	height:1em;
+	cursor:col-resize;
+}
+#achieveform .rulermark img
+{
+	width:1em;
+	height:1em;
+}
+#achieveform .rulermarkpre
+{
+	position:absolute;
+	width:1em;
+	height:1em;
+}
+#achieveform .bwsjsisactive .withininner
+{
+	position:absolute;
+	padding-top: 0.35em;
+	padding-left: 0.55em;
+	color: #999999
+}
+#achieveform .colspan.bws.labelwithin { padding:0; margin:0 }
+#achieveform .labelnone
+{
+	position:absolute!important;
+	left:-1000em;
+	top:-1000em;
+}
+#achieveform .aftextinput, 
+#achieveform.aftextarea {
+	width: 100%;
+	background-color: transparent;
+	border: 1px solid black;
+	margin-right: 0.16em;
+}
+#achieveform .compound .aftextinput {
+	width: 7em;
+}
+#achieveform .afselectbox {
+	width: 100%;
+	border: 1px solid black;
+}
+#achieveform .compound .afselectbox {
+	width: auto;
+}
+#achieveform .rulerguideline {
+	position:absolute;
+	top: 0em;
+	height: 2em;
+	border-left: 1px dotted blue;
+}
+#achieveform .sizer {
+	width: 0.41em;
+	height: 0.41em;
+	font-size: 0.08em;
+	top:-100em;
+	left:-100em;
+	position:absolute;
+	filter: Alpha(enabled=1,opacity=50);
+	-moz-opacity: 50%;
+	opacity: 50%;
+	background-color:#0070b0
+}
+#achieveform .edgehandleleft, .edgehandleright
+{
+	position:absolute;
+	width: 0.8em;
+	top: 0;
+	cursor: col-resize;
+	visibility: hidden;
+}
+#achieveform .edgehandleleft div, .edgehandleright div
+{
+	position: absolute;
+	width: 0.8em;
+}
+#achieveform .edgehandeleft img, .edgehandleright img
+{
+	width: 0.8em;
+}
+#achieveform .edgehandleleft
+{
+	left: 0;
+}
+#achieveform .edgehandleright
+{
+	right: 0.16em;
+}
+#achieveform .datetime .date, .datetime .time
+{
+	display: inline;
+}
+
+
+
+#achieveform .subform
+{
+	border-width: 0;
+	padding: 0;
+	margin: 0;
+}
+
+#achieveform .subform legend
+{
+	display: block;
+	border-width: 0;
+	padding: 0;
+	margin: 0;
+	color:black;
+}
+
+#achieveform .designcol, .designsub
+{
+	position: relative;
+	padding: 0 0.5em;
+	height: 0.83em;
+}
+
+#achieveform .designcolin, .designsubin
+{
+	height: 0.41em;
+	font-size: 0.41em;
+}
+
+#achieveform .designcolin
+{
+	background-color: #bad7e3;
+}
+
+#achieveform .designsubin
+{
+	background-color: #868888;
+}
+
+#achieveform .multi
+{
+	display: inline;
+	margin-right: 1em;
+}
+
+#achieveform .abstopleft
+{
+	position: absolute;
+	left: 0;
+	top: 0;
+	text-align: left;
+}
+
+#achieveform .abstopright
+{
+	position: absolute;
+	right: 0;
+	top: 0;
+	text-align: right;
+}
+
+#achieveform .abscontainer
+{
+	position: relative;
+}
+
+#achieveform .afcalcouter
+{
+	position: relative;
+}
+
+#achieveform .afcalcsub
+{
+	text-align: center;
+	padding-left: 5px !important;
+	padding-right: 5px !important;
+}
+
+#achieveform .afcalctablebutton {
+	text-align: right;
+	width:auto;
+	padding-left: 0.5em;
+}
+
+#achieveform .afcalctableinput {
+	width:100%;
+	padding-right: 1em;
+	vertical-align: top;
+}
+
+
+/*!!!!f3.css!!!!*/
+/* font size fix for browsers that reset font-size for tables */
+#achieveform TABLE {font-size:100%}
+
+#achieveform .xoomstart { clear: both; }
+#achieveform .xoomer { 
+	margin-left: 0.83em;
+	border: 1px solid #AAAAAA;
+	background: /*url(cssimages/css/f3cssgifs/genericbuttongradsilver.gif) repeat-x*/ #F6F9FB;
+	display: inline;
+}
+#achieveform .xoomend { clear: both; }
+#achieveform .xoom1,.xoom2,.xoom3,.xoom4,.xoom5 {
+	border: none;
+	background: none;
+}
+#achieveform .xoom1 {
+	font-size: 80%;
+	height: 0.9em;
+}
+#achieveform .xoomed1 {
+	font-size: 80%;
+}
+#achieveform .xoomed1 input.genericinput {
+	zoom: 90%;
+}
+#achieveform .xoom2 {
+	font-size: 100%;
+	height: 0.9em;
+}	
+#achieveform .xoomed2 {
+	font-size: 100%;
+}
+#achieveform .xoomed2 input.genericinput {
+	zoom: 100%;
+}
+#achieveform .xoom3 {
+	font-size: 120%;
+	height: 0.9em;
+}
+#achieveform .xoomed3 {
+	font-size: 120%;
+}
+#achieveform .xoomed3 input[type=radio] {
+	zoom: 120%;
+}
+#achieveform .xoom4 {
+	font-size: 150%;
+	height: 0.9em;
+}
+#achieveform .xoomed4 {
+	font-size: 150%;
+}
+#achieveform .xoomed4 input[type=radio] {
+	zoom: 150%;
+}
+#achieveform .xoom5 {
+	font-size: 200%;
+	height: 0.9em;
+}
+#achieveform .xoomed5 {
+	font-size: 200%;
+}
+#achieveform .xoomed5 input[type=radio] {
+	zoom: 200%;
+}
+	
+
+#achieveform .fakelink {
+	border-width: 0;
+	color: blue;
+	background: transparent;
+	padding: 0;
+	margin: 0;
+	display: inline;
+	cursor: pointer;
+	text-decoration: underline;
+	width: auto;
+	vertical-align: middle;
+	height: 1.25em;
+}
+
+#achieveform .subformel .datael  {
+	padding-left: 0.41em !important;
+}
+
+#achieveform .colel {
+	padding-left: 0.1em;
+}
+
+/*begin grid classes */
+
+#achieveform .textcharboxes{
+	border: 1px solid black;
+	margin:0;
+	padding: 0;
+	height: 100%
+	
+
+}
+	
+#achieveform .outertextcharboxes{
+	margin:0;
+	position: relative;
+	padding: 0;
+	width: 100%;
+	height: 100%
+	
+	
+
+}
+	
+#achieveform .columnwisefieldtd {
+	width:10%;
+}
+	
+#achieveform .gridrowcells{	
+	border-left: 1px solid black;
+	border-bottom: 1px solid black
+	
+}
+
+#achieveform .gridrowtitle{
+	border: 1px solid black;
+	font-weight:bold;
+	height: 1.66em;
+	text-align: center
+	
+	
+}
+
+#achieveform .gridrowgrouptitle{
+	border-right: 1px solid #ffffff; 
+	border-top: 1px solid black;
+	background-color: black;
+	color: #ffffff;
+	padding-left: 0.83em;
+	padding-right: 0.83em;
+	text-align: center
+	
+}
+
+#achieveform .gridrowlistitems{
+	border-left: 1px solid black;
+	border-bottom: 1px solid black;
+	border-right: 1px solid black;
+	padding-left:0.83em;
+	padding-right: 0.83em
+	
+}
+
+
+
+#achieveform .gridheading{
+	border: 1px solid black;
+	font-weight:bold;
+	height: 2.5em;
+	background-color: #E5DFDF;
+	text-align: center
+
+	
+}
+
+#achieveform .gridsubheading{	
+	padding-left: 0.83em;
+	font-weight:bold;
+	background-color: #E5DFDF
+	
+}
+
+#achieveform .gridgrouptitle{
+	padding-left: 0.83em;
+	padding-right: 0.83em;
+	
+}
+
+#achieveform .gridtotalheading{
+	padding-left: 0.83em;
+	padding-right: 0.83em;
+}
+
+
+#achieveform .gridlistitem{
+	padding-left: 0.83em;
+	padding-right: 0.83em;
+	
+}
+
+
+#achieveform .gridgap{
+	border-left: 1px solid black;
+	
+}
+/*end grid classes */
+/* To accomdate MCMS etc. and integration of AF into other sites, below is a list of tables 
+#achieveform that need a width of 100% */
+
+#achieveform .aftable {
+	width: 100%
+}
+#achieveform .printoutertable {
+	width: 100%
+}
+#achieveform TABLE.pageheadingtext {
+	width: 100%
+}
+#achieveform .ruletable {
+	width: 100%
+}
+
+#achieveform table.ruletable,
+#achieveform table.ruletable tbody {
+	border: none;
+}
+
+
+#achieveform .processcontent2 {
+	width: 100%
+}
+#achieveform .toptable {
+	width: 100%
+}
+#achieveform TABLE.formnametext {
+	width: 100%
+}
+#achieveform .printtextarea {
+	width: 100%;
+	border: 1px solid #51679C
+}
+#achieveform .allboxedborder {
+	border: 2px solid black;
+}
+#achieveform .adminfailtable {
+	width: 100%
+}
+#achieveform .textinputscan {
+	width: 100%
+}
+#achieveform .tabs {
+	width: 100%
+}
+#achieveform .clsFormBackground {
+	width: 100%
+}
+#achieveform .clsToolbarBackground {
+	width: 100%
+}
+#achieveform .conditiontablenowrap {
+	width: 100%
+}
+#achieveform .date {
+	width: 100%
+}
+#achieveform .datescan {
+	width: 100%
+}
+#achieveform .inputfield {
+	width: 100%
+}
+#achieveform .inputsearchform {
+	width: 100%
+}
+
+#achieveform .whs1 { 
+	width: 100%
+}
+#achieveform .whs3 { 
+	width: 100%
+}
+#achieveform .whs4 { 
+	width: 100%
+}
+#achieveform .whs6 { 
+	width: 100%
+}
+
+/* General tables */
+#achieveform .sectionnametable {
+	width: 98%;
+	margin-left: 1%;
+	margin-right: 1%
+}
+#achieveform div.sectionnametable {
+	margin: 0.25em;
+}
+
+#achieveform .sectionnametable ol {
+	list-style: none;
+	display: inline;
+	margin: 0;
+}
+
+#achieveform .sectionnametable li {
+	display: inline;
+	margin: 0.25em;
+}
+#achieveform .sectionfloat, langfloat {
+	clear: both;
+	float: left;
+	position: relative;
+	vertical-align: top;
+	text-align: center;
+	width: 20%;
+}
+
+
+#achieveform .progressbarnonetable {
+	width: 100%
+}
+#achieveform div.progressbarnonetable {
+	margin: 0.25em;
+}
+#achieveform .progressbartoptable {
+	width: 98%;
+	margin-left: 1%;
+}
+#achieveform div.progressbartoptable {
+	margin: 0.25em;
+}
+
+#achieveform .progressbartoptable ol {
+	list-style: none;
+	display: inline;
+	margin: 0.25em;
+}
+
+#achieveform .progressbartoptable li {
+	display: inline;
+}
+
+#achieveform .progressbarlefttable {
+	width: 100%
+}
+#achieveform div.progressbarlefttable {
+	margin: 0.25em;
+}
+#achieveform .progressbarbottomtable {
+	width: 100%
+}
+#achieveform div.progressbarbottomtable {
+	margin: 0.25em;
+}
+#achieveform .renderdisplaytable {
+	width: 100%
+}
+#achieveform .infopathrenderdisplaytable {
+	width: 100%;
+	text-align: center
+}
+#achieveform .subformtitletable {
+	width: 100%
+}
+
+#achieveform .subformtitle{
+	color: #5E79A4
+		
+}
+#achieveform .summaryoptionstitle {
+	background: #E2E0DB;
+	vertical-align: middle;
+	border-top: 1px solid #fff;
+	border-bottom: 1px solid #808080;
+	color: black;
+	height: 1.5em;
+	padding-left: 0.41em;
+	border-left: 1px solid #C1BEB8;
+	width: 12em
+}
+#achieveform .summaryvalidtitle {
+	background: #E2E0DB;
+	vertical-align: middle;
+	border-top: 1px solid #fff;
+	border-bottom: 1px solid #808080;
+	color: black;
+	height: 1.5em;
+	padding-left: 0.41em;
+	border-left: 1px solid #C1BEB8;
+	width: 12em
+}
+
+#achieveform .summaryoptions {
+	width: 12em
+	
+}
+#achieveform .summaryvalid {
+	text-align: center;
+	width: 12em
+}
+
+#achieveform .summarycontinuesubmit {
+	color: black;
+	border: 1px solid #FFFFFF;
+	font-size: 95%;
+	margin: 0.16em;
+	cursor: pointer;
+	filter:progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='#CECECE', Positive='true');
+}
+
+
+#achieveform .othersubmitbutton {
+	background: url(cssimages/css/f3cssgifs/upperheadergradnew.gif) repeat-x #4E92F4;
+	color: #FFFFFF;
+	border: 1px solid #FFFFFF;
+	font-size: 95%;
+	margin-top: 0.16em;
+	margin-left: 0.08em;
+	cursor: pointer;
+	filter:progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='#CECECE', Positive='true');
+}
+
+#achieveform .summaryerrorspan {
+	background-color: #FED6D6;
+	border: 1px solid red;
+	white-space: nowrap;
+}
+#achieveform .summaryerror {
+	float:left;
+	white-space: nowrap;
+}
+#achieveform .summaryerror p{
+	padding:0.5em;
+	margin:0;
+}
+#achieveform .summarycontinue {
+	float:center;
+}
+
+#achieveform .selectonehorizontaltable {
+	width: 100%;
+}
+#achieveform .selectmanyhorizontaltable {
+	width: 100% !important;
+}
+
+/* Generic Classes */
+#achieveform .normaltext A {
+	color: black;
+	text-decoration: none
+}
+#achieveform .normaltext {
+	color: black;
+	font-weight: normal
+}
+#achieveform H2 {
+	color:#0065a4;
+	font-size: 120%;
+	padding: 0;
+	margin: 0;
+}
+#achieveform IMG {
+	border: 0;
+}
+#achieveform H1 {
+	font-size: 140%;
+	font-weight: bold;
+	color: #51679C;
+ 	padding: 0;
+	margin: 0;
+	padding-bottom: 0.16em;
+
+}
+#achieveform .attributetext {
+	padding-top: 1.16em;
+	padding-bottom: 0.33em;
+	padding-left: 1.5em;
+}
+
+#achieveform .attributetextmsv, .attributetextlrg {
+	color: #0065a4;
+	font-weight: bold;
+	padding-left: 0.41em;
+}
+#achieveform .tablewhite {
+	background-color: #FFFFFF
+}
+
+#achieveform .errormessage {
+	color: red;
+	text-align: center
+}
+
+#achieveform .fielderror, .fielderror div {
+	background: #FFE0EB;
+}
+
+#achieveform .fielderror .generictextinput, .fielderror .generictextarea {
+	border: 1px solid #550000;
+	/*background: url(cssimages/css/f3cssgifs/fieldgradred.gif) repeat-x top;*/
+}
+
+#achieveform .errormessagetable {
+	background-color: #FFFFFF;
+	width: 50em;
+	padding-top: 0.41em;
+	padding-right: 2.83em;
+	padding-bottom: 0.41em;
+	border: 1px solid #528FBD;
+	padding-left: 2.83em;
+	/*background-image:  url(cssimages/css/f3cssgifs/warningsign.gif);
+	background-repeat: no-repeat;
+	background-position: 1.5% 10%;*/
+	filter:progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='#CECECE', Positive='true')
+}
+
+#achieveform .surroundtable {
+	background-color: #FFFFFF;
+	color: #000000;
+	width: 100%;
+}
+
+#achieveform .selectboxspacer {
+	padding-right: 3.33em;
+	background-color: Aqua
+}
+
+#achieveform .homepagetable {
+	background-color: #FFFFFF;
+	border-bottom: 1px solid #D9D9D9;
+	padding-bottom: 1.66em;
+	width: 100%;
+}
+
+#achieveform .referencepagetable {
+	background-color: #FFFFFF;
+	border-bottom: 1px solid #D9D9D9;
+	padding-bottom: 1.66em;
+	width: 100%;
+	text-align: center;
+}
+
+#achieveform .iframepopup {
+	overflow:hidden;
+	width:0.16em;
+	height:0.16em;
+	top:-4166.66em;
+	left:-4166.66em;
+	position:absolute;
+	border-width: 0
+}
+#achieveform tds {
+	border: 1px solid red
+}
+/* Toolbar Classes */
+
+
+
+#achieveform .loginSwirl{
+	
+}
+
+#achieveform .formslogotextlogin {
+		
+		width: 22.83em;
+}
+
+#achieveform .notloggedin {
+		white-space:nowrap;
+		width: 22.83em;
+}
+
+#achieveform .outertoolbarmaincontainer {
+	width: 100%;
+	overflow: hidden;
+}
+#achieveform .outertoolbarcontainer {
+	width: 100%;
+	background: /*url(cssimages/css/f3cssgifs/AF_headerBackground.jpg) repeat-x*/ #5da9c5;
+	overflow: hidden;
+}
+#achieveform .outertoolbarcontainerbottom {
+	width: 100%;
+	overflow: hidden;
+}
+#achieveform .formslogotext {
+	font-weight: bold;
+	color: #ffffff;
+	white-space: nowrap;
+	padding-left: 0.41em;
+	
+	width: 24.58em;
+}
+
+#achieveform .headerMiddle {
+	width: 48%;
+}
+
+#achieveform .underLogo {
+	/*background: url(cssimages/css/f3cssgifs/AF_toolbarSide_swirl.jpg) no-repeat;*/
+	width: 18.83em;
+}
+
+#achieveform .fakeLogout {
+
+	width: 6%;
+}
+
+#achieveform div.formslogotext {
+	height: 1.75em;
+	text-align: center;
+	line-height: 1.75em;
+	vertical-align: middle;
+	position: relative;
+	top: 2.5em;
+}
+
+
+#achieveform .formslogotextlogin {
+	font-weight: bold;
+	color: #ffffff;
+	white-space: nowrap;
+	padding-right: 0.41em;
+	padding-top: 2.08em;
+}
+#achieveform .formsloginbutton {
+	background: none;
+	border: none;
+	font-weight: bold;
+	color: #FFFFFF;
+	font-size: 120%;
+	cursor: pointer;
+	padding: 0em 0.08em 0em 0.08em;
+	margin: 0;
+	outline: 0 none red;
+	margin-top: 2.16em;
+}
+#achieveform .formsloginlink, .formsloginlink:hover, .formsloginlink:active, .formsloginlink:visited {
+	
+	color: #FFFFFF;
+	background: #0065a4;
+	border-width: 0;
+	border-style: solid;
+	border-color: #333333;
+	font-size: 75%;
+	cursor: pointer;
+	padding: 0em 0.08em 0em 0.08em;
+	text-decoration: none;
+}
+#achieveform .notloggedin {
+	color: #ffffff;
+	font-size: 80%;
+	font-weight: bold;
+	white-space: nowrap;
+	padding-top: 2.08em;
+}
+#achieveform .uppertoolbartableauth {
+	/*background: url(cssimages/css/f3cssgifs/page_swirl.jpg) no-repeat top left;*/
+	height: 4.50em;
+	width: 100%;
+	border: none!important;
+}
+
+#achieveform .uppertoolbartable {
+	/*background: url(cssimages/css/f3cssgifs/page_swirl.jpg) no-repeat top left;*/
+	height: 4.50em;
+	width: 100%;
+	
+	
+}
+
+#achieveform .navigationtable {
+	border: none;
+	/*background: url(cssimages/css/f3cssgifs/AF_toolbarBackground.jpg) repeat-x top;*/
+	background-color:#2c2c2c;
+	padding-left: 0.16em;
+	width: 100%;
+	height: 3.58em;
+	
+}
+
+#achieveform .buttonSideBar {
+	margin: 0;
+	padding: 0;
+	/*background: url(cssimages/css/f3cssgifs/AF_toolbarbuttonSide.jpg) no-repeat;*/
+	width: 3.08em;
+	height: 3.58em;
+	margin-top: 0 auto;
+	float: right;
+	position: absolute;
+	left: 15.75em;
+	top: 4.50em;
+}
+
+#achieveform .buttonSideBarBackground {
+	margin: 0;
+	padding: 0;
+	width: 18.33em;
+	height: 3.58em;
+}
+
+#achieveform .navigationtablefront {
+	border: none;
+	/*background: url(cssimages/css/f3cssgifs/AF_toolbarBackground.jpg) repeat-x;*/
+	padding-left: 0.16em;
+	width: 100%;
+	height: 3.58em;
+	padding: 0;
+	margin: 0;
+}
+
+#achieveform .navigationtablefront td{
+	padding: 0;
+	margin: 0;
+}
+
+#achieveform .navigationtablefront tr{
+	padding: 0;
+	margin: 0;
+}
+
+#achieveform .AFlogo {
+	position: absolute;
+	top: 4.5em;
+	left: 2.5em;
+	font-size: 120%;
+	white-space:nowrap;
+}
+
+#achieveform .logoImage {
+	/*background: url(cssimages/css/f3cssgifs/AF_mainLogol.jpg) no-repeat;*/
+	width: 4.83em;
+	height: 3.75em;
+	float: left;
+	position: relative;
+	top: 1em;
+	left: 6.08em;
+}
+
+#achieveform .buttonSideBarFront {
+	margin: 0;
+	padding: 0;
+	/*background: url(cssimages/css/f3cssgifs/AF_toolbarbuttonSide.jpg) no-repeat top;*/
+	width: 3.08em;
+	height: 3.58em;
+	float: right;
+}
+
+#achieveform .buttonSideBarBackgroundFront{
+	margin: 0;
+	padding: 0;
+	width: 20.83em;
+	height: 3.58em;
+	float: left;
+}
+
+#achieveform .underLogofront {
+	background: url(cssimages/css/f3cssgifs/AF_toolbarSide_swirl.jpg) no-repeat;
+	margin: 0;
+	padding: 0;
+}
+
+#achieveform .frontDivider {
+	margin: 0;
+	padding: 0;
+	width: 100%;
+}
+
+#achieveform .endbar {
+  /*background:url(cssimages/css/f3cssgifs/endbar.gif) no-repeat 10% 50%;*/
+}
+#achieveform .tabbutton {
+	white-space:nowrap;
+	vertical-align: top;
+	width: 3em;
+}
+
+#achieveform .toolbarMiddle {
+	width: 100%;
+}
+
+#achieveform .tabbuttonhighlight {
+	white-space:nowrap;
+	vertical-align: top;
+}
+#achieveform .tabbutton .label, .tabbuttonhighlight .label {
+	margin-left: 0.25em;
+	margin-right: 0.25em;
+}
+#achieveform .tabbuttonhighlight .label {
+	color: #ffffff;
+	text-decoration: underline;
+}
+
+#achieveform .tabbutton .label {
+	color: #ffffff;
+}
+#achieveform .tabbuttonhighlight A {
+	display: block;
+	color: black;
+	text-decoration: none;
+	white-space: nowrap;
+	padding: 0.25em;
+	margin-top: 0.58em;
+	border: none;
+	
+}
+#achieveform .tabbutton A,.tabbutton DIV, .tabbuttonhighlight DIV {
+	border-top:	2px solid none;
+	display: block;
+	color: black;
+	text-decoration: none;
+	white-space: nowrap;
+	padding: 0.25em;
+	margin-top: 0.58em;
+}
+#achieveform .tabbuttonhighlight A:hover {
+	color: #ffffff;
+}
+#achieveform .tabbutton A:hover , .tabbutton A:active, .tabbutton A:focus {
+	color: #ffffff;
+}
+#achieveform .tabbutton DIV .label, .tabbuttonhighlight DIV .label {
+	font-weight: bold;
+	font-size:0.9em;
+	color: #D3D3D3;
+	}
+#achieveform .formselected {
+	width: 60%;
+	padding-left: 8em;
+	text-indent: -1em;
+	color: #fff;
+	font-weight: normal;
+	padding-top: 2em;
+}
+#achieveform .blackit {color: black }
+#achieveform .tabspacer {
+	width: 70%
+}
+#achieveform .tabspaceremote {
+	width: 50%
+}
+#achieveform .statustext {
+	color: #676767;
+	font-size: 70%;
+	font-weight: bold;
+	text-indent: 0.5em;
+	background-color: #DAE3EE;
+	border-right: 1px solid #A0C4DB;
+	border-top: 1px solid #A0C4DB;
+	white-space: nowrap
+}
+#achieveform .statusbarlink {
+	color: #999A9A;
+	font-size: 70%;
+	background: /*url(cssimages/css/f3cssgifs/weedropshadow.gif) repeat-x top*/  #FFFFFF;
+	height: 2em;
+	text-indent: 0.8em
+}
+/* Second layer tabs buttons */
+#achieveform .lowertabstd {
+	width: 100%;
+}
+#achieveform .lowertabstable {
+	/*background: url(cssimages/css/f3cssgifs/navtablebevel.gif) repeat-x;*/
+	height:1.91em;
+	width:100%;
+	border-bottom: 1px solid #9D9D9D
+}
+#achieveform .abslowertable {
+	width: 100%
+}
+#achieveform .abslowertable IMG {
+	vertical-align: bottom
+}
+
+#achieveform .lowershadow {
+	/*background: url(cssimages/css/f3cssgifs/lowertabstableshadow.gif) repeat-x top;*/
+	width: 100%;
+}
+
+#achieveform .secondtabsel, .secondtabunsel {
+	padding-bottom: 0.41em;
+	padding-left: 0.83em;
+	padding-right:0.83em;
+	white-space:nowrap;
+	cursor: default;
+	vertical-align: top;
+}
+#achieveform .afmoneyinput {
+	width: 5em !important;
+}
+#achieveform .secondtabsel:active, .secondtabsel:focus {
+	background: url(cssimages/css/f3cssgifs/navtablebevel.gif) repeat-x;d-color: transparent;
+	background-color: transparent;
+}
+#achieveform .secondtabunsel A ,.secondtabsel A, .secondtabunsel .fakelink, .secondtabsel .fakelink {
+	text-decoration:none;
+	color: #666666;
+	height: 0.83em;
+	position: relative;
+	top: 0.41em;
+	padding-bottom: 0.41em;
+}
+	
+#achieveform .secondtabsel A {
+	color: #ff8400;
+  height: 1.66em;
+}
+
+#achieveform .secondtabunsel A:hover, .secondtabunsel:hover {
+	color: #ff8400;
+}
+
+#achieveform .leftareatd {
+	/*background: url(cssimages/css/f3cssgifs/endbar.gif) no-repeat 100% 50%;*/
+	padding-left: 0.25em;
+}
+
+#achieveform .langbuttons {
+	font-family: "courier", monospaced;
+	font-size: inherit;
+	border: 1px;
+	color:#0065a4;
+	background-color: #DDBBBB;
+	background: /*url(cssimages/css/f3cssgifs/genericbuttongradsilver.gif) repeat-x top*/ #F6F9FB;
+}
+
+/* Content Table */
+#achieveform .centralcontenttable {
+	border: 1px solid #528FBD;
+	background: /*url(cssimages/css/f3cssgifs/lowertabselborder.gif) repeat-x top*/ #FFFFFF;
+	width: 100%
+}
+
+#achieveform .centralcontenttablelang {
+	border: 1px solid #528FBD;
+	background: /*url(cssimages/css/f3cssgifs/lowertabselborder.gif) repeat-x top*/ #FFFFFF;
+	width: 100%;
+
+}
+#achieveform .centralcontenttablelang .generictextinput {
+	width: 20em;
+}
+#achieveform .processcontent {
+	width: 60%;
+	/*background: url(cssimages/css/f3cssgifs/dlowertabselborder.gif) repeat-x top transparent;*/
+}
+/* left toolbar */
+#achieveform .toolbartable  {
+	width: 4.16em;
+	margin-right: 0.33em;
+	margin-left: 0.16em;
+	border: 1px solid #A0C4DB;
+	padding-left: 0.16em;
+	padding-right: 0.16em;
+	background-color: #F6F9FB;
+	border-bottom: 5px solid #DAE3EE
+}
+#achieveform .toolbartitle {
+	color: #676767;
+	font-size: 70%;
+	font-weight: bold;
+	text-indent: 0.5em;
+	background-color: #DAE3EE;
+	white-space: nowrap;
+	border-bottom: 1px solid #A0C4DB;
+	/*background-image: url(cssimages/css/f3cssgifs/navtablebevel.gif);
+	background-repeat: repeat-x;
+	background-position: bottom*/
+}
+/* New Form Page */
+#achieveform .pageheadingtext {
+	color: #0065a4;
+	font-weight: bold;
+}
+
+#achieveform .pageheadingtext IMG{
+	vertical-align: middle
+}
+#achieveform .cnfsurroundtable {
+	background-color: #FFFFFF;
+	width: 55%
+}
+/* Browse Forms Panel */ 
+#achieveform .selectformstable {
+	background-color: #FFFFFF;
+	vertical-align: top;
+	width: 100%
+}
+#achieveform .lightgrey {
+	background-color: #E2E2E2;
+
+
+}
+#achieveform .selectformstable A {
+	background-color: #FFFFFF;
+	text-decoration: none;
+	color: black
+}
+
+#achieveform .selgroup A {
+		color: #EE4220;
+		text-decoration: none;
+		text-align: left;
+	}	
+}
+
+#achieveform .getstarted {
+	font-size: 90%;	
+	vertical-align: middle;
+	color: gray;
+}
+#achieveform .getstarted A {
+	text-decoration: none;
+	color: gray;
+}
+#achieveform .getstarted A:hover {
+	color: #EE4220;
+}
+#achieveform .getstarted SPAN {
+	letter-spacing: 0.08em;
+	color: black;
+}
+
+#achieveform .unselgroup {
+	color: black;
+	text-decoration: none;
+	text-align: left;
+}
+
+
+#achieveform .bluebottom {
+	border-top: 2px solid #0065a4
+}
+
+#achieveform .selectgroupheader {
+	background: #E2E0DB;
+	vertical-align: middle;
+	border-top: 1px solid #fff;
+	border-bottom: 1px solid #808080;
+	color: black;
+	height: 1.66em;
+	padding-left: 0.41em;
+}
+#achieveform .selectgroupheaderbrowse {
+	/*background: url(cssimages/css/f3cssgifs/navtablebevel.gif) bottom;*/
+	vertical-align: middle;
+	border-top: 1px solid #CACACA;
+	border-bottom: 1px solid #808080;
+	color: black;
+	height: 1.66em;
+	padding-left: 0.41em;
+}
+
+
+#achieveform .breadcrumbtd {
+	border-bottom: 1px solid #808080;
+	}
+#achieveform .breadcrumbtd a {
+	background:transparent
+}
+#achieveform .breadcrumbtd IMG {
+	vertical-align: middle;
+}
+#achieveform .formnamebrowse {
+
+	font-weight:bold;
+	padding-left: 0.41em;
+}
+#achieveform .breadcrumbresource {
+	border-bottom: 1px solid #808080;
+	}
+#achieveform .resourcetoolbartitle{
+	margin-left:1.2em;
+	color:#494949;
+}
+/* the internal submit button */
+#achieveform .genericsubmit {
+	background: url(cssimages/css/f3cssgifs/upperheadergradnew.gif) repeat-x #4E92F4;
+	color: #FFFFFF;
+	border: 1px solid #FFFFFF;
+	font-size: 95%;
+	margin-top: 0.16em;
+	margin-left: 0.08em;
+	cursor: pointer;
+	filter: none !important;
+}
+	
+#achieveform .lookupsubmit  {
+	background: url(cssimages/css/f3cssgifs/upperheadergradnew.gif) repeat-x* #4E92F4;
+	color: #FFFFFF;
+	border: 1px solid #FFFFFF;
+	font-size: 95%;
+	margin-top: 0.16em;
+	margin-left: 0.08em;
+	cursor: pointer;
+	}
+	
+	
+#achieveform .genericinstall{
+	background: url(cssimages/css/f3cssgifs/upperheadergradnew.gif) repeat-x #4E92F4;
+	color: #FFFFFF;
+	border: 1px solid #FFFFFF;
+	font-size: 95%;
+	margin-top: 0.16em;
+	margin-left: 0.08em;
+	padding: 0.25em;
+	cursor: pointer;
+	width: 5.83em;
+	text-align: center;
+}
+	
+#achieveform .genericsubmit[disabled]
+{
+	color: graytext;
+}
+#achieveform a, .jqfakelink{
+	color: #444444;
+	text-decoration: none;
+	cursor: pointer;
+	font-weight: bold;
+}
+#achieveform a:hover, a:focus, .jqfakelink:hover, .jqfakelink:focus{
+	color: #e14511;
+	text-decoration: none;
+}
+#achieveform .sectionlinktitle a{
+	text-decoration: underline;
+}
+#achieveform .menuouter .hidebutton{
+	position: absolute;
+	top: 8px;
+	right: 5px;
+}
+
+#achieveform .menuouter .hidebutton input, .menuouter .hidebutton img {
+#achieveform border-left:1px dotted #6688AA;
+#achieveform cursor:pointer;
+#achieveform padding:4px;
+#achieveform vertical-align:top;
+}
+#achieveform .menuouter .hidebutton input.ccstyledbutton {
+#achieveform padding:0 4px;
+}
+#achieveform .menuouter .ie6only.hidebutton{
+	top: 8px;
+	right: 13px;
+}
+#achieveform .menuouter .aftersectionlink{
+	clear: both;
+}
+#achieveform .menuouter .sectionlinktitlepre{
+	display: none;
+}
+
+#achieveform .sectionlinktitle, h2, .feedpageouter .feedheader{
+	color: #444444;
+	font-size: 1.5em;
+	font-weight: bold;
+	margin: 0 0 5px 0;
+	font-family: Arial,sans-serif;
+	padding: 0.2em;
+	border-bottom: 1px solid #6688AA;
+}
+#achieveform .standardtable .generictextarea {
+	width: 28.08em;
+}
+#achieveform .generictextarea {
+		border: 1px solid #528FBD;
+		background: url(cssimages/css/f3cssgifs/fieldgrad.gif) repeat-x top;
+}
+#achieveform .genericlabel {
+	font-weight: bold;
+	font-size: 80%;
+	width: 15%;
+	padding-left: 1em;
+	background-color: #FFFFFF
+}
+#achieveform .genericupload {
+	padding-bottom: 0.08em;
+	margin-bottom: 0.25em;
+}
+#achieveform .generictext {
+	padding-left: 1em;
+	background-color: #FFFFFF
+}
+#achieveform .browseformstable {
+	padding-top: 0.83em;
+	padding-bottom: 0.41em;
+	background-color: #FFFFFF;
+	/*background-image: url(cssimages/css/f3cssgifs/searchboxdrop.gif);
+	background-repeat: repeat-x;
+	background-position: top;*/
+	width: 100%
+}
+#achieveform .browseformstablelist {
+	background-color: #FFFFFF;
+	margin-bottom: 0.25em;
+	width: 100%
+	}
+#achieveform .browseformstablelist2 {
+	width: 100%
+	}
+	
+#achieveform .formstree {
+	background-color: #FFFFFF;
+	border-right: 1px solid #808080;
+	border-bottom: 1px solid #808080;
+	width: 25%
+
+}
+
+
+#achieveform .searchtable {
+	width: 100%
+}
+#achieveform .searchresultstable {
+	background-color: #FFFFFF;
+	border-bottom: 1px solid #528FBD;
+	width: 100%
+}
+
+#achieveform .headerlabels {
+	background: #E2E0DB;
+	vertical-align: middle;
+	border-top: 1px solid #fff;
+	border-bottom: 1px solid #808080;
+	color: black;
+	height: 1.5em;
+	padding-left: 0.41em;;
+	border-left: 1px solid #C1BEB8;
+	text-align: left;
+	font-weight: normal;
+	overflow: hidden;
+}
+
+#achieveform .headerlabelsdetails, .headerlabelsdetailstp{
+	background: #E2E0DB;
+	vertical-align: middle;
+	margin-top: 0.66em;
+	border-bottom: 1px solid #808080;
+	margin-bottom: 0.41em;
+	padding: 0.25em;
+	display: block;
+	padding-left: 0;
+	}
+#achieveform .headerlabelsdetailstp {
+#achieveform margin-top: 0;
+}
+#achieveform .formnametext A {
+	color: black;
+	line-height: 1.5em;
+	padding-left: 0.5em;
+	text-decoration: none;
+	background: transparent;
+}
+#achieveform .formnametext A:hover {
+	color: #159846
+}
+/* RenderForm Classes */
+
+#achieveform .deletesubformbutton {
+	background: url(cssimages/css/f3cssgifs/upperheadergradnew.gif) repeat-x #4E92F4;
+	color: #FFFFFF;
+	border: 1px solid #FFFFFF;
+	font-size: 95%;
+	margin-top: 0.16em;
+	margin-left: 0.08em;
+	cursor: pointer;
+	filter:progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='#CECECE', Positive='true');
+}
+#achieveform .subformrendertable {
+	padding-bottom: 0.33em;
+	width: 100%;
+}
+
+#achieveform .compoundtable {
+	width: 5%;
+}
+
+#achieveform .compoundnametable {
+	width: 91%;
+}
+
+#achieveform .sectionnamerender {
+	color: #0065a4;
+	font-weight: bold
+}
+#achieveform .subformcolumns {
+	width:40%
+	}
+
+#achieveform .formname {
+	color: #5E79A4;
+	font-size: 140%;
+	font-weight: bold
+}
+
+
+#achieveform .progressside {
+	position: absolute;
+	width: 100%
+}
+
+#achieveform .hidden {
+	visibility: hidden
+}
+#achieveform .nodisplay {
+	visibility: hidden;
+	display: none
+}
+#achieveform .progress1, .view1 {
+	background-color: white;
+	border: 1px solid #000;
+	margin: 0.16em;
+	color: #000;
+	cursor: pointer;
+	padding: 0.08em;
+}
+#achieveform .progress0, .view0 {
+	background-color: white;
+	border: 1px solid white;
+	margin: 0.16em;
+	color: #0065a4;
+	cursor: pointer;
+	padding: 0.08em;
+}
+
+#achieveform .progressvalid{
+	background-color: white;
+	border: 1px solid white;
+	margin: 0.16em;
+	color: green;
+	cursor: pointer;
+	padding: 0.08em;
+}
+
+#achieveform .view1 {
+	color: #EE4220;
+	
+}
+#achieveform .view0 {
+	color: #666666
+}
+
+#achieveform .progressbartoptable .progress1, .sectionnametable .progress1 {
+	background-color: #0065a4;
+	background: url(cssimages/css/f3cssgifs/upperheadergradnew.gif) repeat-x #0065a4;
+	margin-left: 0.16em;
+	font-weight: bold;
+	color: white;
+	font-weight:bold;
+	cursor: pointer;
+	padding: 0.08em;
+	border: 1px solid #0065a4;
+}
+
+, .progressbartoptable .progressvalid, .sectionnametable .progressvalid {
+	background-color: #1B74AB;
+	margin-left: 0.16em;
+	font-weight: bold;
+	color: white;
+	font-weight:bold;
+	cursor: pointer;
+	padding: 0.08em;
+	border: 1px solid #00FF00;
+}
+
+#achieveform .progressbartoptable .progress0, .sectionnametable .progress0 {
+	background-color: white;
+	border: 1px solid #0065a4;
+	margin-left: 0.16em;
+	font-weight: bold;
+	color: #0065a4;
+	font-weight:bold;
+	cursor: pointer;
+	padding: 0.08em;
+}
+
+
+/* non clickable top&bottom buttons */
+#achieveform .progress1nonclickable {
+	background-color: #528FBD;
+	border: 1px solid #528FBD;
+	margin-left: 0.16em;
+	font-weight: bold;
+	color: #FFFFFF;
+	cursor: default;
+	margin: 0.16em;
+	padding: 0.08em;
+}
+#achieveform .progress0nonclickable {
+	background-color: #FFFFFF;
+	border: 1px solid #528FBD;
+	margin-left: 0.16em;
+	font-weight: bold;
+	color: #5E79A4;
+	cursor: default;
+	margin: 0.16em;
+	padding: 0.08em;
+}
+/* Side Progress Classes */
+
+#achieveform .progress1s {
+	background-color: #528FBD;
+	font-size: 90%;
+	border: 1px solid #528FBD;
+	margin-left: 0.16em;
+	font-weight: bold;
+	color: #FFFFFF;
+	cursor: pointer;
+	width: 1.25em;
+}
+#achieveform .progress0s {
+	background-color: #FFFFFF;
+	font-size: 90%;
+	border: 1px solid #528FBD;
+	margin-left: 0.16em;
+	font-weight: bold;
+	color: #5E79A4;
+	cursor: pointer;
+	width: 1.25em;
+}
+#achieveform .progress2s {
+	background-color: #528FBD;
+	font-size: 90%;
+	border: 1px solid #528FBD;
+	margin-left: 0.16em;
+	font-weight: bold;
+	color: #FFFFFF;
+	cursor: pointer;
+	width: 6.66em;
+}
+#achieveform .progress20s {
+	background-color: #FFFFFF;
+	font-size: 90%;
+	border: 1px solid #528FBD;
+	margin-left: 0.16em;
+	font-weight: bold;
+	color: #5E79A4;
+	cursor: pointer;
+	width: 6.66em;
+}
+/* non clickable side buttons */
+#achieveform .progress1snonclickable {
+	background-color: #528FBD;
+	font-size: 90%;
+	border: 1px solid #528FBD;
+	margin-left: 0.16em;
+	font-weight: bold;
+	color: #FFFFFF;
+	width: 1.25em;
+}
+#achieveform .progress0snonclickable {
+	background-color: #FFFFFF;
+	font-size: 90%;
+	border: 1px solid #528FBD;
+	margin-left: 0.16em;
+	font-weight: bold;
+	color: #5E79A4;
+	width: 1.25em;
+}
+#achieveform .progress2snonclickable {
+	background-color: #528FBD;
+	font-size: 90%;
+	border: 1px solid #528FBD;
+	margin-left: 0.16em;
+	font-weight: bold;
+	color: #FFFFFF;
+	width: 6.66em;
+}
+#achieveform .progress20snonclickable {
+	background-color: #FFFFFF;
+	font-size: 100%;
+	border: 1px solid #528FBD;
+	margin-left: 0.16em;
+	font-weight: bold;
+	color: #5E79A4;
+	width: 6.66em;
+}
+#achieveform .advrulesbutton {
+	background-color: #FFFFFF;
+	font-size: 100%;
+	border: 1px solid #528FBD;
+	margin-left: 0.16em;
+	font-weight: bold;
+	color: #5E79A4;
+	cursor: pointer;
+	padding: 0.08em;
+	margin: 0.16em;
+}
+#achieveform .advrulesbutton1 {
+	background-color: #528FBD;
+	font-size: 100%;
+	border: 1px solid #528FBD;
+	margin-left: 0.16em;
+	font-weight: bold;
+	color: #FFFFFF;
+	cursor: pointer;
+	padding: 0.08em;
+	margin: 0.16em;
+}
+
+#achieveform .outerformtablerows {
+	background-color: transparent;
+	padding-bottom: 0.16em;
+	width: 100%;
+	border: none;
+}
+#achieveform .outerformtablecolumns{
+	padding-bottom: 0.16em;
+	background-color:  #FFFFFF;
+	width: 100%
+	}
+
+#achieveform .outerformtablerows tbody {
+	border: none;
+}
+	
+#achieveform .outerformtablerows tbody:hover,
+#achieveform .outerformtablerows tr:hover,
+#achieveform .outerformtablerows td:hover,
+#achieveform .referencepagetable td:hover,
+#achieveform .referencepagetable tr:hover,
+#achieveform .referencepagetable tbody:hover {
+	background-color: transparent;
+}
+
+#achieveform .renderbuttonstable, .renderbuttonstablesidenav {
+	width: 98%;
+	margin-left: 1%;
+	margin-right: 1%;
+	border: 1px solid #c4c4c4;
+	padding: 0.83em;
+	background-color: #FFFFFF;
+	}
+#achieveform .afnavbuttons {
+	clear:both;
+}
+#achieveform .buttonsfloatleft {
+	float:left;
+}
+#achieveform .infopathrenderbuttonstable {
+	text-align: left;
+	width: auto;
+	margin-right: 1%;
+	border: 1px solid #c4c4c4;
+	padding: 0.83em;
+	background-color: #FFFFFF;
+	}
+#achieveform div.renderbuttonstable {
+	width: 97%;
+	margin: 0.25em 0.5em;
+	padding-top: 1em;	
+	padding-bottom: 0.41em;	
+	padding-left: 0.41em;	
+	padding-right: 0.83em;	
+}
+
+#achieveform div.renderbuttonstablesidenav {
+	float: right;
+	width: 75%;
+	margin-left: 0.75%;
+	margin-right: 0.41em;
+	margin-top: 0.25em;
+	margin-bottom: 0.25em;
+	padding: 0.41em;
+	position: relative;
+}
+#achieveform .textinputs {
+	border: 1px solid #808080
+}
+#achieveform .fieldtitle {
+	color: #000000;
+	font-weight: normal;
+	width: 33%;
+}
+
+#achieveform .colwisesubformfieldtitle {
+	width: 1%;
+	padding-right: 0.5em;
+}
+
+#achieveform fieldlabel {
+}
+#achieveform .generictextinput, .css_textinput {
+	border: 1px solid #808080;
+	margin-right: 0.16em;
+	margin-top: 0.16em;
+	background: url(cssimages/css/f3cssgifs/fieldgrad.gif) repeat-x top;
+}
+#achieveform span.generictextinput {
+	border: none !important;
+	margin: auto !important;
+	background: none !important;
+}
+
+#achieveform .css_textinput {
+	width: 25em;
+}
+#achieveform .genericsecrettextinput {
+	border: 1px solid #808080;
+	margin-right: 0.16em;
+	width: 12.41em;
+	background: url(cssimages/css/f3cssgifs/fieldgrad.gif) repeat-x top;
+}
+
+#achieveform TEXTAREA {
+		font-family: Arial, Helvetica, sans-serif;
+	}
+
+#achieveform .generictextarea {
+	border: 1px solid #808080;
+	background-color: #FFFFFF;
+	text-align: left;
+	margin-top: 0.16em;
+}
+#achieveform .genericselect {
+	border: 1px solid #528FBD;
+	margin-top: 0.16em;
+}
+#achieveform .generictime {
+	margin-right: 0.16em;
+	margin-top: 0.16em;
+}
+#achieveform .generictime .textboxhour {
+	width:2em;
+	/*background-image:url(cssimages/css/f3cssgifs/hourbackground.gif);
+	background-repeat: no-repeat;*/
+}
+#achieveform .generictime .textboxminute {
+	width:2em;
+	/*background-image:url(cssimages/css/f3cssgifs/minutebackground.gif);
+	background-repeat: no-repeat;*/
+}
+#achieveform .generictime .textboxsecond {
+	width:2em;
+	/*background-image:url(cssimages/css/f3cssgifs/secondbackground.gif);
+	background-repeat: no-repeat;*/
+}
+
+#achieveform .genericrichtext {
+	border: 1px solid #528FBD
+}
+#achieveform .genericdate {
+	margin-right: 0.16em;
+	margin-top: 0.16em;
+}
+#achieveform .richeditouter {
+	overflow-x: auto;
+	overflow-y: scroll;
+}
+
+#achieveform .richeditinner {
+	height: 100%;
+}
+
+#achieveform .richeditbar {
+	z-index: 1000;
+	background-color: #F5F7FA;
+	background-image: url(cssimages/css/f3cssgifs/upperheadergrad.gif);
+	background-repeat: repeat-x;
+	background-position: bottom;
+	border: 1px solid #528FBD;
+	padding-top: 0.33em;
+	padding-bottom: 0.33em;
+	top: 0;
+	position: absolute;
+}
+
+#achieveform .richeditbutton
+{
+	margin-right: 0.5em;
+	text-align: center;
+	border: 0;
+	background: transparent;
+	font-weight: bold;
+	color: #AAA;
+	padding: 0.08em 0.16em;
+}
+
+#achieveform .richedithighlight
+{
+	color:black;
+	border: 1px solid black;
+	background: white;
+	padding: 0;
+}
+#achieveform .paragraphtext, .paragraghtext {
+	color: #0065a4; /*0065a4 2E597A*/
+	font-weight: bold;
+}
+/* the fill-in forms button style */
+#achieveform .renderformbuttons {
+		background: url(cssimages/css/f3cssgifs/upperheadergradnew.gif) repeat-x #4E92F4;
+	color: #FFFFFF;
+	border: 1px solid #FFFFFF;
+	font-size: 95%;
+	margin-top: 0.16em;
+	margin-left: 0.08em;
+	cursor: pointer;
+	filter:progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='#CECECE', Positive='true');
+}
+#achieveform .eformstext {
+	text-align: center;
+	font-size: 80%
+}
+#achieveform .eformstext A {
+	color: #5E79A4
+}
+#achieveform .validationtable {
+	background-color: #FFFFFF;
+	border-bottom: 1px solid #528FBD;
+	width: 100%
+}
+#achieveform .rulesection {
+	color: #9A0000
+}
+#achieveform .reviewtable {
+	border: 1px solid #528FBD;
+	background-color: white;
+	width: 90%
+}
+/* View Form Data Classes */
+
+#achieveform .viewdataoutertable {
+	background-color: #FFFFFF;
+	border-bottom: 1px solid #528FBD;
+	}
+#achieveform .responsetd {
+	color: black;
+	
+}
+#achieveform .responsetd P,li{
+	color: black
+}
+
+#achieveform .outerreadonlytable {
+	width: 100%
+}
+#achieveform .warning {
+	font-size: 85%;
+	color: red;
+        background: none;
+}
+#achieveform .simplemessage {
+	font-size: 85%;
+	font-weight:bold;
+}
+#achieveform .referenceno {
+	color: #000;
+	font-weight: bold;
+}
+#achieveform .manadatory {
+	color: red;
+}
+#achieveform .headerlabelsformfields {
+	width: 30%;
+	background-color: #FFFFFF;
+	color: #7985B4;
+	font-size: 90%;
+	border-right: 1px solid #528FBD;
+	padding-left: 0.5em;
+	/*background-image: url(cssimages/css/f3cssgifs/Browseforms/headerlabel.gif);
+	background-repeat: repeat-x;
+	background-position: bottom;*/
+	font-weight: bold;
+	line-height: 1.3em;
+	padding-bottom: 0.16em;
+}
+/* Date control classes */
+
+/* calendar box */
+.cal {
+        BACKGROUND-COLOR: #e5e5e9; 
+		  font-size: 110%;
+		  white-space: nowrap;
+		 
+}
+
+.cal A:link {
+            color: black;
+		
+}           
+/* calendar day names */
+.calwday {
+            BACKGROUND-COLOR: #b2b2b2; padding-bottom: 0.08em; PADDING-LEFT: 0.08em; PADDING-RIGHT: 0.08em; PADDING-TOP: 0.08em; 
+            font-size: 80%
+}
+/* calendar normal date */
+.caldate {
+            padding-bottom: 0.08em; PADDING-LEFT: 0.08em; PADDING-RIGHT: 0.08em; PADDING-TOP: 0.08em; TEXT-ALIGN: center;
+            font-size: 80%
+}
+/* calendar selected date */
+.caldatesel {
+            BACKGROUND-COLOR: #ffffff;
+            font-size: 80%
+}
+/* edge of calendar */
+.caledge {
+            BACKGROUND-COLOR: #82A0D3; COLOR: white;
+				font-size: 90% !important
+}
+.caledge A:visited {
+            BACKGROUND-COLOR:#82A0D3; 
+            COLOR: white;
+}
+
+.caledge A:link {
+            COLOR: white;
+}
+
+.caldateother {
+            BACKGROUND-COLOR: #c4c4ce
+}
+
+.calerror {
+            BACKGROUND-COLOR: #fb7d77
+}
+
+.dateerror
+{
+            BACKGROUND-COLOR: #fbcdc7
+}
+
+A.dateerror
+{
+  border: 1px solid red;
+
+}
+
+.calpyear {
+           WIDTH: 4em
+
+}
+
+
+.datecombo {
+	background-image: url(cssimages/css/f3cssgifs/dateicon.gif);
+	background-repeat: no-repeat;
+	background-position: 10%;
+	text-decoration: none;
+	padding: 0.41em 0.66em;
+	
+}
+
+/* Drag and drop classes */
+
+#achieveform .droptargetbar { background-color:#0070b0; }
+
+
+#achieveform .droptargetbar, .offscreen {
+	width: 4em;
+	height: 4em;
+	font-size:10%;
+	top:-10000em;
+	left:-10000em;
+	position:absolute
+}
+
+/* Validation Errors Page */
+#achieveform .sectionstable {
+	background-color: #FFFFFF;
+	width: 100%;
+}
+
+#achieveform .sectionname {
+	color: #9A0000
+	
+}
+#achieveform .errortext {
+	color: #000000
+}
+/* Javascript Pop-Up Menu */
+
+#achieveform .fieldpopupmenu {
+	border: 1px solid #0065a4;
+	border-top: 1px solid #0065a4;
+	left:-83.33em;
+	top:-83.33em;
+	text-indent: 1.5em;
+	font-size: 90%;
+	background:white;
+	position: absolute;
+}
+
+#achieveform .hierarchypopupmenu {
+	border: 1px solid #0065a4;
+	border-top: 1px solid #0065a4;
+	POSITION: absolute; 
+	left:-83.33em;
+	top:-83.33em;
+	text-indent: 1.5em;
+	font-size: 90%;
+	background:white;
+}
+
+#achieveform .popuptable, .df_popuptable {
+	background-color: white;
+	padding-left: 0;
+	padding-right: 0;
+	border: 1px solid #0065a4;
+	font-size: 90%;
+	width: 100%
+}
+
+#achieveform .df_popuptable {
+	margin: 0; 
+	border: none;
+}
+
+#achieveform .popuptable TD, .df_popuptable TD {
+	padding-bottom: 0.25em;
+
+}
+#achieveform .popuptabletwo TD {
+	padding-bottom: 0.25em;
+}
+
+#achieveform .popuptable .fieldtitle {
+	white-space: nowrap;
+	vertical-align: middle;
+	color: #0065a4;
+	text-align: right;
+	padding-right: 0.25em;
+}
+#achieveform .popuptable .generictextinput, .popuptabletwo .generictextinput {
+	font-size: 110%;
+	width: 70%;
+}
+#achieveform .popuptabletwo {
+	background: transparent;
+	width: 32.58em;
+	font-size: 100%;
+}
+#achieveform .df_popuptable {
+	z-index: 10 !important;
+}
+
+
+#achieveform .popuptabletwo a {
+	text-decoration: none;
+}
+#achieveform .popuptabletwo .fieldtitle {
+	white-space: nowrap;
+	vertical-align: middle;
+	padding-right: 0.25em;
+}
+#achieveform .popuptabletwo .genericsubmit {
+	font-size: 120%
+}
+
+#achieveform .popuptabletwo .paragraphtext, .popuptabletwo .paragraghtext {
+	font-weight: bold;
+}
+
+#achieveform .popuptable .paragraphtext, .popuptable .paragraghtext {
+	font-weight: bold;
+}
+#achieveform .popupdivtable {
+	width: 25.83em;
+	
+}
+#achieveform .popuptitle {
+	color: white;
+	background:url(cssimages/css/f3cssgifs/upperheadergradnew.gif) repeat-x bottom #0065a4;
+	font-weight: bold;
+	padding: 0.33em;
+}
+#achieveform .popupbody {
+	padding: 0.33em;
+}
+#achieveform .popupformname {
+	color: white;
+	background:url(cssimages/css/f3cssgifs/upperheadergradnew.gif) repeat-x bottom #0065a4;
+	font-weight: bold;
+	padding: 0.33em;
+}
+#achieveform .popupformgroupname {
+	color: white;
+	background:url(cssimages/css/f3cssgifs/upperheadergradnew.gif) repeat-x bottom #0065a4;
+	font-weight: bold;
+	padding: 0.33em;
+}
+
+#achieveform DIV.fieldpopupmenu TD{ 
+	width: 100%
+}
+#achieveform .myadvancedtable {
+	width: 25.83em;
+	/*FILTER: Alpha(Opacity=80);*/ 
+}
+
+#achieveform .popupmenu {
+	border: 1px solid #0065a4;
+	POSITION: absolute; 
+	left:-83.33em;
+	top: -83.33em;
+	width: 100%;
+	background:white;
+	width: 25em;;
+	white-space:nowrap;
+	z-index:1;
+}
+#achieveform .popupmenu.submenu {
+	padding: 0;
+	margin: 0;
+}
+
+#achieveform .helppopup
+{
+	border: 1px solid #528FBD;
+	POSITION: absolute; 
+	left:-83.33em;
+	top: -83.33em;
+	BACKGROUND-COLOR: #FBFDFD;
+	white-space: nowrap;
+	text-indent: 0.1em;
+	font-size: 90%;
+	padding: 0.16em;
+	border-top: 5px solid #528FBD;
+	z-index: 2
+
+}
+#achieveform .PopMainMenu
+{
+	font-weight: bold;
+	border: 1px solid gray;
+	background: white;
+	filter:progid:DXImageTransform.Microsoft.dropshadow(OffX=0, OffY=2, Color='#CECECE', Positive='true');
+}
+
+
+#achieveform .PopMainMenuItem
+{
+	white-space: nowrap;
+}
+#achieveform .PopSubMenu
+{
+	POSITION: absolute; 
+	left:-83.33em;
+	top: -83.33em;
+	border: 1px solid #9D9D9D;
+	border-top: 5px solid #9D9D9D;
+	padding-left: 0.33em;
+	padding-right: 0.33em;
+	background: white;
+}
+#achieveform .PopSubMenu TD
+{
+	border-bottom: 1px solid #9D9D9D;
+	padding-left: 0.33em;
+	padding-right: 0.33em;
+}
+
+
+#achieveform .PopMenuItem
+{	
+	/*background: url(cssimages/css/f3cssgifs/navtablebevel.gif) repeat-x;d-color: transparent;*/
+	background-color: transparent;
+	white-space: nowrap;
+	filter:progid:DXImageTransform.Microsoft.dropshadow(OffX=1, OffY=1, Color='#CECECE', Positive='true');
+	white-space:nowrap;
+	height: 1.66em;
+	cursor: default;
+	color: black
+}
+
+#achieveform .PopMenuItem A
+{
+	background-color: transparent;
+	width: 100%;
+	height: 100%;
+	text-decoration: none;
+	color: black;
+}
+#achieveform .PopMenuSeperator {
+	font-size: 8%;
+	background-color: #9D9D9D;
+	white-space: nowrap;
+	height: 2em;
+	white-space:nowrap;
+	cursor: default;
+	color: black
+}
+#achieveform .PopMenuItem A:hover, .PopMenuItem:hover {
+	color: #EE4220;
+}
+#achieveform .PopMenuItem A:active, .PopMenuItem:active, .PopMenuItem A:focus, .PopMenuItem:focus {
+	background: url(cssimages/css/f3cssgifs/menubevel.gif) repeat-x;d-color: transparent;
+	background-color: transparent;
+	color: #EE4220;
+}	
+#achieveform .PopMenuButton
+{
+	background-color: transparent;
+	color: gray;
+	border: none;
+	cursor: pointer;
+	text-align: left;
+	width: 100%;
+}
+
+#achieveform .browsemenusuboption {
+	padding: 0.33em 0.33em 0.33em 1.5em;
+}
+
+#achieveform .browsemenusuboption A {
+	text-decoration: none;
+	color: black;
+	display:block;
+	padding: 0.33em 0.33em 0.33em 1.5em;
+	border-bottom:1px solid #c4c4c4;
+}
+
+#achieveform .browsemenusuboption A:hover {
+	text-decoration: none;
+	color: #159846;
+	font-weight: normal;
+	white-space: nowrap
+}
+
+#achieveform .browsemenuoption {
+	padding: 0.33em;
+}
+
+#achieveform .browsemenuoption A {
+	text-decoration: none;
+	color: black;
+	border-bottom:1px solid #c4c4c4;
+	display:block;
+	padding: 0.33em;
+	
+	
+}
+#achieveform .browsemenuoption A:hover {
+	text-decoration: none;
+	color: #159846;
+	font-weight: normal;
+	white-space: nowrap
+}
+
+
+/* Design Form Page */
+
+	
+#achieveform .colruleend { /* is a div */
+	font-size:8%;
+	width:100%;
+	height: 3em;
+	background-color: #C7CACC
+	}
+#achieveform .colrulestart { /* is a div */
+	font-size:8%;
+	width:100%;
+	height:4em;
+	background-color: #C3C8CC;
+	text-align: right;
+	background-color: #CCCCCC;
+	}
+#achieveform .colrulesplit { /* is the right hand td */
+	background-color: #C7CACC;
+	height: 0.16em;
+	}
+	
+#achieveform .popupclosebutton
+{
+	font-size: 80%;
+	z-index: 10;
+}	
+	
+#achieveform .df_toolbar {
+	/*background: url(cssimages/css/f3cssgifs/genericbuttongradsilver.gif) repeat-x ;*/
+	width: 100%;
+	border-bottom:1px solid #9D9D9D;
+}
+#achieveform .df_toolbaroptions {
+	color: #fff;
+	padding: 0.16em;
+	padding-top: 0.16em;
+	border-bottom:1px solid #9D9D9D;
+	padding-bottom: 0.25em;
+}
+#achieveform .df_toolbaroptions IMG, .df_toolbaroptions .genericimagesubmit, .df_toolbar IMG, .df_toolbar .genericimagesubmit{
+	margin-right: 0.16em;
+}
+
+#achieveform .df_toolbarviewbystatus {
+}
+
+#achieveform .df_toolbarchkbox {
+	padding-right: 0.75em;
+}
+
+#achieveform .df_toolbarstartdate {
+	/*background:url(cssimages/css/f3cssgifs/endbar.gif) no-repeat 0% 50%;*/
+	padding-left: 0.41em;
+	padding-right: 0.75em;
+}
+
+#achieveform .df_toolbarenddate {
+	/*background:url(cssimages/css/f3cssgifs/endbar.gif) no-repeat 0% 50%;*/
+	padding-left: 0.41em;
+	padding-right: 0.75em;
+}
+
+#achieveform .outerdesignformtable {
+	background-color: #FFFFFF;
+	padding-left: 0.16em;
+	width: 100%;
+	margin-top:0.41em;
+}
+#achieveform .outerdesignformtd {
+	width:100%;
+}
+
+#achieveform .outerdesignformtable TABLE {
+	padding-top: 0.08em;
+}
+
+#achieveform .outerdesignformtable TD {
+	padding-right: 0.5em;
+}
+
+#achieveform .bulkeditlink A{
+	color: black
+}
+#achieveform .officeonly {
+	background-color: #FFEE66
+}
+#achieveform .ddfield {
+	background-color: #66EEFF
+}
+#achieveform .sectionstd {
+	position: relative;
+	top: 0.41em;
+
+}
+#achieveform .sectionstdbulk {
+	position: relative;
+	top: 0.41em;
+
+	z-index: 2
+}
+#achieveform .sectionstable {
+	background-color: #FFFFFF;
+	width: 2.5em;
+	text-align: left;
+	border: 1px solid #528FBD;
+	border-bottom: 1px solid white;
+}
+	
+#achieveform .sectiontitle {
+	color: #5E79A4
+}
+#achieveform .columnheader {
+	font-weight: bold;
+	color: #5E79A4;
+	background-color: #F4F4F4
+}
+
+#achieveform .selectfields {
+	width: 20%
+}
+
+#achieveform .designformbackgroud {
+	background: #A4B5C0;
+	width: 100%;
+}
+#achieveform .prinrformbackground {
+	background: #A4B5C0;
+	width: 100%;
+}
+/* Insertion Point */ 
+#achieveform .outerinsertiontable {
+	background-color: #539DC2;
+	width: 100%;
+	border: 1px solid #c4c4c4;
+	border-top: 0;
+	color: white;
+	font-weight: bold;
+
+}
+#achieveform .ipointtitle {
+	color: white;
+	font-weight: bold;
+	border-bottom: 1px solid #6B9EEB;
+	height: 1.25em;
+	background:/*url(cssimages/css/f3cssgifs/topleftipoint.gif) no-repeat left*/ #0065a4;
+	padding-left: 1.66em;
+}
+
+#achieveform .insertionlabel {
+	font-size: 120%;
+  padding-left:0.5em;
+  padding-right:0.2em;
+  text-shadow:0 1px 0 #1B536F;
+}
+	
+#achieveform .ipointtitleopt {
+	color: white;
+	font-weight: bold;
+	border-left: 1px solid #6B9EEB;
+	border-right: 1px solid #6B9EEB;
+	border-bottom: 1px solid #6B9EEB;
+	width: 13.33em;
+	background-color: #0065a4;
+}
+#achieveform .overflowme {
+		overflow: auto;
+		background-color: #F5F7F8;
+		scrollbar-face-color:#ffffff; 
+		scrollbar-track-color:#F5F7F8; 	
+		scrollbar-arrow-color:#999999; 
+		scrollbar-highlight-color:#ffffff; 
+		scrollbar-shadow-color:#999999; 
+		scrollbar-3dlight-color:#999999; 
+		scrollbar-darkshadow-color:#ffffff;
+		height: 6.25em;
+		width: 98%;
+}
+#achieveform .overflowmeoptions {
+		overflow: auto;
+		height: 6.25em;
+		background-color: #F5F7F8;
+		width: 13.33em;
+		border-left: 1px solid #A0C4DB;
+		scrollbar-face-color:#ffffff; 
+		scrollbar-track-color:#F5F7F8; 	
+		scrollbar-arrow-color:#999999; 
+		scrollbar-highlight-color:#ffffff; 
+		scrollbar-shadow-color:#999999; 
+		scrollbar-3dlight-color:#999999; 
+		scrollbar-darkshadow-color:#ffffff;
+		overflow-x: hidden
+}
+#achieveform .optionlink A{
+	text-decoration: none;
+	color: gray;
+	font-size: 90%
+}
+#achieveform .optionlink a:hover {
+	color: #EE4220;
+	
+}
+#achieveform .optionselected A{
+	text-decoration: none;
+	color: #EE4220;
+	font-size: 90%
+}
+#achieveform .textlink a {
+#achieveform color: #EE4220;
+}
+
+#achieveform .pink {
+	color:#EE4220;
+	background-color:#fff;
+}
+
+/* list screen */
+#achieveform .outerlisttable {
+	background-color: #FAF8F8;
+	border-top: 1px solid #D0CCC4;
+	width: 100%
+}
+#achieveform .centrallisttable {
+	border-bottom: 1px solid #7290C1;
+	background-color: #FFFFFF;
+	/*background-image: url(cssimages/css/f3cssgifs/searchboxdrop.gif);
+	background-repeat: repeat-x;
+	background-position: top;*/
+	width: 100%
+}
+#achieveform .greycell {
+	background-color: #FCFCFC
+}
+
+/* email notifications */
+
+#achieveform .emailnotificationstable {
+	border: 1px solid #528FBD;
+	background: /*url(cssimages/css/f3cssgifs/lowertabselborder.gif) repeat-x top*/ #FFFFFF;
+	width: 100%
+}
+#achieveform .formfillertable {
+	margin-bottom: 2.5em;
+	width: 100%
+}
+
+#achieveform .emailwidthcell {
+	width: 20%
+}
+/* integration */
+
+#achieveform .testintegrationtable {
+	text-align: left;
+	width: 80%;
+	background-color: white;
+	border: 1px solid #528FBD
+}
+#achieveform .integrationactiontable {
+	width: 100%;
+}
+	
+#achieveform .functionname {
+	font-weight: bold;
+	color: #9A0000
+	
+}
+#achieveform .loglabel {
+	color: #4F6992;
+	font-weight: bold;
+
+	vertical-align: top
+}
+#achieveform .logtext {
+	color: black;
+
+	vertical-align: top
+}
+
+#achieveform .logtextbold {
+	font-weight:bold;
+	color: black
+
+}
+#achieveform .logrule {
+	COLOR: #ffffff; height: 0.16em; BACKGROUND-COLOR: #7D7D7D
+}
+#achieveform .logoddcell{
+	background-color:#f4f4f4	
+}
+
+#achieveform .lognoerror {
+	color: #40AC40
+
+}
+
+#achieveform .tokentext {
+	color:#4F6992;
+	font-weight: normal
+}
+/* Details Page */
+
+/*sections page*/
+#achieveform .deletemessagetable {
+	width:16.66em;
+	padding: 0.41em;
+	border: 1px solid #6C6C6C;
+	padding-left: 2.83em;
+	background:  /*url(cssimages/css/f3cssgifs/warningsign.gif) no-repeat 1.5% 10%*/ #fff;
+	filter:progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='#CECECE', Positive='true')
+}
+#achieveform .deletemessagediv {
+	width: 20em;
+	margin-left: auto;
+	margin-right: auto;
+	padding: 0.5em;
+	border: 1px solid #6C6C6C;
+	padding-left: 3.5em;
+	background:  url(cssimages/css/f3cssgifs/warningsign.gif) no-repeat 1.5% 10% #fff;
+	filter:progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='#CECECE', Positive='true')
+}
+#achieveform .publishedmessagetable {
+	width:  41.66em;
+	padding: 0.41em;
+	border: 1px solid #0065a4;
+	border-top: 4px solid #0065a4;
+	padding-left: 2.83em;
+	background:  url(cssimages/css/f3cssgifs/warningsign.gif) no-repeat 1.5% 10% #fff;
+	text-align: left;
+	margin-top: 0.83em;
+	filter:progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='#CECECE', Positive='true')
+}
+#achieveform .publishedmessagetable a {
+	color: #EE4220;	
+}
+#achieveform .confirmmessage2 .warningcontainer {
+	padding-top: 0.33em;
+	padding-bottom: 0.33em;
+	background-color: white;
+	border: none;
+	
+}
+#achieveform .confirmmessage2 .warningcontainer p{
+	padding:0;
+	margin:0;
+}
+/* resourceoption toolbars */
+#achieveform .ddtools {
+	background: /*url(cssimages/css/f3cssgifs/navtablebevel.gif) repeat-x bottom*/ #F6F9FB;
+	color: #5E79A4;
+	border-bottom: 1px solid #808080;
+	padding-top: 0.16em;
+	padding-bottom: 0.08em;
+}
+#achieveform .printtools {
+	background: /*url(cssimages/css/f3cssgifs/navtablebevel.gif) repeat-x bottom*/ #F6F9FB;
+	color: #5E79A4;
+	border-bottom: 1px solid #808080;
+	padding-top: 0.16em;
+	padding-bottom: 0.08em;
+}
+#achieveform .printtools .genericselect {
+	font-size: 95%
+}
+#achieveform .printtools  .genericimagesubmit {
+	margin-bottom: 0.25em;
+}
+#achieveform .toolsheader {
+	background-color: #528FBD;
+	color: #FFFFFF;
+	text-align: center;
+	font-weight: bold;
+	height: 0.83em;
+}
+
+#achieveform .sidetoolstd {
+	width: 2.5em;
+	
+}
+
+/* Admin Options */
+
+#achieveform .adminoutertable {
+	border: 1px solid #528FBD;
+	background: /*url(cssimages/css/f3cssgifs/lowertabselborder.gif) repeat-x top*/  #FFFFFF;
+	width: 100%
+}
+
+#achieveform .adminsecurity {
+#achieveform background-color: #FFFFFF;
+#achieveform margin-bottom: 0.83em;
+}
+#achieveform .adminsecurity TD {
+	color: #AF4141
+}
+#achieveform .adminsecurity A {
+	color: #000000;
+	background-color: #FFFFFF;
+	text-decoration: none
+}
+
+#achieveform .adminformdesign {
+	background-color: #FFFFFF;
+	margin-bottom: 0.83em;
+	padding-right: 8.3em;
+}
+#achieveform .adminformdesign TD {
+	color: #4E7B41
+}
+#achieveform .adminformdesign A {
+	color: #000000;
+	text-decoration: none
+}
+
+#achieveform .adminformgroups {
+	background-color: #FFFFFF;
+	margin-bottom: 0.83em;;
+	padding-right: 8.3em;
+}
+#achieveform .adminformgroups TD {
+	color: #C1914D
+}
+#achieveform .adminformgroups A {
+	color: #000000;
+	text-decoration: none
+}
+#achieveform .adminresources {
+	background-color:#FFFFFF;
+	margin-bottom: 0.83em;;
+	padding-right: 8.3em;
+}
+#achieveform .adminresources TD {
+	color: #4D91C1
+}
+#achieveform .adminresources A {
+	color: #000000;
+	text-decoration: none
+}
+#achieveform .adminformimport {
+	background-color: #FFFFFF;
+	margin-bottom: 0.83em;;
+	padding-right: 8.3em;
+
+}
+#achieveform .adminformimport TD {
+	color: #D8448D
+}
+#achieveform .adminformimport A {
+	color: #000000;
+	text-decoration: none
+}
+#achieveform .adminsystem {
+	background-color: #FFFFFF;
+	margin-bottom: 0.83em;;
+	padding-right: 8.3em;
+}
+#achieveform .adminsystem TD {
+	color: #2A9CB1
+}
+#achieveform .adminsystem A{
+	color: #000000;
+	text-decoration: none
+}
+#achieveform .adminintegrations TD {
+	color: #2A9CB1
+}
+#achieveform .adminintegrations A{
+	color: #000000;
+	text-decoration: none
+}
+
+#achieveform .paysystem TD {
+	color: #A09023
+}
+#achieveform .paysystem A{
+	color: #000000;
+	text-decoration: none
+}
+#achieveform .headerlabelsadmin {
+	font-weight: bold
+	}
+#achieveform .brandproperties .generictextinput {
+	width: 65%;
+
+}
+#achieveform .adminkey {
+	color: black;
+}
+#achieveform .adminvalue {
+	color: #9A0000;
+	white-space: nowrap;
+}
+/* Conditionals Page */
+#achieveform .rejectionrule {
+	color: #9A0000
+}
+/* Publish Form Page */
+
+/* Login Panel*/
+#achieveform .emailtable {
+	background-color: #FFFFFF;
+	border: 1px solid #528FBD;
+	width: 33%;
+	text-align: left;
+	margin: 0.83em auto;
+	vertical-align:middle;
+}
+#achieveform .emailtable .fakecolleft{
+	padding-top: 0.5em;
+}
+#achieveform .emailheader {
+	/*background:url(cssimages/css/f3cssgifs/navtablebevel.gif) repeat-x;*/
+	height:1.7em;
+	color: #5E79A4;
+	font-weight: bold;
+	border-bottom: 1px solid #9D9D9D
+}
+#achieveform .logintable {
+	margin: 0 auto;
+	background-color: #FFFFFF;
+	border: 1px solid #528FBD;
+	width: 29.16em;
+
+	text-align: left;
+	
+}
+#achieveform .logintable td {
+	padding: 0.16em 0.66em 0.16em 0.66em;
+	vertical-align:top;
+}
+#achieveform .loginheader {
+	/*background:url(cssimages/css/f3cssgifs/navtablebevel.gif) repeat-x;*/
+	height: 1.41em;
+	color: #5E79A4;
+	font-weight: bold;
+	border-bottom: 1px solid #9D9D9D
+}
+#achieveform div.loginheader {
+	line-height: 1.41em;
+	vertical-align: middle;
+	padding: 0.16em 0.66em;
+}
+#achieveform .fakecolleft {
+	float: left;
+	clear: left;
+	padding: 0.25em;
+}
+#achieveform .fakecolright {
+	float: right;
+	clear: right;
+	padding: 0.25em;
+}
+#achieveform .faketd {
+	padding-left: 0.41em;
+	padding-right: 0.41em;
+	clear:both;
+}
+#achieveform .loggedinas {
+	background-color: #FFFFFF;
+	width: 100%
+}
+#achieveform .loggedintext {
+	width: 5%;
+	white-space: nowrap
+}
+#achieveform .logintable .generictextinput , .logintable .genericsecrettextinput {
+	width: 14.16em;
+}
+#achieveform .cancelloginbutton {
+	position: absolute;
+	top: 10.5em;
+	left: 36%;
+	width: 3.33em;
+	height: 3.33em;
+}
+/* Offline Import */
+#achieveform .offlinetext A, .offlinetext {
+	text-decoration: none;
+	color: #5E79A4
+}
+
+
+/* Permissions Page */
+
+/* In Page Conditional */
+#achieveform .mandatory {
+	color: #FF0000
+}
+
+#achieveform .mandatorysymbol {
+	color: #FF0000
+}
+
+#achieveform .version {
+	color: #676767;
+	font-size: 60%;
+	font-weight: bold;
+	text-indent: 0.5em;
+	border-top: 1px solid #A0C4DB;
+	white-space: nowrap;
+	padding: 0.45em;
+	margin: 0;
+}
+
+#achieveform .version A {
+	color: #676767;
+	white-space: nowrap;
+	padding: 0;
+	margin: 0;
+	text-decoration: none;
+}
+/* Resources Table */
+
+#achieveform .quickedittable {
+	background-color: white;
+	width: 25em;
+	border: 1px solid #0065a4;
+	margin:auto;
+	margin-top: 0.33em;
+}
+
+#achieveform .quickedittable .generictextarea{
+	border-left:0;
+	border-right: 0;
+	border-top: 0;
+	margin-top:0;
+}
+#achieveform .resourceoptions {
+	background: /*url(cssimages/css/f3cssgifs/navtablebevel.gif) repeat-x bottom*/ #F6F9FB;
+	padding: 0.16em;
+	color: #5E79A4;
+	border-bottom: 1px solid #808080;
+}
+
+#achieveform .bf_formoptions {
+	background: /*url(cssimages/css/f3cssgifs/genericbuttongradsilver.gif) repeat-x bottom*/ #ADC7E7;
+	color: #0065a4;
+	border-bottom: 1px solid #808080;
+	padding: 0.16em;
+	padding-top: 0.08em;
+}
+#achieveform .bf_formoptions IMG, .bf_formoptions .genericimagesubmit{
+	margin-right: 0.16em;
+}
+#achieveform .selgroup {
+	color: #EE4220;
+	text-decoration: none;
+	text-align: left;
+}
+
+/* Resource Tabs */
+
+#achieveform .resourcetabsel A {
+	border-right: 1px solid #808080;
+	border-bottom: 1px solid #808080;
+	display: block;
+	font-size: 80%;
+	background: /*url(cssimages/css/f3cssgifs/resourcetabsel.gif)*/ #F4F7FB;
+	text-decoration: none;
+	text-align: center;
+	width: 8.85em;
+	height: 1.76em;
+	vertical-align: text-bottom;
+	padding-top: 0.31em;
+}
+#achieveform .resourcetabunsel A {
+	border-right: 1px solid #808080;
+	border-bottom: 1px solid #808080;
+	display: block;
+	font-size: 80%;
+	background: /*url(cssimages/css/f3cssgifs/resourcetabunsel.gif)*/ #F4F7FB;
+	text-decoration: none;
+	text-align: center;
+	width: 8.85em;
+	height: 1.76em;
+	vertical-align: text-bottom;
+	padding-top: 0.31em;;
+	
+}
+#achieveform .resourcetabunsel A:hover {
+	border-right: 1px solid #808080;
+	border-bottom: 1px solid #808080;
+	display: block;
+	font-size: 80%;
+	background: /*url(cssimages/css/f3cssgifs/resourcetabsel.gif)*/ #F4F7FB;
+	text-decoration: none;
+	text-align: center;
+	width: 8.85em;
+	height: 1.76em;
+	vertical-align: text-bottom;
+	padding-top: 0.31em;;
+	
+}
+
+
+
+#achieveform .resourcetabspacer {
+	width: 50%;
+	background:#E2E0DB;
+	border-top: 1px solid #fff;
+	border-bottom: 1px solid #808080;
+	height: 1.66em;
+}
+
+
+
+/* Images and Other Resources */
+
+#achieveform .imagesuround {
+	border: 1px solid #528FBD;
+	background-color: #FFFFFF;
+	width:16.66em;
+	filter:progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='#CECECE', Positive='true');
+	margin-top:0.41em;
+	margin-bottom: 0.41em;
+}
+#achieveform .imagethumbnail {
+	border: 1px solid #c4c4c4;
+	margin: 0.83em;
+	width: 8.3em;
+	
+}
+
+/* My Favourite Fields */
+
+/* View Saved Forms */
+
+#achieveform .headerlabelsdc {
+	background-color: #FFFFFF;
+	color: #7985B4;
+	font-size: 90%;
+	border-right: 1px solid #528FBD;
+	padding-left: 0.5em;
+	/*background-image: url(cssimages/css/f3cssgifs/Browseforms/headerlabel.gif);
+	background-repeat: repeat-x;
+	background-position: bottom;*/
+	font-weight: bold;
+	line-height: 1.3em;
+	padding-bottom: 0.16em;
+	width: 12.58em;
+}
+#achieveform .headerlabelsref {
+	background-color: #FFFFFF;
+	color: #7985B4;
+	font-size: 90%;
+	border-right: 1px solid #528FBD;
+	padding-left: 0.5em;
+	/*background-image: url(cssimages/css/f3cssgifs/Browseforms/headerlabel.gif);
+	background-repeat: repeat-x;
+	background-position: bottom;*/
+	font-weight: bold;
+	line-height: 1.3em;
+	padding-bottom: 0.16em;
+	width: 7.33em;
+}
+#achieveform .headerlabelsform {
+	background-color: #FFFFFF;
+	color: #7985B4;
+	font-size: 90%;
+	border-right: 1px solid #528FBD;
+	padding-left: 0.5em;
+	/*background-image: url(cssimages/css/f3cssgifs/Browseforms/headerlabel.gif);
+	background-repeat: repeat-x;
+	background-position: bottom;*/
+	font-weight: bold;
+	line-height: 1.3em;
+	padding-bottom: 0.16em;
+	width: 12.08em;
+}
+#achieveform .savedformtable {
+	border: 1px solid #528FBD;
+	background-color: #FFFFFF;
+	margin-top: 1.25em;
+	width: 100%
+	
+	}
+	
+	/* Print Layout */
+#achieveform .printoptionsbit {
+		height: 2.66em;
+		position: relative;
+		top: -0.58em;
+		/*background: url(cssimages/css/f3cssgifs/printgrad.gif) repeat-x top #F6F9FB;
+		background-position: top;
+		background-repeat: repeat-x;*/
+		border: 1px solid #7985B4;
+		border-left: 15px solid #7985B4;
+		white-space: nowrap;
+		width: 19.16em;
+		margin-right: 4em;
+	}
+	.optionstext {
+		color: #7985B4;
+		font-weight: bold;
+		font-size: 70%
+	}
+#achieveform .printlayoutheader {
+	color: #169519;
+	font-weight: bold;
+	text-align: center
+}
+#achieveform .printoptionsbitdif {
+	background-color:	#F6F9FB;
+		height: 2.66em;
+		position: relative;
+		top: -0.33em;
+		/*background-image: url(cssimages/css/f3cssgifs/printgrad.gif);
+		background-position: top;
+		background-repeat: repeat-x;*/
+		border: 1px solid #7985B4;
+		border-left: 15px solid #7985B4;
+		white-space: nowrap;
+		width: 38.5em;
+}
+#achieveform .printinput {
+	width: 4.16em;
+	border: 1px solid #528FBD;
+	margin-right: 0.16em;
+}
+#achieveform .printinputsize {
+	width: 2.08em;
+	border: 1px solid #528FBD;
+	margin-right: 0.16em;
+}
+#achieveform .nofinwhite {
+	background-color: #F5F5F5
+
+}
+#achieveform .nofinwhite TD {
+	white-space: nowrap
+}
+
+/* Signed Data Page */
+
+#achieveform .signtable {
+	background-color: #FFFFFF;
+	border: 1px solid #528FBD;
+	text-align: left;
+	width: 30em;
+	
+}
+
+/* Index Page */
+
+#achieveform .indexsubmits {
+	background-color: #528FBD;
+	font-size: 90%;
+	border: 1px solid #528FBD;
+	margin-left: 0.16em;
+	font-weight: bold;
+	color: #FFFFFF;
+	cursor: pointer;
+	text-align: center;
+	width: 2.16em;
+	height: 2.16em;
+	margin-top: 0.16em;
+}
+#achieveform .indexsubmitsel {
+	background-color: #FFFFFF;
+	font-size: 90%;
+	border: 1px solid #528FBD;
+	margin-left: 0.16em;
+	font-weight: bold;
+	color: #5E79A4;
+	cursor: pointer;
+	text-align: center;
+	width: 2.16em;
+	height: 2.16em;
+	margin-top: 0.16em;
+}
+
+/* Spell Checker */
+#achieveform .spellwindow {
+	background: url(cssimages/css/f3cssgifs/fieldgrad.gif) repeat-x top #fff;
+	padding-top: 1.25em;
+	padding-top: 1.25em;
+	border-top:1px solid #528FBD;
+	border-bottom: 1px solid #528FBD
+}
+
+#achieveform .suggestiontext {
+	border-bottom: 1px solid #ECECEC
+}
+
+
+/* Stats Page */
+
+#achieveform .statsbar {
+	height: 1.41em;
+	/*background-image: url(cssimages/css/f3cssgifs/statsbar.gif);*/
+	
+	
+}
+#achieveform .statsbartable {
+	height: 1.41em;
+	width: 25em;;
+	background: #E9E9E9
+	
+}
+
+#achieveform .prepostbit {
+	border-bottom: 1px solid #c6c6c6;
+	padding: 0;
+	/*background: url(cssimages/css/f3cssgifs/integrationgrad.gif) repeat-x bottom;*/
+}
+
+
+/* Data Dictionary */
+
+#achieveform .ddsidetable {
+	background: white;
+	width: 100%;
+	border: 1px solid #0065a4;
+}
+
+#achieveform .ddheaderbit {
+	background-color: #528fbd;
+	color: white;
+	font-weight: bold;
+	padding: 0.16em;
+	padding-left: 0.25em;
+}
+
+#achieveform .selectfieldstable {
+	border: 1px solid #528FBD;
+	background-color: white;
+	border-bottom: 1px solid white;
+	width: 100%
+	
+}
+#achieveform .selectgroup {
+	color: #5E79A4;
+	font-weight: bold
+}
+
+#achieveform .greyline {
+	background-color: #F1F1F1
+}
+#achieveform .querytable {
+	border: 1px solid #528FBD;
+	border-top: 1px solid white;
+	background-color: white;
+	width: 100%
+}
+#achieveform .ddselectfields {
+	/*background: url(cssimages/css/f3cssgifs/ddgrad.gif);*/
+	height: 2.25em;
+	color: white;
+	font-weight: bold
+}
+#achieveform .hiersubmit {
+	font-size: 10%;
+	background-color: White;
+	border: 0px solid white
+}
+
+/* Activation Screen */
+
+#achieveform .forgotpass {
+	border: 0;
+	color: red;
+	cursor: pointer;
+	background: white;
+	font-size: 100%;
+}
+
+#achieveform .extraformgrouptable TD {
+	padding-bottom: 0.41em;
+}
+#achieveform .extraformgrouptable {
+	width: 100%
+}
+
+/* Field Library */
+
+#achieveform .outerdesignformtdlibrary {
+	width: 100%;
+}
+#achieveform .libsidebartd {
+}
+#achieveform .libsidebartddocked {
+}
+#achieveform .libsidebartable {
+	margin-top:0.41em;
+	background:#fff;
+	border: 1px solid #0065a4;
+	filter:progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=1, Color='#CECECE', Positive='true');
+	width: 100%;
+	font-size:90%;
+}
+#achieveform .libsidebartableheader {
+	color: white;
+	background:/*url(cssimages/css/f3cssgifs/pagetableheader.gif) repeat-x bottom*/ #0065a4;
+	height: 1.66em;
+	font-weight: bold;
+	border-bottom: 2px solid #CECECE;
+	padding-left: 0.25em;;
+}
+#achieveform .libsidebartabledocked {
+	margin-top:0.41em;
+	background:#fff;
+	border: 1px solid #0065a4;
+	width: 1.66em;
+	font-size:90%;
+}
+#achieveform .libsidebartableheaderdocked {
+	color: white;
+	background:/*url(cssimages/css/f3cssgifs/pagetableheader.gif) repeat-x bottom*/ #0065a4;
+	height: 1.66em;
+	font-weight: bold;
+	padding-left: 0.25em;;
+}
+#achieveform .libsidebarcheckboxtd {
+	vertical-align:top;
+	text-align: center;
+	width:8%; 
+	padding:0;
+}
+#achieveform .libsidebarfieldnametd {
+	vertical-align:top;
+	padding-left: 0.33em;
+	padding-right: 0.83em;
+	padding-top: 0.33em;
+	border-left: 1px solid #CECECE; 
+	width: 12.5em;
+}
+#achieveform .libsidebarfieldcontroltd {
+	padding-left: 0.33em;
+	border-left: 1px solid #CECECE; 
+}
+#achieveform .libsidebarfieldcontroldiv{
+	width: 12.5em;
+	overflow: hidden;
+	overflow-y: auto;
+}
+#achieveform .libsidebarcheckboxheader {
+	vertical-align:top;
+	text-align: center;
+	width:8%; 
+	padding:0;
+	background: #E2E0DB;
+	vertical-align: middle;
+	border-top: 1px solid #fff;
+	border-bottom: 1px solid #808080;
+	height: 1.5em;
+}
+#achieveform .libsidebarfieldnameheader {
+	vertical-align:middle;
+	padding-left: 0.33em;
+	padding-right: 0.83em;
+	border-left: 1px solid #CECECE; 
+	background: #E2E0DB;
+	vertical-align: middle;
+	border-top: 1px solid #fff;
+	border-bottom: 1px solid #808080;
+	height: 1.5em;
+	padding-left: 0.41em;
+	border-left: 1px solid #C1BEB8;
+}
+#achieveform .libsidebarfieldcontrolheader {
+	padding-left: 0.33em;
+	border-left: 1px solid #CECECE; 
+	background: #E2E0DB;
+	vertical-align: middle;
+	border-top: 1px solid #fff;
+	border-bottom: 1px solid #808080;
+	color: black;
+	height: 1.5em;
+	padding-left: 0.41em;
+	border-left: 1px solid #C1BEB8;
+}
+#achieveform .libsidebartdtitle {
+
+}
+#achieveform .libsidebartddock {
+	text-align: right;
+	padding-right: 0.16em;
+}
+#achieveform .libsidebaroverflow {
+		overflow: auto;
+		overflow-x: hidden; 
+		background-color: #F5F7F8;
+		scrollbar-face-color:#ffffff; 
+		scrollbar-track-color:#F5F7F8; 	
+		scrollbar-arrow-color:#999999; 
+		scrollbar-highlight-color:#ffffff; 
+		scrollbar-shadow-color:#999999; 
+		scrollbar-3dlight-color:#999999; 
+		scrollbar-darkshadow-color:#ffffff;
+		height: 33.33em;
+		width: 100%;
+		border-bottom: 1px solid #CECECE;
+}
+/* Stats Page */
+
+#achieveform .noforms {
+	color: #5E79A4;
+	font-weight: bold;
+	font-size: smaller;
+}
+#achieveform .statstable {
+	width: 80%;
+	border-left: 1px solid #808080;
+}
+#achieveform .mandatorynfg {
+	color: #FF0000
+}
+
+#achieveform .mandatorynf {
+	color: #FF0000
+}
+
+#achieveform .mandatorynfg .generictextinput{
+	width: 28em;
+}
+#achieveform .mandatorynf .generictextinput{
+	width: 28em;
+}
+
+
+
+/* For MCMS Class Changes */
+#achieveform .af3parent TABLE {
+	width: 100%
+}
+
+#achieveform .af3parent .sectionstable {
+	background-color: #FFFFFF;
+	border-bottom: 1px solid #FFFFFF;
+	background-position: top;
+	background-repeat: repeat-x;
+}
+
+#achieveform .af3parent .sectionstd {
+	position: relative;
+	top: 0.66em;
+	white-space: nowrap;
+}
+#achieveform .af3parent .genericselect {
+	font-size: 90%
+}
+#achieveform .af3parent .generictime {
+	font-size: 90%
+}
+#achieveform .af3parent .genericdate {
+	font-size: 90%
+}
+#achieveform .af3parent .generictextinput {
+	font-size: 90%
+}
+#achieveform .af3parent .spacerupper {
+	width: 100%;
+	background-color: #F6F9FB;
+	/*background-image: url(cssimages/css/f3cssgifs/toolbarcms.gif);*/
+	
+}
+
+#achieveform .af3parent .quickedittable {
+	background-color: #F5F8FB;
+	width: 25em;;
+	border: 1px solid #528FBD;
+	filter:progid:DXImageTransform.Microsoft.Gradient(GradientType=0, StartColorStr='#D1DFEC', EndColorStr='#F5F8FB');
+}
+
+#achieveform .af3parent .outerinsertiontable {
+	border: 1px solid #528FBD;
+	background-color: #F5F7F8;
+	filter:progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='#CECECE', Positive='true');
+	color: #1F5782;
+	height: 10em;
+}
+
+#achieveform .af3parent .printoptionsbit {
+		background-color:	#F6F9FB;
+		height: 2.66em;
+		position: relative;
+		top: -0.75em;
+		/*background-image: url(cssimages/css/f3cssgifs/printgrad.gif);
+		background-position: top;
+		background-repeat: repeat-x;*/
+		border: 1px solid #7985B4;
+		border-left: 15px solid #7985B4;
+		white-space: nowrap;
+		width: 90%
+	}
+
+
+
+#achieveform .af3parent .imagesuround {
+	border: 1px solid #528FBD;
+	background-color: #FFFFFF;
+	position: absolute;
+	width:16.66em;
+	left: 60%;
+	top: 20%;
+	filter:progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='#CECECE', Positive='true')
+	
+}
+
+
+#achieveform .h2_mandatory {
+	color:#FF0000;
+	font-size: 120%;
+	padding: 0;
+	margin: 0;
+}
+
+
+
+/* For Lookup Page Styling */
+
+#achieveform .lookup_noresults{
+	color:#FF0000;
+	font-size: 120%;
+	padding: 0;
+	margin: 0;
+}
+
+#achieveform .lookup_please_select{
+	color:#000CCC;
+	font-size: 120%;
+	padding: 0;
+	margin: 0;
+}
+
+#achieveform .lookup_even_rows{
+	background-color:#FFFFFF;
+	padding: 0;
+	margin: 0;
+	
+}
+
+#achieveform .lookup_odd_rows{
+	background-color:#FFFFFF;
+	padding: 0;
+	margin: 0;
+	
+}
+
+#achieveform .lookup_cols{
+	color:#3333FF;
+	padding: 0;
+	margin: 0;
+
+}
+
+#achieveform .lookup_columntitle{
+	color:#0000DD;
+	font-size: 120%;
+	padding: 0;
+	margin: 0;	
+}
+
+#achieveform .lookup_radio{
+}
+
+#achieveform .lookup_title_row{
+	background-color:#AAAFFF;
+}
+#achieveform .scrollbar {
+	overflow: auto;
+	overflow-x: hidden; 
+	scrollbar-face-color:#ffffff; 
+	scrollbar-track-color:#ffffff; 	
+	scrollbar-arrow-color:#999999; 
+	scrollbar-highlight-color:#ffffff; 
+	scrollbar-shadow-color:#999999; 
+	scrollbar-3dlight-color:#999999; 
+	scrollbar-darkshadow-color:#ffffff;
+	height: 8.3em;
+}
+#achieveform .lower{
+	height: 4.16em;	
+}
+
+/* Stages Process */
+#achieveform .stagesexpandtable {
+	border: 1px solid #BDBAB4;
+	width: 100%;
+}
+
+#achieveform .invisiblefield{
+	color:#ffffff;
+	background-color:#ffffff;
+	border: 1px solid #ffffff;
+	
+}
+
+#achieveform .lookuptitle{
+	vertical-align: middle;
+	color: #546B7D;
+	font-size: 80%;
+	padding-left: 0.3em;
+	font-weight: bold;
+}
+#achieveform tds {
+	border: 1px solid #EE4220;
+}
+#achieveform .hiddenlabel {
+  display:none;
+}
+#achieveform .standardtabledesign {
+	width: 98%;
+	margin: 1%;
+	border: 1px solid #0065a4;
+}
+#achieveform .slotdivision, .slotdivision2 {
+	border-bottom: 1px solid #c4c4c4;
+	padding:0.2em 0em 0.2em 0.37em;
+	
+}
+#achieveform .slotdivision2 {
+	font-size: 100%;
+}
+#achieveform .standardtablenpd {
+	width: 98%;
+	margin: 1%;
+	border: 1px solid #0065a4;
+}
+#achieveform .standardtablenpdetails {
+	width: 98%;
+	margin: 1%;
+	border: 1px solid #0065a4;
+}
+#achieveform .standardtablenpdetails TD{
+	text-indent: 0.41em;
+}
+#achieveform .standardtable {
+	width: 98%;
+	margin: 1%;
+	border: 1px solid #0065a4;
+}
+
+#achieveform .standardtablesmall {
+	width: 33.33em;
+	border: 1px solid #0065a4;
+	margin: auto;
+	margin-top: 1.66em;
+}
+#achieveform .standardtable a {
+	color: black
+}
+#achieveform .standardtable .paragraphtext {
+	color: #0065a4;
+	font-weight: bold;
+}
+#achieveform .standardtable .paragraghtext {
+	color: #0065a4;
+	font-weight: bold;
+}
+#achieveform .standardtable td {
+	/*padding-left: 0.33em;
+	padding-right: 0.33em;*/
+}
+
+#achieveform .standardtable tr.header td.standardtableheader {
+	background: /*url(cssimages/css/f3cssgifs/navtablegrey.gif) repeat-x*/ #000;
+	height: 1.91em;
+	vertical-align: middle;
+}
+
+#achieveform .standardtable tr.details td.standardtableheader {
+	background: #ccc;
+	color: #666;
+}
+
+#achieveform .standardtableheader, .standardtableheadernpd  {
+	color: white;
+	height: 1.66em;
+	font-weight: bold;
+	border: none !important;
+	background: /*url(cssimages/css/f3cssgifs/navtablegrey.gif) repeat-x*/ #000;
+	padding-left: 0.41em;
+}
+	
+#achieveform div.standardtableheader {
+	line-height: 1.66em;
+	vertical-align: middle;
+	padding-left: 0.25em;
+}
+#achieveform .smallstandtable {
+	width: 50%;
+	margin:auto;
+	margin-top: 1.66em;
+	border: 1px solid #0065a4;
+}
+#achieveform .smallstandtable td {
+	padding-left: 0.33em;
+	padding-right: 0.33em;
+}
+
+
+#achieveform .endgraphic {
+	background:/*url(cssimages/css/f3cssgifs/pagetableheader.gif) repeat-x bottom*/ #0065a4;
+	text-align: right
+}
+#achieveform .endgraphicdd {
+	background:/*url(cssimages/css/f3cssgifs/pagetableheader.gif) repeat-x bottom*/ #0065a4;
+	color: white;
+	font-weight:bold;
+	padding-left: 0.33em;
+}
+#achieveform .endgraphicdd IMG {
+	margin-left: 6.66em;
+}
+#achieveform .slotdivision {
+	border-bottom: 1px solid #c4c4c4;
+	padding: 0.16em 0 0.16em 0.33em
+}
+#achieveform .slotdivisionhigh {
+	border-bottom: 1px solid #c4c4c4;
+	padding:0.16em 0em 0.16em 0.33em;
+	color: #EE4220;
+}
+#achieveform .slotdivision a, .slotdivision2 a {
+	color: #EE4220;
+}
+
+#achieveform .helparea {
+	background-color:#E4E4E4;
+	padding: 0.66em 0 0.66em 0
+}
+#achieveform .helparea a {
+	color: #EE4220;
+}
+#achieveform .tranfieldsep {
+	border-top: 1px solid #c4c4c4;
+}
+#achieveform .tranlatefieldtitle {
+	color: #D94426;
+}
+#achieveform tsd {border: 1px solid #EE4220;}
+
+#achieveform .spacerupper  {width:100%;}
+
+#achieveform .highlightonblue {
+	color: #dbf1fd;
+}
+#achieveform .highlight {
+	color: #EE4220;
+	text-decoration: none;
+}
+#achieveform .hieroptions {
+	vertical-align: top; 
+	padding-top: 0.83em; 
+	padding-bottom: 0.41em;
+}
+#achieveform .hieroptions a {
+	color: #EE4220 !important
+}
+#achieveform .gentextinput .generictextinput {
+	width: 33.33em;
+}
+
+/* Query Search Form */
+
+#achieveform .querytools {
+	border-bottom:1px solid #cccccc
+}
+
+#achieveform .bws.colspan .generictextinput {
+	width: 10em;
+}
+
+/* Activation Screen */
+#achieveform .activationtable {
+	margin: auto;
+	padding: 0.41em;
+	margin-top: 0.83em;
+	width: 60.5em;
+	/*background: url(cssimages/css/f3cssgifs/activationscreen.gif);*/
+	height: 34.16em;
+}
+#achieveform .activationbar {
+	font-weight: bold;
+	color: #fff;
+	padding-top: 0.66em;
+	padding-left: 1.66em;
+}
+#achieveform hr {
+	height: 0.08em;
+	
+}
+
+#achieveform .makemandatory {
+	color: red
+}
+#achieveform .viewfields {
+	background: #0065a4;
+	color: white;
+	padding: 0.16em;
+	/*border-top: 10px solid white;*/
+	padding-left: 0.33em;
+}
+#achieveform .selectview {
+
+	padding: 0.16em;
+	padding-left: 0.33em;
+	font-size: 100%;
+}
+
+#achieveform .textareasmall {
+	font-size: 80%
+} 
+
+
+#achieveform .colrulesplitrender { /* is the right hand td */
+	border-left: 0px transparent solid
+	}
+	
+	
+
+	
+/* ---------The menu---------------- */
+#achieveform ul#menu {
+	margin: 0;
+  	border: 0 none;
+  	padding: 0;
+  	width: 41.66em; /*For KHTML*/
+  	list-style: none;
+  	height: 2em;
+	padding-left: 0.25em;
+	
+}
+
+#achieveform ul#menu li {
+  	margin: 0;
+  	border: 0 none;
+  	padding: 0;
+  	float: left; /*For Gecko*/
+  	display: inline;
+  	list-style: none;
+  	position: relative;
+ 	height: 2em;
+}
+
+#achieveform ul#menu ul {
+  	margin: 0;
+
+  	border: 0 none;
+  	padding: 0;
+  	width: 13.33em;
+  	list-style: none;
+  	display: none;
+  	position: absolute;
+  	top: 2em;
+  	left: 0;
+	border: 1px solid #cccccc;
+	background: /*url("cssimages/css/f3cssgifs/menu_non_hover.gif") repeat-y left*/ white;
+	border-bottom: 0;
+}
+
+#achieveform ul#menu ul li {
+	float: none; /*For Gecko*/
+	display: block !important;
+	display: inline; /*For IE*/
+}
+
+/* Horizontal menu */
+#achieveform ul#menu a {
+	border-top: 1px solid white;
+	background-color: white;
+	padding: 0 0.8em;
+	float: none !important; /*For Opera*/
+	float: left; /*For IE*/
+	display: block;
+	color: #000000;
+	font: 0.83em/1.75em Verdana, Arial, Helvetica, sans-serif;
+	text-decoration: none;
+	height: auto !important;
+	height: 1%; /*For IE*/
+}
+
+
+
+
+/* Horizontal menu Hover */
+#achieveform ul#menu a:hover,
+#achieveform ul#menu li:hover a,
+#achieveform ul#menu li.iehover a {
+	color: #EE4220;
+}
+
+/* 1st drop down menu */
+#achieveform ul#menu li:hover li a,
+#achieveform ul#menu li.iehover li a {
+	float: none;
+	color: #000000;
+}
+
+/* 1st drop down menu hover */
+#achieveform ul#menu li:hover li a:hover,
+#achieveform ul#menu li:hover li:hover a,
+#achieveform ul#menu li.iehover li a:hover,
+#achieveform ul#menu li.iehover li.iehover a {;
+	color: #EE4220;
+}
+
+/* 2nd drop down menu */
+#achieveform ul#menu li:hover li:hover li a,
+#achieveform ul#menu li.iehover li.iehover li a {
+	
+	color: #000000;
+}
+
+/* 2nd drop down menu hover */
+#achieveform ul#menu4 li:hover li:hover li a:hover,
+#achieveform ul#menu4 li:hover li:hover li:hover a,
+#achieveform ul#menu4 li.iehover li.iehover li a:hover,
+#achieveform ul#menu4 li.iehover li.iehover li.iehover a {
+	color: #EE4220;
+}
+
+/* 3rd drop down menu */
+#achieveform ul#menu li:hover li:hover li:hover li a,
+#achieveform ul#menu li.iehover li.iehover li.iehover li a {
+	color: #000000;
+}
+
+/* 3rd drop down menu hover */
+#achieveform ul#menu li:hover li:hover li:hover li a:hover,
+#achieveform ul#menu li.iehover li.iehover li.iehover li a:hover {
+	color: #EE4220;
+}
+
+#achieveform ul#menu ul ul,
+#achieveform ul#menu ul ul ul {
+	display: none;
+	position: absolute;
+	top: 0;
+	left: 13.33em;
+}
+
+#achieveform ul#menu li:hover ul ul,
+#achieveform ul#menu li:hover ul ul ul,
+#achieveform ul#menu li.iehover ul ul,
+#achieveform ul#menu li.iehover ul ul ul {
+	display: none;
+}
+
+#achieveform ul#menu li:hover ul,
+#achieveform ul#menu ul li:hover ul,
+#achieveform ul#menu ul ul li:hover ul,
+#achieveform ul#menu li.iehover ul,
+#achieveform ul#menu ul li.iehover ul,
+#achieveform ul#menu ul ul li.iehover ul {
+	display: block;
+}
+
+#achieveform .menulistobject a {
+	background: transparent !important
+}
+#achieveform .menulistobject a:hover {
+	color: #EE4220;
+	border-top: 1px solid #EE4220 !important;
+}
+#achieveform .menulistobject {
+	/*background:url(cssimages/css/f3cssgifs/tabseperator.gif) no-repeat 100% 50%;*/
+	
+}
+#achieveform .subitem a{
+	border-bottom: 1px solid #cccccc;
+	border-top: 0 !important;
+}
+#achieveform .subitem a:hover {
+	border-top: 0 !important;
+	border-bottom: 1px solid #cccccc;
+}
+
+
+/*Classes to allow Internet Explorer to resize the text fields, text areas, and select lists*/
+#achieveform input {
+	font-size: 100%
+}
+#achieveform select{
+	font-size:100%
+}
+#achieveform textarea{
+	font-size:100%
+}
+
+/* Vista style border classes */
+#achieveform .bc_top_left {width: 33%;}
+#achieveform .bc_top_middle {color: white;}
+#achieveform .bc_top_right {width: 33%;}
+
+#achieveform .border_back{
+	/*background: transparent url(cssimages/css/f3cssgifs/pop_background.png) repeat-y 0 0;	*/
+	padding: 0.16em;
+	
+}
+
+#achieveform .selectmanydiv{
+	height: 9em; 
+	width:100%; 
+	overflow: auto; 
+	border: 1px solid #c4c4c4;
+}
+
+
+
+#achieveform .bc_top_right {
+	/*background: transparent url(cssimages/css/f3cssgifs/top_right.png) repeat-x 0 0;*/	
+}
+
+#achieveform .bc_top_left {
+	/*background: transparent url(cssimages/css/f3cssgifs/top_left.png) repeat-x 0 0;*/	
+}
+
+
+
+#achieveform .bc_top_middle {
+	/*background: transparent url(cssimages/css/f3cssgifs/top_mid.png) repeat-x 0 0;*/
+	height: 1.5em;	
+
+}
+
+
+
+#achieveform .dockme .genericimagesubmit {
+	margin-top: 1.66em;;
+	
+}
+#achieveform .warningcontainer{
+	background-color: #FED6D6;
+	border: 1px solid red;
+}
+#achieveform .warningcontainer p{
+	padding:0.5em;
+	margin:0;
+}
+#achieveform .warningfield{
+	background-color: #FED6D6;
+}
+
+#achieveform .mandatorysymbol{
+	color: red;
+	font-weight: bold;
+}
+
+#achieveform .fieldselectionoutertable {
+	padding: 0.41em;
+}
+#achieveform .fieldselectiontable {
+	width: 33.33em;
+	border: 1px solid gray;
+	filter:progid:DXImageTransform.Microsoft.Gradient(GradientType=1, StartColorStr='#D1DFEC', EndColorStr='#F5F8FB');
+}
+#achieveform .navbartitle {
+	display: none;
+}
+
+#achieveform .nodecoration {
+	text-decoration: none
+}
+
+#achieveform .andred {
+	color: red
+}
+
+#achieveform .helptext {
+	color: blue;
+	vertical-align: top !important;
+}
+
+/* Stages Management Dashboard */
+#achieveform .narrowtextinput {
+	width: 3em;
+}
+
+#achieveform .displaynone {
+	visibility: hidden;
+	display: none;
+}
+
+
+/* Stages Grid */
+
+
+#achieveform .gridstandardtable a {
+	color: black
+}
+#achieveform .gridstandardtable .paragraphtext {
+	color: #0065a4;
+	font-weight: bold;
+}
+#achieveform .gridstandardtable .paragraghtext {
+	color: #0065a4;
+	font-weight: bold;
+	}
+#achieveform .gridstandardtable {
+	width: 98%;
+	margin: 1%;
+	border: 1px solid #e9e9e9;
+}
+#achieveform .gridstandardtable .generictextarea {
+	width: 28.08em;
+}
+
+#achieveform .maingridtable {
+	border:#0065a4 solid;
+	border-width: 1px;
+	margin: auto;
+}
+
+#achieveform .gridheaderlabelsodd{
+	border-bottom: #e9e9e9 solid 1px;
+	background: #4d6f84;
+	vertical-align: middle;
+	color: #ffffff;
+	font-size: 140%;
+	height: 1.06em;
+	text-align: left;
+	font-weight: normal;
+}
+#achieveform .hasplus:hover {
+	/*background: url(/AFInt/Images/AFPD/plus.png) no-repeat top right;*/
+	background-color: none !important;
+}
+
+#achieveform .gridheaderlabelseven{
+	border-bottom: #e9e9e9 solid 1px;
+	background: #6c98b3;
+	vertical-align: middle;
+	color: #ffffff;
+	font-size: 116%;
+	height: 1.3em;
+	text-align: left;
+	font-weight: normal;
+}
+
+#achieveform .gridheaderlabelseven:hover{
+	cursor: move;
+}
+
+#achieveform .gridheaderlabelsodd:hover{
+	cursor: move;
+}
+
+#achieveform .gridheaderlabels{
+	border-bottom: #e9e9e9 solid 1px;
+	background: #666;
+	vertical-align: middle;
+	color: #ffffff;
+	font-size: 130%;
+	height: 1.5em;
+	padding: 0.25em 1.58em 0.25em 0.41em;
+	text-align: left;
+	font-weight: normal;
+}
+
+#achieveform .completionStageText {
+	display: none;
+}
+
+#achieveform .dragstageimg {
+	float: right;
+	position: relative;
+	left: 1.08em;
+	background: url
+}
+#achieveform .stagetitlediv {
+	float: left;
+	position: relative;
+	cursor: default;
+}
+#achieveform .stagecelltable {
+	width:100%;
+}
+ .stagename {
+	height: auto;
+	font-weight: bold;
+	font-size: 120%;
+	cursor: default;
+	color: #565656;
+}
+
+#achieveform .cellYellow {
+	background-color: #ffffcc !important;
+	border: 1px solid #ffff00 !important;
+}
+
+#achieveform .cellBlue {
+	background-color: #cce2fd !important;
+	border: 1px solid #0072ff !important;
+}
+
+#achieveform .cellPurple {
+	background-color: #ebbffb !important;
+	border: 1px solid #bb15f9 !important;
+}
+
+#achieveform .cellGreen {
+	background-color: #d0f19d !important;
+	border: 1px solid #82c11e !important;
+}
+
+#achieveform .cellPink {
+	background-color: #f8b5ec !important;
+	border: 1px solid #fa55dd !important;
+}
+
+#achieveform .cellBrown {
+	background-color: #fed6aa !important;
+	border: 1px solid #9a662d !important;
+}
+
+#achieveform .maingridtable .standardcell {
+	text-align: center;
+	vertical-align: middle;
+	border:#e9e9e9 solid;
+	border-width: 0px 0px 1px 1px;
+	width: 6.5em;
+}
+#achieveform .maingridtable .splitcell, .maingridtable .joincell {
+	background-color: white;
+}
+#achieveform .maingridtable .stagecell {
+	background-color: white;
+}
+
+#achieveform .maingridtable .parallelzonemodel1{
+	background-color: white;
+}
+
+#achieveform .maingridtable td:hover {
+	cursor: default;
+}
+
+#achieveform .genericimagesubmit:hover {
+	cursor: pointer;
+}
+
+#achieveform .routecomp {
+	text-align:left;
+}
+
+#achieveform .routecompsequence {
+	font-family:courier new;
+	font-size:100%;
+	letter-spacing:-0.08em;
+	cursor: default;
+}
+
+#achieveform .gridheaderlabelName {
+	display: none;
+}
+
+#achieveform .defaultcell {
+	height: 2.5em;
+	vertical-align: middle;
+	text-align: center; 
+}
+ .stagecelltable .cellmid {
+	vertical-align: middle;
+	text-align: center; 
+}
+ .stagecelltable .cellbot {
+	 text-align: center;
+	 vertical-align:middle;
+}
+/* Stage Popups */
+
+#achieveform .stagepopuptable{
+	background-color: white;
+	padding-left: 0;
+	padding-right: 0;
+	border: 1px solid #0065a4;
+	font-size: 90%;
+	width: 100%;
+	filter:progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='#3D333333', Positive='true');
+	
+}
+#achieveform .selectedtitle{
+	background-color: transparent;
+	padding: 0.08em;
+	padding-top: 0.25em;
+	width:100%;
+}
+#achieveform .selectedtitle INPUT{
+	font-weight:bold;
+	text-align: center;
+	background:transparent;
+	font-size:120%;
+	width:100%;
+	border: 1px solid #808080;
+	background: url(cssimages/css/f3cssgifs/fieldgrad.gif) repeat-x top;	
+}
+#achieveform .selectedtitle .genericinput{
+	
+}
+#achieveform .processoptions .optiontable{
+	padding-left: 0.5em;
+	padding-bottom: 0.08em;
+}
+#achieveform .integrationname{
+	text-align:left;
+}
+#achieveform .optionstitle{
+	font-weight:bold;
+	text-align:left;
+	padding-left: 0.08em;
+	padding-top: 0.08em;
+	cursor:default;
+}
+
+#achieveform .processoptionsdiv{
+	margin: 0.08em;
+	padding-top: 0.33em;
+	/*border: 1px gray solid;
+	background: url(cssimages/css/f3cssgifs/fieldgrad.gif) repeat-x top;	*/
+}
+#achieveform .processboxselected {
+	font-weight:bold;
+	text-align: center;
+	vertical-align: top;
+	width:100%;
+}
+#achieveform .deletediv{
+	text-align: right;
+	padding: 0.08em;
+	padding-right: 0.33em;
+}
+#achieveform .deletediv IMG {
+	cursor: pointer;
+}
+#achieveform .optionname {
+	cursor:default;	
+	text-align: left;
+	font-weight: normal;
+	color: #000000;
+}
+#achieveform .optionaction {
+	width:1%;
+}
+
+
+/* Other Popups */
+#achieveform .gridpup{
+	width: 12.08em;
+	text-align: center;
+	vertical-align: top;
+	border: 2px solid black;
+	background-color: white;
+	filter:progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='#3D333333', Positive='true');
+}
+#achieveform .gridpup .puptitle{
+	background-color: transparent;
+	padding: 0.16em;
+	font-weight:bold;
+	width:100%;
+	font-size:110%;
+}
+ .bottomoptions{
+	padding: 0.16em;
+	margin-top: 0.41em;
+	font-weight:bold;
+	width:100%;
+	font-size:110%;
+}
+ .bottomoptions .save{
+	float: left;
+	position: relative;
+	padding: 0.08em 0em 0.08em 0.16em;
+	text-align:left;
+	width: 25%;
+}
+ .bottomoptions .delete{
+	float: right;
+	position: relative;
+	padding: 0.08em 0.16em 0.08em 0em;
+	text-align:right;
+	width: 25%;
+}
+
+#achieveform .pupoptions {
+	width: 98%;
+	/*border: 1px gray solid;
+	background: url(cssimages/css/f3cssgifs/fieldgrad.gif) repeat-x top;	*/
+	text-align:left;
+}
+#achieveform .pupoptions .option{
+	padding-left: 0.33em;
+	padding-top: 0.16em;
+	padding-bottom: 0.16em;
+	text-align:left;
+	font-weight: normal;
+	width:100%;
+}
+
+#achieveform .pupoptions .option .name{
+	text-align:left;
+	font-weight: normal;
+}
+#achieveform .pupoptions .option .action{
+	width:1%;
+	text-align:right;
+}
+
+#achieveform .createstageoption {
+	height:2.08em;
+}
+
+#achieveform .createnewstagetable {
+	margin-top: 0.66em;
+	border: 1px #0065a4 solid;
+#achieveform .dynpopup{
+	z-index: 1000;
+}
+	width:100%;
+	height:100%;	
+}
+
+#achieveform .stageshelparea {
+	background-color:#E4E4E4;
+	padding: 0.66em 0 0.66em 0;
+}
+
+
+#achieveform .stagesdesigntable {
+	width: 98%;
+	margin: 1%;;
+	border: 1px solid #0065a4;
+}
+#achieveform .stagesdesigntable .header {
+	color: white;
+	background:/*url(cssimages/css/f3cssgifs/pagetableheader.gif) repeat-x bottom*/ #0065a4;
+	height: 1.66em;
+	font-weight: bold;
+	border: 1px solid #0065a4;
+}
+#achieveform .stagesdesigntable .helparea {
+	background-color:#E4E4E4;
+	padding: 0.66em 0 0.66em 0;
+}
+#achieveform .stagesdesigntable .maintable {
+	padding: 0.41em;
+}
+#achieveform .stagesdesigntable .joinconditonlabel{
+	vertical-align: top;
+}
+#achieveform .stagesdesigntable .joinconditonselect{
+}
+#achieveform .joinconditonvalue .furtheroption {
+	padding-left: 0.41em;
+}
+#achieveform .joinconditonvalue {
+	height:2.08em;
+}
+
+#achieveform .librarydifferent {
+	background-color: #fbcdc7
+}
+
+/*  Stages Design Toolbar */
+#achieveform .processdesigntoolbar {
+	background:url(cssimages/css/f3cssgifs/navtablebevel.gif) repeat-x;
+	height: 1.91em;
+	width:100%;
+	border-bottom: 1px solid #9D9D9D
+}
+#achieveform .processdesigntoolbar .tabsel, .processdesigntoolbar .tabunsel{
+	padding-bottom: 0.41em;
+	/*background:url(cssimages/css/f3cssgifs/tabseperator.gif) no-repeat 100% 40%;*/
+	padding-left: 0.66em;
+	padding-right: 0.66em;
+	white-space:nowrap;
+	cursor: default;
+}
+#achieveform .processdesigntoolbar .tabunsel A ,.processdesigntoolbar .tabsel A,.processdesigntoolbar .tabunsel .fakelink,.processdesigntoolbar .tabsel .fakelink {
+	text-decoration:none;
+	color: #000000
+}
+
+#achieveform .processdesigntoolbar .tabsel A, .processdesigntoolbar .tabunsel A:hover,.processdesigntoolbar .tabunsel:hover {
+	color: #EE4220;	
+}
+
+#achieveform .processdetailstable TR {
+	padding-top: 0.33em;
+}
+
+#achieveform .invalidparawarning {
+	color: red;
+	cursor: default;
+	font-weight: bold;
+}
+
+#achieveform .hide, .subform .hide {
+#achieveform display:none
+}
+
+/* Sections menu */
+
+#achieveform .fieldpopupmenu  {
+	padding: 0.16em;
+	filter:progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='#3D333333', Positive='true');
+	text-align: center;
+	border: 2px solid #000;
+	width: 30em;
+}
+#achieveform .hierarchypopupmenu  {
+	padding: 0.16em;
+	filter:progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='#3D333333', Positive='true');
+	text-align: center;
+	border: 2px solid #000;
+}
+#achieveform .fieldpopupmenu table {
+	margin: 0.08em;
+	border: 1px gray solid;
+	background: url(cssimages/css/f3cssgifs/fieldgrad.gif) repeat-x top;	
+}
+#achieveform .fieldpopupmenu td {
+	text-align: center;
+}
+#achieveform .fieldpopupmenu .attributetext {
+	padding: 0.41em; 0 0 0;
+}
+#achieveform .labeltdWithin {
+	position: absolute;
+	padding: 0.45em 0.15em;
+	color: #999999;
+}
+#achieveform .labeltdNone {
+	position: absolute;
+	left: -1000em;
+	top: -1000em;
+}
+#achieveform .sectionname input.fakelink {
+	padding: 0.41em;
+	width: auto;
+	overflow: visible;
+}
+
+#achieveform .aftable .fakelink {
+	font-size: 130%;
+	padding-bottom: 0.83em;
+	padding-top: 0.83em; ;
+	height: 1.66em;
+	text-decoration: none;
+	color: #1f1f1f;
+}
+
+#achieveform .fieldsetcontrol
+{
+	border-width: 0;
+	padding: 0;
+	margin: 0;
+}
+
+#achieveform .fieldsetcontrol legend
+{
+	position: absolute !important;
+	left: -10000px;
+	top: 0px;
+	font-size: 0;
+}
+
+/* Manage Print Layouts */
+#achieveform #printLayoutTable {
+	margin-left: 2em;
+	margin-bottom: 2em;
+	vertical-align: bottom;
+	border-collapse: collapse;
+}
+#achieveform #printLayoutTable .generictextinput {
+	background-color: #FFFFFF;
+}
+#achieveform #printLayoutTable TD{
+	vertical-align: bottom;
+}
+#achieveform #printLayoutTable TR.highlighted TD{
+	background-color: #e0e0e0;
+}
+#achieveform #printLayoutTable .options {
+	text-align: right;
+	padding-left: 1em;
+}
+
+#achieveform .rulerindent {
+#achieveform height: 0.1em;
+}
+#achieveform .repeatableouter {
+	position: relative;
+	padding-right:4.2em;
+}
+
+#achieveform .repeatablebutton {
+	position:absolute;
+	right:0;
+	top:0;
+	width:3.7em;
+}
+
+#achieveform .repeatablescrollbar {
+#achieveform overflow:hidden;
+}
+
+#achieveform .outerformtablerows td  { vertical-align: top }
+
+#achieveform .fieldtr .afcalcouter {display:inline}
+
+#achieveform .tab .outerformtablerows textarea.generictextinput { width:100%; height: 10em }
+#achieveform .colwiseel{
+	overflow: hidden;
+	word-wrap: break-word;
+}
+#achieveform .revertmessagesection {
+#achieveform background:#F6F9FB /*url(cssimages/css/f3cssgifs/genericbuttongradsilver.gif) repeat-x scroll 0 0*/;
+#achieveform border:1px solid #AAAAAA;
+#achieveform margin:2em auto;
+#achieveform padding:2em;
+#achieveform text-align:center;
+#achieveform width:35em;
+}
+#achieveform .revertmessagesection h2 {
+	font-weight:normal; 
+	font-size:1.1em;
+	padding-bottom:.5em;
+	color:#000000;
+}
+
+BODY.ajaxbusy { cursor:progress!important }
+BODY.ajaxbusy * { cursor:progress!important }
+
+
+/*!!!!jquery.tabs.css!!!!*/
+/* Caution! Ensure accessibility in print and other media types... */
+@media projection, screen { /* Use class for showing/hiding tab content, so that visibility can be better controlled in different media types... */
+    .tabs-hide {
+        display: none;
+    }
+}
+
+/* Hide useless elements in print layouts... */
+@media print {
+    .tabs-nav {
+        display: none;
+    }
+}
+
+/* Skin */
+#achieveform .tabs-nav {
+    list-style: none;
+    margin: 0;
+    padding: 0 0 0 4px;
+}
+#achieveform .tabs-nav:after { /* clearing without presentational markup, IE gets extra treatment */
+    display: block;
+    clear: both;
+    content: " ";
+}
+#achieveform .tabs-nav li {
+    float: left;
+    margin: 0 0 0 1px;
+    min-width: 84px; /* be nice to Opera */
+}
+#achieveform .tabs-nav a, .tabs-nav a span {
+    display: block;
+    padding: 0 10px;
+    background: url(tab.png) no-repeat;
+}
+#achieveform .tabs-nav a {
+    position: relative;
+    top: 1px;
+    z-index: 2;
+    padding-left: 0;
+/*    color: #27537a;*/
+    font-size: 12px;
+    font-weight: bold;
+    line-height: 1.2;
+    text-align: center;
+    text-decoration: none;
+    white-space: nowrap; /* required in IE 6 */    
+}
+#achieveform .tabs-nav .tabs-selected a {
+    color: #000;
+}
+#achieveform .tabs-nav .tabs-selected a, .tabs-nav a:hover, .tabs-nav a:focus, .tabs-nav a:active {
+    background-position: 100% -150px;
+    outline: 0; /* prevent dotted border in Firefox */
+}
+#achieveform .tabs-nav a, .tabs-nav .tabs-disabled a:hover, .tabs-nav .tabs-disabled a:focus, .tabs-nav .tabs-disabled a:active {
+    background-position: 100% -100px;
+}
+#achieveform .tabs-nav a span {
+    width: 64px; /* IE 6 treats width as min-width */
+    min-width: 64px;
+    height: 18px; /* IE 6 treats height as min-height */
+    min-height: 18px;
+    padding-top: 6px;
+    padding-right: 0;
+}
+*>.tabs-nav a span { /* hide from IE 6 */
+    width: auto;
+    height: auto;
+}
+#achieveform .tabs-nav .tabs-selected a span {
+    padding-top: 7px;
+}
+#achieveform .tabs-nav .tabs-selected a span, .tabs-nav a:hover span, .tabs-nav a:focus span, .tabs-nav a:active span {
+    background-position: 0 -50px;
+}
+#achieveform .tabs-nav a span, .tabs-nav .tabs-disabled a:hover span, .tabs-nav .tabs-disabled a:focus span, .tabs-nav .tabs-disabled a:active span {
+    background-position: 0 0;
+}
+#achieveform .tabs-nav .tabs-selected a:link, .tabs-nav .tabs-selected a:visited, .tabs-nav .tabs-disabled a:link, .tabs-nav .tabs-disabled a:visited { /* @ Opera, use pseudo classes otherwise it confuses cursor... */
+    cursor: text;
+}
+#achieveform .tabs-nav a:hover, .tabs-nav a:focus, .tabs-nav a:active { /* @ Opera, we need to be explicit again here now... */
+    cursor: pointer;
+}
+#achieveform .tabs-nav .tabs-disabled {
+    opacity: .4;
+}
+#achieveform .tabs-container {
+    border-top: 1px solid #97a5b0;
+    padding: 1em 8px;
+    background: #fff; /* declare background color for container to avoid distorted fonts in IE while fading */
+}
+#achieveform .tabs-loading em {
+    padding: 0 0 0 20px;
+    background: url(js/jquery/tabs/loading.gif) no-repeat 0 50%;
+}
+
+
+/*!!!!screen.css!!!!*/
+/* Global styling */
+#achieveform #error404 li {
+	font-size: 12px;
+	color: #505063;
+}
+/* Popup menu */
+#achieveform ul#accountMenu {
+	position: absolute;
+	background-color: #E8E8E8;
+	border-right: 1px solid #999999;
+	border-bottom: 1px solid #999999;
+	border-left: 1px solid #FFFFFF;
+	margin: 0;
+	padding: 0;
+	list-style-type: none;
+}
+#achieveform ul#accountMenu li {
+	float: none !important;
+	clear: both !important;
+	display: block !important;
+	white-space: nowrap;
+	color:#505063;
+	font-size:0.75em;
+	margin: 0 0 4px 0;
+	padding: 0;
+}
+#achieveform ul#accountMenu li a {
+	float: none !important;
+	background-image: none !important;
+	background-color: #E8E8E8 !important;
+	border: none !important;
+	color: #000000 !important;
+	clear: both !important;
+	padding: 8px;
+	margin: 0;
+}
+#achieveform ul#accountMenu li a:hover {
+	color: #0065A4 !important;
+}
+
+#achieveform .editoff .edit { display: none; }
+#achieveform .editon .plain { display: none; }
+
+
+/* Layout columns */
+#achieveform .colheader {
+	width: 100%;
+	clear: right;
+	padding-top: 0.2em;
+}
+#achieveform .colthreeleft {
+	width: 33%;
+	float: left;
+	clear: left;
+	margin-top: 0.2em;
+}
+#achieveform .colthreetop {
+	width: 65%;
+	clear: right;
+	float: right;
+	margin-top: 0.2em;
+}
+#achieveform .colmidleft {
+	width: 33%;
+	float: left;
+	clear: left;
+	margin-top: 0.2em;
+}
+#achieveform .colthreemid {
+	width: 33%;
+	float: left;
+	clear: none;
+	margin-left: 0.5%;
+	margin-top: 0.2em;
+}
+#achieveform .colthreeright {
+	width: 33%;
+	float: right;
+	clear: right;
+	margin-top: 0.2em;
+}
+#achieveform .colthreebottom {
+	width: 100%;
+	clear: both;
+	margin-top: 0.2em;
+}
+#achieveform .twocolleft {
+	width: 49%;
+	float: left;
+	clear: left;
+}
+#achieveform .twocolright {
+	width: 49%;
+	float: right;
+	clear: right;
+}
+
+#achieveform .threecolnwnleft
+{
+	width: 175px;
+	float: left;
+	clear: left;
+}
+
+#achieveform .threecolnwnmiddle
+{
+	width: auto;
+	float: left;
+	clear: none;
+}
+
+#achieveform .threecolnwnright
+{
+	width: 220px;
+	float: right;
+	clear: right;
+}
+
+
+#achieveform .hidden, .nodisplay, .displaynone {
+	display: none;
+	}
+	
+#achieveform .fname, .fdate, .fscore, .fpages {
+	display: inline;
+	}
+	
+#achieveform .signUpTable{
+	font-size: 1em;
+}
+#achieveform .loginbox  #WelcomeText{
+	font-size: 3em;
+	top: 15px;
+	left: 5px;
+	opacity: 0.2;
+	-moz-opacity: 0.2;
+	filter: alpha(opacity=20);
+}
+#achieveform #lightwindow_contents{
+	background-color: #E2DED5;
+	border:5px solid #EFEFEF;
+	color: #999999;
+}
+#achieveform #xlogin_form .welcometext { margin: 4em 2em 2em 4em }
+#achieveform #xlogin_form #wcoltwocenter { margin: 20px 0; padding: 0 10px }
+#achieveform #xlogin_form h3 { font-size: 1.8em; margin-bottom: 10px }
+
+#achieveform .signupbox td, .loginDetails .form_row, .loginDetails .form_row_auto { border: none; padding: 5px 0 }
+#achieveform .form_row { clear: both; }
+
+#achieveform .loginouter .loginbox { background: #F9F9F9; border: 1px solid #E9E9E9 }
+#achieveform .loginouter .loginbox label { width:30% }
+#achieveform .loginouter .form_row label { display: block; float: left; padding-top: 3px }
+#achieveform .loginouter .loginbox, .loginouter  .signupbox { margin: 2%; width: 40%; float: left; padding: 0 10px 10px 10px; }
+#achieveform #LoginUsernameBox, #LoginPasswordBox, #SignUpUsernameBox, #SignUpFullNameBox, #SignUpPasswordBox, #SignUpConfirmPasswordBox {
+	width: 180px;
+	border: 1px solid #E3E3E3;
+	background: #FFF /*url(images/form_element_bg.gif) bottom left repeat-x*/;
+	padding: 2px;
+	font-family: Arial, Helvetica, sans-serif;
+}
+#achieveform .passwordbox
+{
+	/*
+    padding-top: 10px;
+	padding-bottom: 10px;
+	padding-right: 10px;
+	padding-left: 10px;
+	width: 400px;
+    */
+}
+#achieveform .login
+{
+	width: 450px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	padding-right: 10px;
+	padding-left: 10px;
+}
+#achieveform .loginBoxStyle label
+{
+	float: left;
+}
+#achieveform .signupfields label
+{
+	float: left;
+	width: 30%;
+}
+#achieveform .signup_form_row input
+{
+	width: 200px;
+}
+#achieveform .signup_form_row_auto
+{
+	margin-top: 15px;
+	margin-bottom: 15px;
+}
+#achieveform .loginbox, .signupbox
+{
+	border-style: solid;
+	border-width: 1px;
+	border-color: #638aad;
+	vertical-align: top;
+}
+#achieveform .signuprows
+{
+	margin-bottom: 15px;
+}
+#achieveform .toolbarouter
+{
+	clear: left;
+}
+#achieveform .resetPasswordBox label
+{
+	width: 40%;
+	float: left;
+}
+#achieveform .afterlabel
+{
+		padding-top: 15px
+}
+#achieveform .resetPasswordBox
+{
+	width: 100%;
+	margin-bottom: 15px;
+}
+
+#achieveform .ac_input {
+	width: 200px;
+}
+#achieveform .ac_results {
+	padding: 0px;
+	border: 1px solid WindowFrame;
+	background-color: Window;
+	overflow: hidden;
+}
+
+#achieveform .ac_results ul {
+	width: 100%;
+	list-style-position: outside;
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+#achieveform .ac_results iframe {
+	display:none;/*sorry for IE5*/
+	display/**/:block;/*sorry for IE5*/
+	position:absolute;
+	top:0;
+	left:0;
+	z-index:-1;
+	filter:mask();
+	width:3000px;
+	height:3000px;
+}
+
+#achieveform .ac_results li {
+	margin: 0px;
+	padding: 2px 5px;
+	cursor: pointer;
+	display: block;
+	width: 100%;
+	font: menu;
+	font-size: 12px;
+	overflow: hidden;
+}
+#achieveform .ac_loading {
+	background-color:#DDFFDD;
+}
+#achieveform .ac_over {
+	background-color: Highlight;
+	color: HighlightText;
+}
+
+#achieveform .feedaddouter, .feedcfgouter {
+	border: 1px solid silver;
+	margin: 10px;
+	padding: 5px;
+}
+
+
+/* JQUERY UI CLASSES */
+/* Layout helpers
+----------------------------------*/
+#achieveform .ui-helper-hidden { display: none; }
+#achieveform .ui-helper-hidden-accessible { position: absolute; left: -99999999px; }
+#achieveform .ui-helper-reset { margin: 0; padding: 0; border: 0; outline: 0; line-height: 1.3; text-decoration: none; font-size: 100%; list-style: none; }
+#achieveform .ui-helper-clearfix:after { content: "."; display: block; height: 0; clear: both; visibility: hidden; }
+#achieveform .ui-helper-clearfix { display: inline-block; }
+/* required comment for clearfix to work in Opera \*/
+* html .ui-helper-clearfix { height:1%; }
+#achieveform .ui-helper-clearfix { display:block; }
+/* end clearfix */
+#achieveform .ui-helper-zfix { width: 100%; height: 100%; top: 0; left: 0; position: absolute; opacity: 0; filter:Alpha(Opacity=0); }
+
+
+/* Interaction Cues
+----------------------------------*/
+#achieveform .ui-state-disabled { cursor: default !important; }
+
+
+/* Icons
+----------------------------------*/
+
+/* states and images */
+#achieveform .ui-icon { display: block; text-indent: -99999px; overflow: hidden; background-repeat: no-repeat; }
+
+
+/* Misc visuals
+----------------------------------*/
+
+/* Overlays */
+#achieveform .ui-widget-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+
+/* Tabs
+----------------------------------*/
+#achieveform .ui-tabs { padding: .2em; zoom: 1; }
+#achieveform .ui-tabs .ui-tabs-nav { list-style: none; position: relative; padding: .2em .2em 0; }
+#achieveform .ui-tabs .ui-tabs-nav li { position: relative; float: left; border-bottom-width: 0 !important; margin: 0 .2em -1px 0; padding: 0; }
+#achieveform .ui-tabs .ui-tabs-nav li a { float: left; text-decoration: none; padding: .5em 1em; }
+#achieveform .ui-tabs .ui-tabs-nav li.ui-tabs-selected { padding-bottom: 1px; border-bottom-width: 0; }
+#achieveform .ui-tabs .ui-tabs-nav li.ui-tabs-selected a, .ui-tabs .ui-tabs-nav li.ui-state-disabled a, .ui-tabs .ui-tabs-nav li.ui-state-processing a { cursor: text; }
+#achieveform .ui-tabs .ui-tabs-nav li a, .ui-tabs.ui-tabs-collapsible .ui-tabs-nav li.ui-tabs-selected a { cursor: pointer; } /* first selector in group seems obsolete, but required to overcome bug in Opera applying cursor: text overall if defined elsewhere... */
+#achieveform .ui-tabs .ui-tabs-panel { padding: 1em 1.4em; display: block; border-width: 0; background: none; }
+#achieveform .ui-tabs .ui-tabs-hide { position: absolute; top: -100000px }
+
+/* Corner radius */
+#achieveform .ui-corner-tl { -moz-border-radius-topleft: 4px/*{cornerRadius}*/; -webkit-border-top-left-radius: 4px/*{cornerRadius}*/; }
+#achieveform .ui-corner-tr { -moz-border-radius-topright: 4px/*{cornerRadius}*/; -webkit-border-top-right-radius: 4px/*{cornerRadius}*/; }
+#achieveform .ui-corner-bl { -moz-border-radius-bottomleft: 4px/*{cornerRadius}*/; -webkit-border-bottom-left-radius: 4px/*{cornerRadius}*/; }
+#achieveform .ui-corner-br { -moz-border-radius-bottomright: 4px/*{cornerRadius}*/; -webkit-border-bottom-right-radius: 4px/*{cornerRadius}*/; }
+#achieveform .ui-corner-top { -moz-border-radius-topleft: 4px/*{cornerRadius}*/; -webkit-border-top-left-radius: 4px/*{cornerRadius}*/; -moz-border-radius-topright: 4px/*{cornerRadius}*/; -webkit-border-top-right-radius: 4px/*{cornerRadius}*/; }
+#achieveform .ui-corner-bottom { -moz-border-radius-bottomleft: 4px/*{cornerRadius}*/; -webkit-border-bottom-left-radius: 4px/*{cornerRadius}*/; -moz-border-radius-bottomright: 4px/*{cornerRadius}*/; -webkit-border-bottom-right-radius: 4px/*{cornerRadius}*/; }
+#achieveform .ui-corner-right {  -moz-border-radius-topright: 4px/*{cornerRadius}*/; -webkit-border-top-right-radius: 4px/*{cornerRadius}*/; -moz-border-radius-bottomright: 4px/*{cornerRadius}*/; -webkit-border-bottom-right-radius: 4px/*{cornerRadius}*/; }
+#achieveform .ui-corner-left { -moz-border-radius-topleft: 4px/*{cornerRadius}*/; -webkit-border-top-left-radius: 4px/*{cornerRadius}*/; -moz-border-radius-bottomleft: 4px/*{cornerRadius}*/; -webkit-border-bottom-left-radius: 4px/*{cornerRadius}*/; }
+#achieveform .ui-corner-all { -moz-border-radius: 4px/*{cornerRadius}*/; -webkit-border-radius: 4px/*{cornerRadius}*/; }
+
+/* Component containers
+----------------------------------*/
+#achieveform .ui-widget { font-size: 1.1em/*{fsDefault}*/; }
+#achieveform .ui-widget input, .ui-widget select, .ui-widget textarea, .ui-widget button { font-size: 1em; }
+#achieveform .ui-widget-content { border: 1px solid #aaaaaa/*{borderColorContent}*/; background: #ffffff/*{bgColorContent}*/ /*url(images/ui-bg_flat_75_ffffff_40x100.png)*//*{bgImgUrlContent}*/ 50%/*{bgContentXPos}*/ 50%/*{bgContentYPos}*/ repeat-x/*{bgContentRepeat}*/; color: #222222/*{fcContent}*/; }
+#achieveform .ui-widget-content a { color: #222222/*{fcContent}*/; }
+#achieveform .ui-widget-header { border: 1px solid #aaaaaa/*{borderColorHeader}*/; background: #cccccc/*{bgColorHeader}*/ /*url(images/ui-bg_highlight-soft_75_cccccc_1x100.png)*//*{bgImgUrlHeader}*/ 50%/*{bgHeaderXPos}*/ 50%/*{bgHeaderYPos}*/ repeat-x/*{bgHeaderRepeat}*/; color: #222222/*{fcHeader}*/; font-weight: bold; }
+#achieveform .ui-widget-header a { color: #222222/*{fcHeader}*/; }
+
+/* Overlays */
+#achieveform .ui-widget-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+#achieveform .ui-widget-overlay { background: #aaaaaa/*{bgColorOverlay}*/ /*url(images/ui-bg_flat_0_aaaaaa_40x100.png)*//*{bgImgUrlOverlay}*/ 50%/*{bgOverlayXPos}*/ 50%/*{bgOverlayYPos}*/ repeat-x/*{bgOverlayRepeat}*/; opacity: .3;filter:Alpha(Opacity=30)/*{opacityOverlay}*/; }
+#achieveform .ui-widget-shadow { margin: -8px/*{offsetTopShadow}*/ 0 0 -8px/*{offsetLeftShadow}*/; padding: 8px/*{thicknessShadow}*/; background: #aaaaaa/*{bgColorShadow}*/ url(images/ui-bg_flat_0_aaaaaa_40x100.png)/*{bgImgUrlShadow}*/ 50%/*{bgShadowXPos}*/ 50%/*{bgShadowYPos}*/ repeat-x/*{bgShadowRepeat}*/; opacity: .3;filter:Alpha(Opacity=30)/*{opacityShadow}*/; -moz-border-radius: 8px/*{cornerRadiusShadow}*/; -webkit-border-radius: 8px/*{cornerRadiusShadow}*/; }
+
+/* Interaction states
+----------------------------------*/
+#achieveform .ui-state-default, .ui-widget-content .ui-state-default { border: 1px solid #d3d3d3/*{borderColorDefault}*/; background: #e6e6e6/*{bgColorDefault}*/ /*{bgImgUrlDefault}*/ 50%/*{bgDefaultXPos}*/ 50%/*{bgDefaultYPos}*/ repeat-x/*{bgDefaultRepeat}*/; font-weight: normal/*{fwDefault}*/; color: #555555/*{fcDefault}*/; outline: none; }
+#achieveform .ui-state-default a, .ui-state-default a:link, .ui-state-default a:visited { color: #555555/*{fcDefault}*/; text-decoration: none; outline: none; }
+#achieveform .ui-state-hover, .ui-widget-content .ui-state-hover, .ui-state-focus, .ui-widget-content .ui-state-focus { border: 1px solid #999999/*{borderColorHover}*/; background: #dadada/*{bgColorHover}*/ /*{bgImgUrlHover}*/ 50%/*{bgHoverXPos}*/ 50%/*{bgHoverYPos}*/ repeat-x/*{bgHoverRepeat}*/; font-weight: normal/*{fwDefault}*/; color: #212121/*{fcHover}*/; outline: none; }
+#achieveform .ui-state-hover a, .ui-state-hover a:hover { color: #212121/*{fcHover}*/; text-decoration: none; outline: none; }
+#achieveform .ui-state-active, .ui-widget-content .ui-state-active { border: 1px solid #aaaaaa/*{borderColorActive}*/; background: #ffffff/*{bgColorActive}*/ /*{bgImgUrlActive}*/ 50%/*{bgActiveXPos}*/ 50%/*{bgActiveYPos}*/ repeat-x/*{bgActiveRepeat}*/; font-weight: normal/*{fwDefault}*/; color: #212121/*{fcActive}*/; outline: none; }
+#achieveform .ui-state-active a, .ui-state-active a:link, .ui-state-active a:visited { color: #212121/*{fcActive}*/; outline: none; text-decoration: none; }
+
+/* Interaction Cues
+----------------------------------*/
+#achieveform .ui-state-highlight, .ui-widget-content .ui-state-highlight {border: 1px solid #fcefa1/*{borderColorHighlight}*/; background: #fbf9ee/*{bgColorHighlight}*/ /*{bgImgUrlHighlight}*/ 50%/*{bgHighlightXPos}*/ 50%/*{bgHighlightYPos}*/ repeat-x/*{bgHighlightRepeat}*/; color: #363636/*{fcHighlight}*/; }
+#achieveform .ui-state-highlight a, .ui-widget-content .ui-state-highlight a { color: #363636/*{fcHighlight}*/; }
+#achieveform .ui-state-error, .ui-widget-content .ui-state-error {border: 1px solid #cd0a0a/*{borderColorError}*/; background: #fef1ec/*{bgColorError}*/ /*{bgImgUrlError}*/ 50%/*{bgErrorXPos}*/ 50%/*{bgErrorYPos}*/ repeat-x/*{bgErrorRepeat}*/; color: #cd0a0a/*{fcError}*/; }
+#achieveform .ui-state-error a, .ui-widget-content .ui-state-error a { color: #cd0a0a/*{fcError}*/; }
+#achieveform .ui-state-error-text, .ui-widget-content .ui-state-error-text { color: #cd0a0a/*{fcError}*/; }
+#achieveform .ui-state-disabled, .ui-widget-content .ui-state-disabled { opacity: .35; filter:Alpha(Opacity=35); background-image: none; }
+#achieveform .ui-priority-primary, .ui-widget-content .ui-priority-primary { font-weight: bold; }
+#achieveform .ui-priority-secondary, .ui-widget-content .ui-priority-secondary { opacity: .7; filter:Alpha(Opacity=70); font-weight: normal; }
+
+/* autosuggest autocomplete */
+#achieveform .ac_results ul {
+  overflow-x: hidden !important;
+}
+
+/* hidden radios select one */
+
+#achieveform label.radio.jqme {
+  padding: .1em .4em;
+  border: 1px solid transparent;
+}
+#achieveform .radio-select-hover, .radio-select {
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  cursor: pointer;
+  background-color: #EFEFEF;
+  border: 1px solid #CFCFCF !important;
+}
+#achieveform label.jqme {
+  padding: .1em .4em;
+  border: 1px solid transparent;
+  cursor: pointer;
+}
+#achieveform .checkbox-select-hover, .checkbox-select, label.jqme:focus {
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  background-color: #EFEFEF;
+  border: 1px solid #CFCFCF !important;
+}
+
+/*!!!!omnisearch.css!!!!*/
+#achieveform .omnisearch-box-wrapper {
+	overflow: hidden;
+}
+
+#achieveform .omnisearch-behind {
+	padding-top:0.1em;
+	padding-left:0.2em;
+	position:absolute;
+	color: #dddddd;
+	font-size: 30pt;
+	height:30pt;
+	line-height:30pt;
+}
+
+#achieveform .omnisearch-behind, .omnisearch-box {
+	width: 90%;
+	margin:0;
+}
+
+#achieveform .omnisearch-box
+{
+	font-size: 30pt;
+	border: 1px solid silver;
+}
+
+#achieveform .saved-omnisearch {
+	margin-bottom: 1px;
+}
+
+#achieveform .saved-omnisearch-title {
+	background: #FF5B23;
+	color: white;
+	padding: 2px;
+	font-weight: bold;
+}
+
+#achieveform .saved-omnisearch-titlebar {
+	display: block;
+	color: white;
+	padding-left: 1em;
+}
+
+#achieveform .saved-omnisearch-delete {
+	float: right;
+	background: white;
+	color: #FF5B23;
+	margin-right: 1em;
+	padding-left: 0.3em;
+	padding-right: 0.2em;
+}
+
+#achieveform .saved-omnisearch-edit {
+	float: right;
+	margin-right: 1em;
+	padding-left: 0.3em;
+	padding-right: 0.2em;
+}
+
+#achieveform .saved-omnisearch-delete:hover {
+	color: #FF5B23;
+}
+
+#achieveform .saved-omnisearch-titlebar:hover {
+	display: block;
+	color: white;
+	text-decoration: none;
+}
+
+#achieveform .omnisearch-save-button {
+	float: right;
+}
+
+#achieveform .omnisearch-box.loading {
+	background: right center no-repeat url(http://fs-filestore-eu.s3.amazonaws.com/standard/images/throbber-fast.gif) #ffffff;
+}
+
+#achieveform .faq2 {
+	background: #dddfff;
+	border: 2px solid #000055;
+	color: white;
+}
+
+#achieveform .loadingtext {display: none; text-align: center; width: 100%; color: red;}
+
+#achieveform .faq-result {
+	border: 1px solid black;
+	padding: 5px;
+}
+
+#achieveform .faq-result .result-link {
+	color: #ee7744;
+	display: block;
+	font-weight: bold;
+	font-size: 12pt;
+}
+
+#achieveform .faq-result .result-link:hover {
+	text-decoration: none;
+	background: #fff0cc;
+}
+
+#achieveform .faq-result .result-summary {
+	font-style: italic;
+}
+
+#achieveform .term-highlight {
+	border-bottom: 1px dotted #8F8F8F;
+}
+
+#achieveform .omnisearch_settings {
+	margin: 0 !important;
+	background: #ddddff;
+	padding: 5px;
+	padding-top: 0px;
+}
+
+#achieveform .omnisearch_settings_button {
+	text-align: center;
+	border: 0;
+	padding: 0.2em;
+	margin: 0;
+	margin-left: 0.3em;
+	font-weight: bold;
+	font-size: 120%;
+}
+
+#achieveform .omnisearch_settings_outer {
+	margin: 0;
+	border-top: 5px solid #ddddff;
+}
+#achieveform .osresultset {
+	padding:0px;
+}
+
+#achieveform .ommisearch_manyresultsmessage {
+	color: red;
+	font-size: 120%;
+}
+	
+#achieveform .showitems {
+	padding-bottom:3px;
+}
+#achieveform .omnicommander_suggestions { background-color: #cce5ff }
+#achieveform .omnicommander_suggestion { background-color: #cce5ff }
+#achieveform .omnicommander_extradetail { font-size:80% }
+#achieveform .omnicommander_extra { font-style: italic }
+#achieveform .noshow { display:none }
+#achieveform .omnicommander_error { background-color: #ffeeee; font-weight: bold }
+
+
+/*!!!!lightwindow.css!!!!*/
+#achieveform #lightwindow_overlay {
+	/* REQUIRED */
+	display: none;
+	visibility: hidden;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100px;
+	z-index: 500;
+	/* REQUIRED */
+}
+
+#achieveform #lightwindow {
+	/* REQUIRED */
+	/* Of Note - The height and width of this element are set to 0px */
+	display: none;
+	visibility: hidden;
+	position: absolute;
+	z-index: 999;
+	/* REQUIRED */
+}
+
+	#lightwindow_container {
+		/* REQUIRED */
+		display: none;
+		visibility: hidden;
+		position: absolute;
+		/* REQUIRED */
+		padding: 0 0 0 0;
+		margin: 0 0 0 0;
+	}
+
+	/* IE6 needs this or it messes with our positioning */
+	* html #lightwindow_container {
+		overflow: hidden;
+	}
+
+	#lightwindow_contents {
+		overflow: hidden;
+		z-index: 0;
+		position: relative;
+		border: 10px solid #000000;
+		background-color: #ffffff;
+	}		
+
+#achieveform #lightwindow_loading {
+	/* REQUIRED */
+	height: 100%;
+	width: 100%;
+	top: 0px;
+	left: 0px;
+	z-index: 9999;
+	position: absolute;
+	/* REQUIRED */
+	background-color: #f0f0f0;
+	padding: 10px;
+}
+
+	#lightwindow_loading_shim { 
+		display: none;
+		left: 0px; 
+		position: absolute; 
+		top: 0px;
+		width: 100%; 
+		height: 100%;
+	}
+
+	#lightwindow_loading span {
+    	font-size: 12px;
+		line-height: 32px;
+		color: #444444;
+		float: left;
+		padding: 0 10px 0 0;
+	}
+
+	#lightwindow_loading span a,
+	#lightwindow_loading span a:link, 
+	#lightwindow_loading span a:visited {
+		color: #09F;
+		text-decoration: none;
+		cursor: pointer;
+	}
+
+	#lightwindow_loading span a:hover,
+	#lightwindow_loading span a:active {
+		text-decoration: underline;
+	}
+
+
+	#lightwindow_loading img {
+   		float: left;
+   		margin: 0 10px 0 0;
+	}
+
+
+/*-----------------------------------------------------------------------------------------------
+	I liked the Navigation so much from http://www.huddletogether.com/projects/lightbox2/
+	I mean let's face it, it works really well and is very easy to figure out.
+-----------------------------------------------------------------------------------------------*/
+
+#achieveform #lightwindow_navigation {
+	/* REQUIRED */
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	display: none;
+	/* REQUIRED */
+}
+	/* We need to shim the navigation for IE, though its more of a sub-floor */
+	#lightwindow_navigation_shim { 
+		/* REQUIRED */
+		display: none;
+		left: 0px; 
+		position: absolute; 
+		top: 0px;
+		width: 100%; 
+		height: 100%;
+		/* REQUIRED */
+	}
+
+	#lightwindow_navigation a,
+	#lightwindow_navigation a:link,
+	#lightwindow_navigation a:visited,
+	#lightwindow_navigation a:hover,
+	#lightwindow_navigation a:active { 
+		/* REQUIRED */
+		outline: none;
+		/* REQUIRED */
+	}
+
+	#lightwindow_previous, 
+	#lightwindow_next {
+		width: 49%;
+		height: 100%;
+		background: transparent url(js/lightwindow/images/blank.gif) no-repeat; /* Trick IE into showing hover */
+		display: block;
+	}
+	
+	#lightwindow_previous { 
+		float: left;
+		left: 0px;
+	}
+
+	#lightwindow_next { 
+		float: right;
+		right: 0px;
+	}
+
+	#lightwindow_previous:hover, 
+	#lightwindow_previous:active { 
+		background: url(js/lightwindow/images/prevlabel.gif) left 15% no-repeat; 
+	}
+
+	#lightwindow_next:hover, 
+	#lightwindow_next:active { 
+		background: url(js/lightwindow/images/nextlabel.gif) right 15% no-repeat; 
+	}
+	
+	#lightwindow_previous_title,
+	#lightwindow_next_title {
+		display: none;
+	}
+	 	
+#achieveform #lightwindow_galleries {
+	width: 100%;
+	position: absolute;
+	z-index: 50; 
+	display: none;
+	overflow: hidden;
+	margin: 0 0 0 10px;
+	bottom: 0px;
+	left: 0px;
+}
+
+	#lightwindow_galleries_tab_container {
+		width: 100%;
+		height: 0px;
+		overflow: hidden;
+	}
+
+	a#lightwindow_galleries_tab,		
+	a:link#lightwindow_galleries_tab,
+	a:visited#lightwindow_galleries_tab {
+		display: block;
+		height: 20px;
+		width: 77px;
+		float: right;
+		line-height: 22px;
+		color: #ffffff;
+		text-decoration: none;
+		font-weight: bold;
+		cursor: pointer;
+		font-size: 11px;
+		color: #ffffbe;
+		/*background: url(js/lightwindow/images/black-70.png) repeat 0 0 transparent;*/
+	}
+	
+	* html a#lightwindow_galleries_tab,		
+	* html a:link#lightwindow_galleries_tab,
+	* html a:visited#lightwindow_galleries_tab {	
+		background: none;
+		background-color: #000000;
+		opacity: .70;
+		filter: alpha(opacity=70);
+	}
+
+	a:hover#lightwindow_galleries_tab,
+	a:active#lightwindow_galleries_tab {
+		color: #ffffbe;
+
+	}
+
+	#lightwindow_galleries_tab_span {
+		display: block;
+		height: 20px;
+		width: 63px;
+		padding: 0 7px 0 7px;
+	}
+	
+	#lightwindow_galleries_tab .up	{
+		background: url(js/lightwindow/images/arrow-up.gif) no-repeat 60px 5px transparent;
+	}
+
+	#lightwindow_galleries_tab .down {
+		background: url(js/lightwindow/images/arrow-down.gif) no-repeat 60px 6px transparent;
+	}
+
+	#lightwindow_galleries_list {
+		background: url(js/lightwindow/images/black-70.png) repeat 0 0 transparent;
+		overflow: hidden;
+		height: 0px;
+	}
+
+	* html #lightwindow_galleries_list {
+		background: none;
+		background-color: #000000;
+		opacity: .70;
+		filter: alpha(opacity=70);
+	}	
+
+	.lightwindow_galleries_list {
+		width: 200px;
+		float: left;
+		margin: 0 0 10px 0;
+		padding: 10px;
+	}
+
+	.lightwindow_galleries_list h1 {	
+		color: #09F;
+		text-decoration: none;
+		font-weight: bold;
+		cursor: pointer;
+		padding: 10px 0 5px 0;
+		font-size: 16px;
+	}
+
+	.lightwindow_galleries_list li {
+		margin: 5px 0 5px 0;
+		list-style-type: none;
+	}
+
+	.lightwindow_galleries_list a, 
+	.lightwindow_galleries_list a:link, 
+	.lightwindow_galleries_list a:visited {
+		display: block;
+		line-height: 22px;
+		color: #ffffff;
+		text-decoration: none;
+		font-weight: bold;
+		cursor: pointer;
+		padding: 0 0 0 10px;
+		font-size: 11px;
+	}
+
+	.lightwindow_galleries_list a:hover, 
+	.lightwindow_galleries_list a:active {
+		background: #000000;
+		color: #ffffbe;
+		border-left: 3px solid #ffffbe;
+		padding: 0 0 0 7px;
+	}
+		
+#achieveform #lightwindow_data {
+	/* REQUIRED */
+	position: absolute;
+	/* REQUIRED */
+}
+
+	#lightwindow_data_slide {
+		/* REQUIRED */
+		position: relative;
+		/* REQUIRED */
+	}
+
+	#lightwindow_data_slide_inner {
+		background-color: #ffffff;
+		padding: 0 10px 10px 10px;
+	}
+
+	#lightwindow_data_caption {
+		padding: 10px 0 0 0;
+		color: #666666;
+		line-height: 25px;
+		background-color: #ffffff;
+		clear: both;
+	}
+
+	#lightwindow_data_details {
+		background-color: #f0f0f0;
+		padding: 0 10px 0 10px;
+		height: 20px;
+	}
+	
+	#lightwindow_data_author_container {
+		width: 40%;
+		text-align: right;
+		color: #666666;
+	 	font-style: italic;
+		font-size: 10px;
+		line-height: 20px;
+		float: right;
+		overflow: hidden;
+	}
+	
+	#lightwindow_data_gallery_container {
+		font-size: 10px;
+		width: 40%;
+		text-align: left;
+		color: #666666;
+		line-height: 20px;
+		float: left;
+		overflow: hidden;
+	}
+	
+#achieveform #lightwindow_title_bar {
+	height: 25px;
+	overflow: hidden;		
+	background-color: #555555;
+}
+
+	#lightwindow_title_bar_title {
+		color: #ffffbe;
+		font-size: 14px;
+		line-height: 25px;
+		text-align: left;
+		float: left;
+	}
+
+	a#lightwindow_title_bar_close_link,	
+	a:link#lightwindow_title_bar_close_link,
+	a:visited#lightwindow_title_bar_close_link {
+		float: right;
+		text-align: right;		
+		cursor: pointer;
+		color: #ffffbe;
+		line-height: 25px;
+		padding: 0;
+		margin: 0;
+	}
+	
+	a:hover#lightwindow_title_bar_close_link,
+	a:active#lightwindow_title_bar_close_link {
+		color: #ffffff;
+	}
+
+/*-----------------------------------------------------------------------------------------------
+	Theme styling stuff
+-----------------------------------------------------------------------------------------------*/	
+
+#achieveform #lightwindow p {
+	color: #000000;
+	padding-right: 10px;
+}
+/*
+	transparent button which hides checkbox in 'Processes I Started'
+*/
+#achieveform .transparentButton{
+	opacity:0;
+	filter:alpha(opacity=0);
+	position:relative;
+	left:22px;
+	height:23px;
+	width:22px
+} 
+
+#achieveform .emptyHelpButtonCell
+{
+	padding-left: 38px;
+}
+
+
+/* Toolbar Icons */
+#achieveform .aftoolbar{ min-width: 0px; _height: 100%; _width: 100%; text-decoration: none !important} /* IE hack for height and width */
+#achieveform .aftoolbar.design { padding-top: 5px; padding-bottom: 5px; display: block; padding-left: 35px; background: /*url(Images/designbutton.jpg)*/ top left no-repeat }
+#achieveform .aftoolbar.fillin { padding-top: 5px; padding-bottom: 5px; display: block; padding-left: 35px; background: /*url(Images/fillinbutton.jpg)*/ top left no-repeat }
+#achieveform .aftoolbar.publish { padding-top: 5px; padding-bottom: 5px; display: block; padding-left: 35px; background: /*url(Images/publishbutton.jpg)*/ top left no-repeat }
+#achieveform .aftoolbar.viewdata { padding-top: 5px; padding-bottom: 5px; display: block; padding-left: 35px; background: /*url(Images/viewdatabutton.jpg)*/ top left no-repeat }
+
+#achieveform .aftoolbar.design.disabled { padding-top: 5px; padding-bottom: 5px; display: block; padding-left: 35px; background: /*url(Images/designbuttongrey.jpg)*/ top left no-repeat }
+#achieveform .aftoolbar.fillin.disabled { padding-top: 5px; padding-bottom: 5px; display: block; padding-left: 35px; background: /*url(Images/fillinbuttongrey.jpg)*/ top left no-repeat }
+#achieveform .aftoolbar.publish.disabled { padding-top: 5px; padding-bottom: 5px; display: block; padding-left: 35px; background: /*url(Images/publishbuttongrey.jpg)*/ top left no-repeat }
+#achieveform .aftoolbar.viewdata.disabled { padding-top: 5px; padding-bottom: 5px; display: block; padding-left: 35px; background: /*url(Images/viewdatabuttongrey.jpg)*/ top left no-repeat }
+
+#achieveform .aftoolbar.admin { padding-top: 5px; padding-bottom: 5px; display: block; padding-left: 25px; background: /*url(Images/adminbutton.jpg)*/ top left no-repeat; text-decoration: none }
+#achieveform .aftoolbar.browse { padding-top: 5px; padding-bottom: 5px; display: block; padding-left: 25px; background: /*url(Images/browseformsbutton.jpg)*/ top left no-repeat; text-decoration: none }
+#achieveform .aftoolbar.resync { padding-top: 5px; padding-bottom: 5px; display: block; padding-left: 25px; background: /*url(Images/resyncbutton.jpg)*/ top left no-repeat; text-decoration: none }
+#achieveform .aftoolbar.mytasks { padding-top: 5px; padding-bottom: 5px; display: block; padding-left: 25px; background: /*url(Images/mytasksbutton.jpg)*/ top left no-repeat; text-decoration: none }
+#achieveform .aftoolbar.mysaves { padding-top: 5px; padding-bottom: 5px; display: block; padding-left: 25px; background: /*url(Images/myformsbutton.jpg)*/ top left no-repeat; text-decoration: none }
+#achieveform .aftoolbar.help { padding-top: 5px; padding-bottom: 5px; display: block; padding-left: 25px; background: /*url(Images/helpbutton.jpg)*/ top left no-repeat; text-decoration: none }
+
+#achieveform .aftoolbarlink { width: 3em; }
+
+
+
+#achieveform img.sig { width:100% }
+
+	
+/* ---------Design Tab menu---------------- */
+#achieveform ul#subMenu{
+	margin: 0;
+  	border: 0 none;
+  	padding: 0;
+  	width: 2.4em;/*For KHTML*/
+  	list-style: none;
+  	height: 2em;
+
+	
+}
+
+#achieveform ul#subMenu li {
+  	margin: 0;
+  	border: 0 none;
+  	padding: 0;
+  	float: left; /*For Gecko*/
+  	display: inline;
+  	list-style: none;
+  	position: relative;
+ 	height: 2em;
+}
+
+#achieveform ul#subMenu ul {
+  	margin: 0;
+  	border: 0 none;
+  	padding: 0;
+  	list-style: none;
+  	display: none;
+  	position: absolute;
+  	top: 2em;
+  	left: 0;
+	border: 1px solid #cccccc;
+	background: /*url("cssimages/css/f3cssgifs/menu_non_hover.gif") repeat-y left*/ white;
+	z-index:500;
+}
+
+#achieveform ul#subMenu ul li {
+	padding: 0 0.8em;
+	float: none; /*For Gecko*/
+	display: block !important;
+	display: inline; /*For IE*/
+	z-index:500;
+}
+
+/* Horizontal menu */
+#achieveform ul#subMenu a {
+	float: none !important; /*For Opera*/
+	float: left; /*For IE*/
+	display: block;
+	height: auto !important;
+	height: 1%; /*For IE*/
+
+}
+
+
+
+
+/* Horizontal menu Hover */
+#achieveform ul#subMenu a:hover,
+#achieveform ul#subMenu li:hover a,
+#achieveform ul#subMenu li.iehover a {
+	color: #EE4220;
+}
+
+/* 1st drop down menu */
+#achieveform ul#subMenu li:hover li a,
+#achieveform ul#subMenu li.iehover li a {
+	float: none;
+	color: #000000;
+}
+
+/* 1st drop down menu hover */
+#achieveform ul#subMenu li:hover li a:hover,
+#achieveform ul#subMenu li:hover li:hover a,
+#achieveform ul#subMenu li.iehover li a:hover,
+#achieveform ul#subMenu li.iehover li.iehover a {;
+	color: #EE4220;
+}
+
+/* 2nd drop down menu */
+#achieveform ul#subMenu li:hover li:hover li a,
+#achieveform ul#subMenu li.iehover li.iehover li a {
+	
+	color: #000000;
+}
+
+/* 2nd drop down menu hover */
+#achieveform ul#menuDesign4 li:hover li:hover li a:hover,
+#achieveform ul#menuDesign4 li:hover li:hover li:hover a,
+#achieveform ul#menuDesign4 li.iehover li.iehover li a:hover,
+#achieveform ul#menuDesign4 li.iehover li.iehover li.iehover a {
+	color: #EE4220;
+}
+
+/* 3rd drop down menu */
+#achieveform ul#subMenu li:hover li:hover li:hover li a,
+#achieveform ul#subMenu li.iehover li.iehover li.iehover li a {
+	color: #000000;
+}
+
+/* 3rd drop down menu hover */
+#achieveform ul#subMenu li:hover li:hover li:hover li a:hover,
+#achieveform ul#subMenu li.iehover li.iehover li.iehover li a:hover {
+	color: #EE4220;
+}
+
+#achieveform ul#subMenu ul ul,
+#achieveform ul#subMenu ul ul ul {
+	display: none;
+	position: relative;
+	top: 0;
+	left: 13.33em;
+}
+
+#achieveform ul#subMenu li:hover ul ul,
+#achieveform ul#subMenu li:hover ul ul ul,
+#achieveform ul#subMenu li.iehover ul ul,
+#achieveform ul#subMenu li.iehover ul ul ul {
+	display: none;
+}
+
+#achieveform ul#subMenu li:hover ul,
+#achieveform ul#subMenu ul li:hover ul,
+#achieveform ul#subMenu ul ul li:hover ul,
+#achieveform ul#subMenu li.iehover ul,
+#achieveform ul#subMenu ul li.iehover ul,
+#achieveform ul#subMenu ul ul li.iehover ul {
+	display: block;
+}
+
+#achieveform .menulistobject a {
+	background: transparent !important
+}
+#achieveform .menulistobject a:hover {
+	color: #EE4220;
+	border-top: 1px solid #EE4220 !important;
+}
+#achieveform .menulistobject {
+	/*background:url(cssimages/css/f3cssgifs/tabseperator.gif) no-repeat 100% 50%;*/
+	
+}
+#achieveform .subitem a{
+	border-bottom: 1px solid #cccccc;
+	border-top: 0 !important;
+}
+#achieveform .subitem a:hover {
+	border-top: 0 !important;
+	border-bottom: 1px solid #cccccc;
+}
+#achieveform .omnisearch-box {	
+    font-size: 17pt;
+    font-weight: bold;
+    margin: auto;
+    padding: 5px;
+    width: 95%;
+    color: #4F4F4F;
+}
+#achieveform .omniitem {
+    white-space: nowrap;
+}
+#achieveform .omnisearch-behind {
+    font-size: 17pt;
+}
+#achieveform .omniresultbox {
+	padding: 8px;
+}
+#achieveform .omniresultbox .hoversection: hover {
+    background-color: #F5F5F5
+}
+#achieveform .omniresultbox a: hover, .omniresultbox a: focus {
+	text-decoration: none;
+	font-weight: normal;
+}
+#achieveform .omniresultbox .term-highlight {
+	border: 0 none;
+	background-color: #E2DED5;
+}
+#achieveform fieldset
+{
+	border-style: solid;
+	border-width: 1px;
+	border-color: #638aad;
+}
+
+#achieveform .genericmessage {
+	font-size: 13pt;
+}
+
+#achieveform .submenu li {
+	list-style-type: none;
+	padding: 2%;
+}
+#achieveform .submenu li a {
+	color: black;
+}
+#achieveform .submenu li a:hover {
+	color: #EE4220;
+}
+#achieveform .showtag {
+	font-size: 1.5em;
+}
+
+#achieveform .bwsjsisactive TR.messageread, TR.messageunread
+{
+	cursor: pointer;
+}
+
+#achieveform .messageunread
+{
+	font-weight: bold;
+}
+
+
+#achieveform .messagecompose .fieldlabel
+{
+	font-weight: bold;
+}
+
+#achieveform .messageview .fieldlabel
+{
+	font-weight: bold;
+}
+#achieveform .messageview .field
+{
+	clear: both;
+	padding: 0;
+}
+
+#achieveform .messageview .message
+{
+	
+}
+
+#achieveform .reporting .fieldlabel
+{
+	font-weight: bold;
+}
+
+
+#achieveform .reporting .field
+{
+	padding: 0;
+}
+
+#achieveform .reporting .field TEXTAREA
+{
+	width: auto;
+}
+
+#achieveform .sortHelper{
+	border: 1px dashed #aaaaaa;
+	background-color: #eeeeee;
+	margin: 8px;
+	margin-bottom: -2px !important;
+}
+
+#achieveform .activedropzone {
+	min-height: 100px;
+	border: 2px solid #CCCCCC;
+	margin: -2px;
+	}
+	
+	
+/***********************************************************/
+/* TOM'S ACHIEVEFORMS CLASSES ******************************/
+/***********************************************************/
+
+#achieveform .dataell,
+#achieveform .dataelr,
+#achieveform .nondatael {
+	padding-left: 0;
+}
+
+#achieveform .dataelr {
+	font-size: 1.2em;
+}
+
+#achieveform .outerformtablerows td.fieldtitle {
+	padding-top: 0.3em;
+}
+
+#achieveform .bws.colspan,
+#achieveform .outerformtablerows .fieldtr {
+	padding: 0 0 0.5em 0;
+}
+	
+#achieveform .sectionnamerender {
+	color: black;
+	font-weight: normal;
+	font-size: 1.2em;
+	border-bottom: 1px dotted #ccc;
+	padding-left: 0.5em;
+	padding-bottom: 0.5em;
+}
+
+#achieveform .warning {
+	color: #f46432;
+}
+
+#achieveform form .formouter {
+	background: white;
+
+	border-top-left-radius: 0px 0px;
+	border-top-right-radius: 0px 0px;
+	border-bottom-right-radius: 0px 0px;
+	border-bottom-left-radius: 0px 0px;
+}
+
+#achieveform div.progressbartoptable {
+	margin: 0;
+	font-size: 1.2em;
+	padding: 0.5em;
+}
+
+#achieveform .progressbartoptable ol {
+	margin: 0;
+	padding: 0;
+}
+
+#achieveform .progressbartoptable ol li {
+	margin: 0;
+	padding: 0;
+	margin-right: 0.5em;
+}
+	
+#achieveform .progressbartoptable ol li input.progress0,
+#achieveform .progressbartoptable ol li input.progress0nonclickable,
+#achieveform .progressbartoptable ol li input.progress1nonclickable,
+#achieveform .progressbartoptable ol li input.progress1 {
+	padding: 0.2em 0.5em;
+}
+
+#achieveform .progressbartoptable ol li input.progress0,
+#achieveform .progressbartoptable ol li input.progress0nonclickable {
+	border: 1px solid #ccc;
+	color: #F46432;
+}
+
+#achieveform .progressbartoptable ol li input.progress1,
+#achieveform .progressbartoptable ol li input.progress1nonclickable {
+	background: #d7d7d7;
+	color: #666;
+	border: 1px solid #ccc;
+}
+
+#achieveform form .nondatael h1,
+#achieveform .fieldtr h1 {
+	color: #000;
+	text-align: center;
+	border: none;
+	font-size: 18px;
+}
+
+#achieveform form .nondatael h2 {
+	color: #000;
+	border-bottom: 1px dotted #f46432;
+	margin: 10px 0;
+}
+
+#achieveform .renderbuttonstable {
+	border: none;
+}
+
+#achieveform .nondatael,
+#achieveform .renderbuttonstable label,
+#achieveform form .fieldlabel {
+	font-weight: normal !important;
+	color: #333;
+	font-size: 12px;
+	/*display: inline-block;*/
+}
+
+#achieveform .outerformtablerows .generictextinput, 
+#achieveform .renderbuttonstable .aftextinput, 
+#achieveform .renderbuttonstable .aftextarea, 
+#achieveform.renderbuttonstable .afselectbox, 
+#achieveform.renderbuttonstable .dateyeartextbox, 
+#achieveform .renderbuttonstable select {
+	font-size: 12px !important;
+	padding: 3px;
+	border-top-left-radius: 2px 2px;
+	border-top-right-radius: 2px 2px;
+	border-bottom-right-radius: 2px 2px;
+	border-bottom-left-radius: 2px 2px;
+	border-color: #ccc;
+}
+
+#achieveform .outerformtablerows .generictextinput  {
+	width: 90%;
+}
+
+body #achieveform .renderbuttonstable .afnavbuttons {
+	background-color: white;
+	text-align: center;
+}
+
+body #achieveform .renderbuttonstable .afnavbuttons input,
+body #achieveform .renderbuttonstable .genericsubmit,
+body #achieveform .referencepagetable .genericsubmit {
+	margin: 0 15px 10px 15px;
+	background-image: none;
+	border: 1px solid #ccc !important;
+	text-shadow:  0px 0px 0px #ccc;
+	background: #fff;
+	color: #f46432;
+	font-size: 1.2em;
+/*	background: #f46432;
+	background: -webkit-gradient(linear, left top, left bottom, from(#f46432), to(#fbc3b0));
+	background: -moz-linear-gradient(top,  #f46432,  #fbc3b0);
+	filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#f46432', endColorstr='#fbc3b0');*/
+	
+	-moz-box-shadow: 1px 1px 2px #ccc;
+	-webkit-box-shadow: 1px 1px 2px #ccc;
+	box-shadow: 1px 1px 2px #ccc;
+}
+
+body #achieveform .renderbuttonstable .genericsubmit {
+	font-size: 1em;
+	margin: 0;
+}
+
+body #achieveform .renderbuttonstable .afnavbuttons input.genericsubmit:hover,
+body #achieveform .renderbuttonstable .genericsubmit:hover{
+	color: #333 !important;
+}
+#achieveform fieldset.colspan legend.bws,
+#achieveform fieldset.colspan legend {
+	background: none;
+	font-size: 1.2em;
+	font-weight: normal;
+	text-transform: none;
+	padding-bottom: 0.5em;
+	font-weight: bold;
+}
+
+#achieveform table {
+	border: 1px solid #d8d8d8;
+        border-bottom: none;
+	margin: 0.5em 0;
+}
+
+#achieveform table tr {
+	background: none;
+	border: none;
+	padding: 0;
+}
+
+#achieveform table tr:hover {
+	background: #ededed;
+}
+
+#achieveform table th.headerlabels {
+	background: #E0EAF4;
+	border: none;
+	border-bottom: 1px solid #d8d8d8;
+	text-transform: uppercase;
+	height: auto;
+	margin: 0;
+}
+
+/******************************/
+/* Ross's Form Classes ********/
+/******************************/
+
+#achieveform .requesttitle {
+	color: #93D5F7;
+	font-size:9px;
+	font-family:"Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}
+
+#achieveform .requesttext {
+	font-size: 11px;
+	font-family:"Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+	margin-bottom: 3px;
+}
+
+#achieveform .requestpair{
+	float: left;
+	padding-right: 10px;
+
+}
+
+#achieveform .requestbody{
+	padding-left: 10px;
+	margin-bottom: 10px;
+}
+
+#achieveform .clear{
+	clear: both;
+	margin-bottom: 5px
+}
+
+#achieveform .requestpair.mini{
+	width: 30px;
+}
+
+#achieveform .requestpair.short{
+	width: 70px;
+}
+
+#achieveform .requestpair.long{
+	width: 150px;
+}
+
+#achieveform .request a{
+	font-color: black;
+}
+
+#achieveform .ac_input{
+	width: 100%;
+	}
+
+#achieveform .selmanyel input { float: left; }
+
+.formlookuppopup{
+        background: none repeat scroll 0 0 #E0EAF4;
+	border: 2px solid black;
+	box-shadow: 0 10px 15px rgba(0, 0, 0, 0.5);
+	
+}
+
+.outertoolbarmaincontainer{
+    display: none;
+}

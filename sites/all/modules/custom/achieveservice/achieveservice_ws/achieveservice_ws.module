@@ -1,0 +1,924 @@
+<?php
+/*
+ * AchieveService Web Services
+ *
+ * Manages fetching arbritrary XML web service feeds from AchieveService
+ * and tranforming them with XSL stylesheets.
+ *
+ * Written by Andrew France <andrew@avito.co.uk> for Business Web Software Ltd.
+ */
+
+/*
+ * Drupal Hooks
+ */
+
+// Permissions hook
+function achieveservice_ws_perm() {
+  return array('administer achieveservice web services');
+}
+
+function achieveservice_ws_init() {
+  // http://drupal.org/node/99973
+  //Don't add here as it gets added too late, drupal adds automatically anyway
+  //drupal_add_js('misc/drupal.js');
+  //Both below needed for collapsible fieldsets
+  drupal_add_js('misc/collapse.js');
+  drupal_add_js('misc/form.js');
+  // http://www.ericmmartin.com/projects/simplemodal/ (MIT License)
+  // http://www.ericmmartin.com/projects/simplemodal/ (MIT License)
+  drupal_add_js(drupal_get_path('module', 'achieveservice_ws').'/achieveservice_ws.js');
+  drupal_add_js(drupal_get_path('module', 'achieveservice_ws').'/jquery.simplemodal.1.4.1.min.js');
+  drupal_add_css(drupal_get_path('module', 'achieveservice_ws').'/modals.css', 'module', 'all', false);
+}
+
+// Menu hook
+function achieveservice_ws_menu() {
+  // Main admin page listing services
+  $menu['admin/structure/achieveservice_ws'] = array(
+      'title' => 'AchieveService Web Services',
+      'description' => 'Manage web service sources and output.',
+      'page callback' => 'achieveservice_ws_services_admin_page',
+      'access arguments' => array('administer achieveservice web services'),
+      'type' => MENU_NORMAL_ITEM,
+      'file' => 'achieveservice_ws.admin.inc',
+      );
+
+  // Admin page listing stylesheets
+  $menu['admin/structure/achieveservice_ws/services'] = array(
+      'title' => 'Services',
+      'description' => 'Manage web service sources and output.',
+      'type' => MENU_DEFAULT_LOCAL_TASK,
+      );
+
+  // Admin page listing stylesheets
+  $menu['admin/structure/achieveservice_ws/stylesheets'] = array(
+      'title' => 'Stylesheets',
+      'description' => 'Manage web service sources and output.',
+      'page callback' => 'achieveservice_ws_xsl_admin_page',
+      'access arguments' => array('administer achieveservice web services'),
+      'type' => MENU_LOCAL_TASK,
+      'file' => 'achieveservice_ws.admin.inc',
+      );
+  
+  // Admin page listing stylesheets
+  $menu['admin/structure/achieveservice_ws/settings'] = array(
+      'title' => 'General Settings',
+      'description' => 'Manage general settings.',
+      'page callback'    => 'drupal_get_form',
+      'page arguments'   => array('achieveservice_ws_settings_admin_page'),
+      'access arguments' => array('administer achieveservice web services'),
+      'type' => MENU_LOCAL_TASK,
+      'file' => 'achieveservice_ws.admin.inc',
+      'weight' => 99,
+      );
+
+  // Edit page for individual services
+  $menu['admin/structure/achieveservice_ws/services/%'] = array(
+      'title' => 'AchieveService Web Service',
+      'description' => 'Edit web service details.',
+      'page callback' => 'drupal_get_form',
+      'page arguments' => array('achieveservice_ws_service_form', 4),
+      'access arguments' => array('administer achieveservice web services'),
+      'type' => MENU_CALLBACK,
+      'file' => 'achieveservice_ws.admin.inc',
+      );
+
+  // Service test page
+  $menu['admin/structure/achieveservice_ws/services/%/test'] = array(
+      'title' => 'Service test',
+      'description' => 'Output from service',
+      'page callback' => 'achieveservice_ws_service_test_page',
+      'page arguments' => array(4),
+      'access arguments' => array('administer achieveservice web services'),
+      'type' => MENU_CALLBACK,
+      'file' => 'achieveservice_ws.admin.inc',
+      );
+
+  // Edit page for a stylesheet
+  $menu['admin/structure/achieveservice_ws/stylesheets/%'] = array(
+      'title' => 'AchieveService Web Service XSL',
+      'description' => 'Edit web service stylesheets.',
+      'page callback' => 'drupal_get_form',
+      'page arguments' => array('achieveservice_ws_xsl_form', 4),
+      'access arguments' => array('administer achieveservice web services'),
+      'type' => MENU_CALLBACK,
+      'file' => 'achieveservice_ws.admin.inc',
+      );
+
+  $menu['asws/%'] = array(
+      'title' => 'AchieveService Web Service Runner',
+      'description' => 'Returns service results',
+      'page callback' => 'achieveservice_ws_render_service',
+      'page arguments' => array(1, 2),
+      'access arguments' => array('access content'),
+      'type' => MENU_CALLBACK,
+      );
+  return $menu;
+}
+
+// Block hook
+function achieveservice_ws_block($op, $delta = 0, $edit = array()) {
+  $services = achieveservice_ws_get_services();
+
+  if ($op == 'list') {
+    $blocks = array();
+    foreach ($services as $service) {
+      $blocks[$service['name']] = array(
+          'info' => $service['title'],
+          'cache' => BLOCK_CACHE_PER_USER,
+          );
+    }
+    return $blocks;
+  }
+
+  if ($op == 'view') {
+    $block = array();
+//  $document = achieveservice_ws_run_service($delta);
+
+//  // Catch a non-existent document, errors should be in watchdog and messages
+//  if (!$document) {
+//    $block['subject'] = t('Error');
+//    $block['content'] = t('AchieveService WS: block "@name" could not be displayed.', array('@name' => $delta));
+//    return $block;
+//  }
+
+//  $title_el = $document->getElementsByTagName('title');
+//  if ($title_el->length > 0) $block['subject'] = $title_el->item(0)->nodeValue;
+
+//  if (!isset($block['subject']) || !$block['subject']) {
+//    drupal_set_message(t('Web service output is missing block title element'), 'error');
+//  }
+
+    // Remove Drupal's core parameter
+    $params = $_GET;
+    $params['return_path'] = $_GET['q'];
+    unset($params['q']);
+
+    $block_ajax = array(
+        'AchieveServiceWS' => array(
+          'blocks' => array(
+            $delta => array(
+              'container' => "{$delta}-container",
+              'path' => base_path().'asws/'.$delta,
+              'params' => $params,
+              ),
+            ),
+          ),
+        );
+    drupal_add_js($block_ajax, 'setting');
+    
+    // Display loading animation
+    $src = base_path().drupal_get_path('module', 'achieveservice_ws').'/images/ajax-loader.gif';
+    $block['subject'] = 'Loading...';
+    $block['content'] = '<div id="'.$delta.'-container" class="loader"><img src="'.$src.'" alt="Loading" /> Please wait while we fetch the data... </div>';
+
+    // To exclude parent <content> tag, render each child element separately
+//  $content_root = $document->getElementsByTagName('content');
+//  if ($content_root->length > 0) {
+//    $content_nodes = $content_root->item(0)->childNodes;
+//    $content = array();
+//    foreach ($content_nodes as $node) {
+//      $content[] = $document->saveXML($node);
+//    }
+//    $block['content'] = implode('', $content);
+//  }
+
+//  if (!isset($block['content']) || !$block['content']) {
+//    drupal_set_message(t('Web service output is missing the content element'), 'error');
+//  }
+    return $block;
+  }
+}
+
+/**
+  * Implementation of hook_block_info().
+  */
+function achieveservice_ws_block_info() {
+  $services = achieveservice_ws_get_services();
+  $blocks = array();
+  foreach ($services as $service) {
+    $blocks[$service['name']] = array(
+      'info' => $service['title'],
+      'cache' => DRUPAL_CACHE_PER_USER,
+    );
+  }
+  return $blocks;
+
+  /*$blocks = array();
+  $blocks['activities'] = array(
+    'info' => t('Activities'),
+    'cache' => DRUPAL_NO_CACHE,
+  );
+  return $blocks;*/
+}
+
+/**
+  * Implementation of hook_block_info().
+  */
+function achieveservice_ws_block_view($block_name = '') {
+  // Remove Drupal's core parameter
+    $params = $_GET;
+    $params['return_path'] = $_GET['q'];
+    unset($params['q']);
+
+    $delta = $block_name;
+
+    $service = achieveservice_ws_get_service($delta);
+
+    if ($service['renderstyle']=='Chart') {
+
+     $x = achieveservice_ws_run_service($delta);
+
+     $type = 'BAR';
+     $tn = $x->getElementsByTagName('charttype');
+     if ($tn->length > 0) {
+       $type = $tn->item(0)->nodeValue;
+     }
+
+     $charttitle = '';
+     $tn = $x->getElementsByTagName('charttitle');
+     if ($tn->length > 0) {
+       $charttitle = $tn->item(0)->nodeValue;
+     }
+
+     $width = 400;
+     $height = 300;
+     $tn = $x->getElementsByTagName('chartwidth');
+     if ($tn->length > 0) {
+       $width = (int)$tn->item(0)->nodeValue;
+     }
+     $tn = $x->getElementsByTagName('chartheight');
+     if ($tn->length > 0) {
+       $height = (int)$tn->item(0)->nodeValue;
+     }
+
+
+
+     if ($type == 'PIE') {
+       $chart = array(
+        '#chart_id' => $delta.'_chart',
+        '#title' => $charttitle,
+        '#type' => CHART_TYPE_PIE,
+        '#adjust_resolution' => FALSE,
+        '#size' => array('#width' => $width, '#height' => $height),
+        );
+
+        foreach ($x->getElementsByTagName('row') as $row) {
+          $title = ($row->getElementsByTagName('title')->item(0)->nodeValue);
+          $value = (float)($row->getElementsByTagName('value')->item(0)->nodeValue);
+
+          $chart['#data'][] = $value;
+          $chart['#legends'][] = $title;
+        }
+
+     } else {
+ 
+       $chart = array(
+        '#chart_id' => $delta.'_chart',
+        '#title' => $charttitle,
+        '#type' => CHART_TYPE_BAR_V,
+        '#adjust_resolution' => TRUE,
+        '#size' => array('#width' => $width, '#height' => $height), 
+        );
+
+        foreach ($x->getElementsByTagName('row') as $row) {
+          $col = '';
+          if ($row->getElementsByTagName('color')->length > 0) {
+            $col = $row->getElementsByTagName('color')->item(0)->nodeValue;
+          }
+          $title = ($row->getElementsByTagName('title')->item(0)->nodeValue);
+          $value = (float)($row->getElementsByTagName('value')->item(0)->nodeValue);
+
+          $chart['#data'][] = $value;
+          $chart['#labels'][] = $title;
+          $chart['#data_colors'][] = $col;
+        }
+	$chartmin = min($chart['#data']); 
+	$chartmin = $chartmin<0?$chartmin:0;
+	$chartmax = max($chart['#data']);
+        $chart['#mixed_axis_labels'][CHART_AXIS_Y_LEFT][0][] = chart_mixed_axis_range_label($chartmin, $chartmax);
+      }
+      $chtml = '<div class="googlechart">'.theme('chart',array('chart'=>$chart)).'</div>';
+      return array('content'=>$chtml);
+    }
+
+
+    $block_ajax = array(
+      'AchieveServiceWS' => array(
+        'blocks' => array(
+          $delta => array(
+            'container' => "{$delta}-container",
+            'path' => base_path().'asws/'.$delta,
+            'params' => $params,
+          ),
+        ),
+      ),
+    );
+    drupal_add_js($block_ajax, 'setting');
+
+    // Display loading animation
+    $src = base_path().drupal_get_path('module', 'achieveservice_ws').'/images/ajax-loader.gif';
+    $block['subject'] = $service['title'];
+    $block['content'] = '<div id="'.$delta.'-container" class="loader"><img src="'.$src.'" alt="Loading" />Please wait while we fetch
+the data... </div>';
+
+  return $block;
+
+  /*if($block_name == 'activities') {
+    $activities = activities_block_content();
+    $block = array();
+    $block['subject'] = t('Activities');
+    $block['content']['list'] = array(
+      '#theme' => 'item_list',
+      '#items' => $activities,
+    );
+    return $block;
+  }*/
+}
+
+
+function achieveservice_ws_extract_content_and_title($xml) {
+  assert($xml instanceof DOMDocument);
+  $title='none';
+  $title_el = $xml->getElementsByTagName('title');
+  if ($title_el->length > 0) $title = $title_el->item(0)->nodeValue;
+
+  // To exclude parent <content> tag, render each child element separately
+  $content = 'Error';
+  $content_root = $xml->getElementsByTagName('content');
+  if ($content_root->length > 0) {
+    $content_nodes = $content_root->item(0)->childNodes;
+    $content_bits = array();
+    foreach ($content_nodes as $node) {
+      $content_bits[] = $xml->saveXML($node);
+    }
+    $content = implode('', $content_bits);
+  } else {
+    $content = $xml->saveXML();
+  }
+  return array('title' => $title, 'content' => $content);
+}
+
+// Render a service result directly without theme, useful for AJAX
+function achieveservice_ws_render_service($service_name, $search_term=NULL) {
+  $cached_services_list = array('council_tax_summary', 'benefits_summary', 'housing_summary');
+  
+  // Use cached data if available
+  //if(in_array($service_name, $cached_services_list) && isset($_SESSION['cached_services'][$service_name]) &&
+      //$_SESSION['cached_services']['changed_data'] === FALSE) {
+      
+     //$response =  $_SESSION['cached_services'][$service_name];
+     //drupal_json_output($response);
+  //}
+  //else {
+    if (!$search_term && isset($_GET['search']))
+      $search_term = $_GET['search'];
+
+    $output_xml = achieveservice_ws_run_service($service_name, $search_term);
+    
+    if ($output_xml) {
+      $response = achieveservice_ws_extract_content_and_title($output_xml);
+      
+      // Cache the summary data because it is in a block called on a number of pages
+      if(in_array($service_name, $cached_services_list)) {
+        $_SESSION['cached_services'][$service_name] = $response;
+        $_SESSION['cached_services']['changed_data'] = FALSE;
+      }
+      drupal_json_output($response);
+    } 
+    else {
+      print_r(drupal_set_message());
+    }
+  //}
+}
+
+/*
+ * Processing functions
+ */
+
+function achieveservice_ws_run_service($name, $search_term=NULL) {
+  $service = achieveservice_ws_get_service($name);
+//   print '<pre>';
+//   print_r($service);
+//   exit;
+  // Mike 16/02/11
+  // Some services have search terms. If a search term is present
+  // it is added to the url here
+
+  if($search_term !== NULL) {
+    // Mike 11/03/11
+    // The new FAQs service uses 'search' NOT 'searchTerm' 
+    if($name == 'frequently_asked_questions') {
+      $service['xml_source'] .= '?is_internal_only=0';
+    }
+    else {
+      if(!empty($search_term))
+        $service['xml_source'] .= '&SearchTerm='.str_replace(' ', '+', $search_term);
+    }
+  }
+  
+  if (strlen($_SERVER['QUERY_STRING'])>0)
+    $service['xml_source'] .= '&'.$_SERVER['QUERY_STRING'];
+  
+  if (!$service) {
+    watchdog('achieveservice_ws', 'Service @name not found.',
+        array('@name' => $name), WATCHDOG_ERROR);
+    drupal_set_message(t('Service not found.'), 'error');
+    return FALSE;
+  }
+
+  // Load and parse stylesheet
+  $stylesheet_xml = achieveservice_ws_get_xsl($service['xsl_id']);
+
+  if (!$stylesheet_xml) {
+    watchdog('achieveservice_ws', 'Could not retrieve XSLT with ID @id',
+        array('@id' => $service['xsl_id']), WATCHDOG_ERROR);
+    drupal_set_message(t('Could not load stylesheet.'), 'error');
+    return FALSE;
+  }
+
+  // Fetch and parse web service
+  $service_xml = achieveservice_ws_fetch_service_xml($service);
+  if (!$service_xml) {
+    watchdog('achieveservice_ws', 'Could not retrieve service XML: @name',
+        array('@name' => $name), WATCHDOG_ERROR);
+    drupal_set_message(t('Could not retrieve service XML'), 'error');
+    return FALSE;
+  }
+  
+  //die($stylesheet_xml);
+  
+  // Apply stylesheet tranformation to service
+  $output_xml = achieveservice_ws_apply_xslt($service_xml, $stylesheet_xml, $name);
+
+  if ($output_xml) {
+    return $output_xml;
+  } else {
+    drupal_set_message(t('Error running AchieveService Web Service: @name', array('@name' => $name)), 'error');
+    return FALSE;
+  }
+}
+
+function achieveservice_ws_fetch_service_xml($service) {
+  assert($service && is_array($service));
+  // If full URL is specified use that
+  if (strpos($service['xml_source'], 'http://') === 0) {
+    $doc = file_get_contents($service['xml_source']);
+  } else {
+    // Send request to AchieveService
+    $doc = achieveservice_ws_get_feed_content($service['xml_source']);
+  }
+  return achieveservice_ws_process_xml($doc);
+}
+
+// Fetch XML page from AchieveService feed under $url
+function achieveservice_ws_get_feed_content($url) {
+  //die('here');
+  $auth = TRUE;
+  $as_config = achieveservice_core_getconfig();
+  if (!$as_config) return FALSE;
+
+  // XXX: possibly dangerous hack, should at least be sanitised
+  $get_params = array();
+  $disallowed = array("search");
+  foreach ($_GET as $key => $value) {
+    if (!in_array($key, $disallowed))
+      $get_params[] = "$key=$value";
+  }
+  $url .= '&'.implode('&', $get_params);
+
+  $response = achieveservice_core_request($as_config, $url, $auth);
+
+  // TODO: any error checks required?
+  if ($response == FALSE) {
+    watchdog('achieveservice_ws', 'AS core request failed: @response', array('@response' => $response), WATCHDOG_ERROR);
+    return $response;
+  }
+
+  return $response['response'];
+}
+
+// Fetch the XSL stylesheet document given $id
+function achieveservice_ws_get_xsl($id_or_name) {
+  assert($id_or_name == TRUE);
+
+  if (is_numeric($id_or_name)) {
+    //$result = db_fetch_array(db_query('SELECT source, document FROM achieveservice_ws_stylesheets aws WHERE id = %d', $id_or_name));
+    
+    $result = db_query('SELECT source, document FROM {achieveservice_ws_stylesheets} WHERE id = :id', array(':id' => $id_or_name));
+  } else {
+    //$result = db_fetch_array(db_query('SELECT source, document FROM achieveservice_ws_stylesheets aws WHERE name = \'%s\'', $id_or_name));
+    
+    $result = db_query('SELECT source, document FROM {achieveservice_ws_stylesheets} WHERE name = :name', array(':name' => $id_or_name));
+  }
+
+  if (!$result) {
+    watchdog('achieveservice_ws', 'Could not find XSL with ID: @id', array('@id' => $id_or_name), WATCHDOG_ERROR);
+    return FALSE;
+  }
+  $record = $result->fetchAssoc();
+  
+//   print '<pre>';
+//   print_r($record);
+//   exit;
+
+  // Load the XSL text
+  if ($record['document']) {
+    // from the DB if present
+    $xsl_text = $record['document'];
+  } elseif ($record['source']) {
+    // or from a provided path (and possibly URL in future)
+    $path = $record['source'];
+    if (!file_exists($path)) {
+      watchdog('achieveservice_ws', 'Could not find XSL file with path: @source',
+          array('@source' => $path), WATCHDOG_ERROR);
+      return FALSE;
+    }
+    $xsl_text = file_get_contents($path);
+    //die('text = ' . $xsl_text);
+  } else {
+    watchdog('achieveservice_ws', 'Could not find XSL document or source.', array(), WATCHDOG_ERROR);
+    return FALSE;
+  }
+
+  return achieveservice_ws_process_xml($xsl_text);
+}
+
+// Convert $text to XML DOMDocument
+function achieveservice_ws_process_xml($text) {
+  assert($text == TRUE);
+
+  $doc = DOMDocument::loadXML($text);
+
+  if ($doc === FALSE) {
+    $xml_error = libxml_get_last_error();
+    if ($xml_error) {
+      watchdog('achieveservice_ws', "Feed parser error: @code @message",
+          array('@code' => $xml_error->code, '@message' => $xml_error->message),
+          WATCHDOG_ERROR);
+    } else {
+      watchdog('achieveservice_ws', 'Feed parser failed but no error was given.',
+          array(), WATCHDOG_ERROR);
+    }
+  }
+
+  return $doc;
+}
+
+// Apply $xsl stylesheet to $xml document
+function achieveservice_ws_apply_xslt($xml, $xsl, $scope = '') {
+  global $user;
+  //assert($xml instanceof DOMDocument);
+  //assert($xsl instanceof DOMDocument);
+  
+//   print 'Testing';
+//   print $xml->saveXML();
+//   exit;
+
+//   print 'path = ' . $_GET['return_path'] . '<br/>';
+//   die($_GET['q']);
+
+  $return_path = strlen(variable_get('achieveservice_ws_redirect_url', '')) > 0 ? variable_get('achieveservice_ws_redirect_url', '') : $_GET['q'];
+  
+  $processor = new XSLTProcessor();
+  // Supply current Drupal path (apparently no standard function to retrieve it)
+  $processor->setParameter('', 'return_path', isset($_GET['return_path']) ? $_GET['return_path'] : $return_path);
+  $processor->setParameter('', 'uid', isset($user->uid) ? $user->uid : '');
+  $processor->setParameter('', 'scope', $scope);
+  // XXX: warning this exposes all PHP functions to the XSLT, it should be restricted
+  $processor->registerPHPFunctions();
+  $processor->importStylesheet($xsl);
+  $output = $processor->transformToDoc($xml);
+  // die($xml);
+//   print 'Testing';
+//   print $output->saveXML();
+//   exit;
+
+  if ($output == FALSE) {
+    //die('Hello');
+    // TODO: replace with better error processing if possible
+    watchdog('achieveservice_ws', 'XSLT transformation failed, see PHP warnings for details', array(), WATCHDOG_ERROR);
+  }
+  return $output;
+}
+
+/*
+ * Data functions
+ */
+
+function achieveservice_ws_new_service($params = array()) {
+  return achieveservice_ws_new_array_from_table('achieveservice_ws_services', $params);
+}
+
+// Retrieve service definition as keyed array.
+// If $id_or_name is an integer it will look for the primary key, if a string it will search for the machine name
+function achieveservice_ws_get_service($id_or_name) {
+  //assert($id_or_name == TRUE);
+//   print '<pre>';
+//   print_r($id_or_name);
+//   die($id_or_name);
+  if (is_numeric($id_or_name)) {
+    //return db_fetch_array(db_query('SELECT * FROM {achieveservice_ws_services} WHERE id = %d', $id_or_name));
+    $result = db_query('SELECT * FROM {achieveservice_ws_services} WHERE id = :id', array(':id' => $id_or_name));
+  } else {
+    //return db_fetch_array(db_query('SELECT * FROM {achieveservice_ws_services} WHERE name = \'%s\'', $id_or_name));
+    $result = db_query('SELECT * FROM {achieveservice_ws_services} WHERE name = :name', array(':name' => $id_or_name));
+  }
+  return $result->fetchAssoc();
+}
+
+// Create array with $table fields as keys and optional $params as values
+function achieveservice_ws_new_array_from_table($table, $params = array()) {
+  $fields = drupal_schema_fields_sql($table);
+  $object = array_fill_keys($fields, '');
+  if (!empty($params)) {
+    return array_merge($object, $params);
+  }
+  return $object;
+}
+
+function achieveservice_ws_new_stylesheet($params = array()) {
+  return achieveservice_ws_new_array_from_table('achieveservice_ws_stylesheets', $params);
+}
+
+// Load stylesheet given numeric ID or machine name
+function achieveservice_ws_get_stylesheet($id_or_name) {
+  //die($id_or_name);
+  assert($id_or_name == TRUE);
+  if (is_numeric($id_or_name)) {
+    //return db_fetch_array(db_query('SELECT * FROM {achieveservice_ws_stylesheets} WHERE id = %d', $id_or_name));
+    $result = db_query('SELECT * FROM {achieveservice_ws_stylesheets} WHERE id = :id', array(':id' => $id_or_name));
+  } else {
+    //return db_fetch_array(db_query('SELECT * FROM {achieveservice_ws_stylesheets} WHERE name = "%s"', $id_or_name));
+    $result = db_query('SELECT * FROM {achieveservice_ws_stylesheets} WHERE name = :name', array(':name' => $id_or_name));
+  }
+//   $test = $result->fetchAssoc();
+//   print '<pre>';
+//   print_r($test);
+//   exit;
+  return $result->fetchAssoc();
+}
+
+// Get array of all stylesheets defined
+function achieveservice_ws_get_stylesheets() {
+  //die('achieveservice_ws_get_stylesheets');
+  // Sync stylesheets from system
+  achieveservice_ws_sync_stylesheets();
+  
+  //die('here 3');
+
+  // Load from DB
+  $result = db_query('SELECT * FROM {achieveservice_ws_stylesheets} ORDER BY name');
+
+  // TODO: add error check
+
+  $rows = array();
+  while ($row = $result->fetchAssoc()) {
+    $rows[] = $row;
+  }
+//   print '<pre>';
+//   print_r($rows);
+//   exit;
+  return $rows;
+}
+
+// Get all defined services
+function achieveservice_ws_get_services() {
+  //$query = db_query('SELECT services.*, styles.name AS xsl_name FROM {achieveservice_ws_services} services '.
+      //'LEFT OUTER JOIN {achieveservice_ws_stylesheets} styles ON styles.id = services.xsl_id ORDER BY services.name');
+      
+  $query = db_select('achieveservice_ws_services', 'services');
+  $query->addField('services', 'id');
+  $query->addField('services', 'name', 'name');
+  $query->addField('services', 'title');
+  $query->addField('services', 'xml_source');
+  $query->addField('services', 'xsl_id');
+  //$query->addField('services', '*');
+  $query->addField('styles', 'name', 'xsl_name');
+  $query->addField('services', 'searchable');
+  $query->leftJoin('achieveservice_ws_stylesheets', 'styles', 'services.xsl_id = styles.id');
+  $query->orderBy('name');
+  
+  $result = $query->execute();
+  $rows = array();
+  while ($row = $result->fetchAssoc()) {
+    $rows[] = $row;
+  }
+  return $rows;
+
+  // TODO: add error check
+
+  /*$rows = array();
+  while ($row = db_fetch_array($query)) {
+    $rows[] = $row;
+  }
+  return $rows;*/
+}
+
+function achieveservice_ws_save_service($service) {
+  // If service exists, set param to update it
+  $update = array();
+  if (isset($service['id']) && $service['id']) {
+    $update = array('id');
+  }
+  return drupal_write_record('achieveservice_ws_services', $service, $update);
+}
+
+function achieveservice_ws_save_stylesheet($stylesheet) {
+  // If stylesheet exists, set param to update it
+  $update = array();
+  if (isset($stylesheet['id']) && $stylesheet['id']) {
+    $update = array('id');
+  }
+
+  return drupal_write_record('achieveservice_ws_stylesheets', $stylesheet, $update);
+}
+
+function achieveservice_ws_delete_stylesheet($id) {
+  assert(is_numeric($id) && $id > 0);
+  $services_used = achieveservice_ws_get_services_attached_to_stylesheet($id);
+
+  if ($count = count($services_used)) {
+    drupal_set_message(t('@count services are attached to this stylesheet and must be detached before it can be deleted.', array('@count' => $count)), 'error');
+    return FALSE;
+  }
+  
+  $num_deleted = db_delete('achieveservice_ws_stylesheets')
+    ->condition('id', $id)
+    ->execute();
+    
+  return $num_deleted;
+
+  //$result = db_query('DELETE FROM {achieveservice_ws_stylesheets} WHERE id = %d', $id);
+  //return $result;
+}
+
+function achieveservice_ws_delete_service($id) {
+  assert(is_numeric($id) && $id > 0);
+  
+  $num_deleted = db_delete('achieveservice_ws_services')
+    ->condition('id', $id)
+    ->execute();
+    
+  return $num_deleted;
+  
+  //return db_query('DELETE FROM {achieveservice_ws_services} WHERE id = %d', $id);
+}
+
+
+/*
+ * Utility functions
+ */
+
+// Return array of stylesheets suitable for a form select element
+function achieveservice_ws_get_stylesheets_list_for_options() {
+  $result = db_query('SELECT id, name, description FROM {achieveservice_ws_stylesheets} ORDER BY name');
+  $output = array();
+  //while ($row = db_fetch_array($result)) {
+  while ($row = $result->fetchAssoc()) {
+    $output[$row['id']] = check_plain($row['name']) . ' (' . check_plain($row['description']) . ')';
+  }
+  return $output;
+  
+  //$result = db_query('SELECT id, name, description FROM {achieveservice_ws_stylesheets} ORDER BY name');
+}
+
+// Return services attached to $sheet_id
+function achieveservice_ws_get_services_attached_to_stylesheet($xsl_id) {
+  //$query = db_query('SELECT * FROM {achieveservice_ws_services} WHERE xsl_id = %d', $sheet_id);
+  $query = db_query('SELECT * FROM {achieveservice_ws_services} WHERE xsl_id = :xsl_id', array(':xsl_id' => $xsl_id));
+
+  $rows = array();
+  while ($row = db_fetch_array($query)) {
+    $rows[] = $row;
+  }
+  return $rows;
+}
+
+// Update database stylesheets from files supplied with module
+function achieveservice_ws_sync_stylesheets() {
+  $path = drupal_get_path('module', 'achieveservice_ws').'/stylesheets';
+  $file_sheets = achieveservice_ws_get_stylesheets_from_path($path);
+  
+//   print '<pre>';
+//   print_r($file_sheets);
+//   exit;
+
+  foreach ($file_sheets as $sheet) {
+    // Check if sheet is already in DB
+    $db_sheet = achieveservice_ws_get_stylesheet($sheet['name']);
+
+    // Setting ID will cause update
+    if ($db_sheet) {
+      $sheet['id'] = $db_sheet['id'];
+    }
+
+    // TODO: error handling
+    achieveservice_ws_save_stylesheet($sheet);
+  }
+  return;
+}
+
+// Load all XSL stylesheets residing at $path, returns sheet-structure array.
+function achieveservice_ws_get_stylesheets_from_path($path) {
+  if (!$path || !file_exists($path)) {
+    watchdog('achieveservice_ws', 'Could not find stylesheets load path: @path',
+        array('@path' => $path), WATCHDOG_ERROR);
+    return array();
+  }
+
+  $files = glob($path.'/*.xsl');
+  $sheets = array();
+  foreach ($files as $file) {
+    $info = pathinfo($file);
+
+    // Parse the XSL file
+    $xsl = achieveservice_ws_process_xml(file_get_contents($file));
+    if (!$xsl) continue;
+
+    $xpath = new DOMXPath($xsl);
+    $xpath->registerNamespace('xsl', 'http://www.w3.org/1999/XSL/Transform');
+    //$description = $xpath->evaluate('/xsl:variable[@name="description"]/text()');
+    $description = $xpath->evaluate('/xsl:stylesheet/xsl:variable[@name="description"]/text()');
+
+    $sheet = array(
+        'name' => $info['filename'],
+        'description' => $description->item(0)->nodeValue,
+        'source' => $file,
+        );
+    $sheets[] = $sheet;
+  }
+  return $sheets;
+}
+
+function achieveservice_ws_format_date($date, $format = 'medium') {
+  if (!$date) return '';
+  $stamp = strtotime($date);
+  if (!$stamp) return $date;  // Fail nicely
+  return strftime('%d/%m/%Y', $stamp);
+}
+
+function achieveservice_ws_search_info(){
+  return array(
+   'title'=>'results',
+   'path'=>'node',
+  );
+}
+
+function achieveservice_ws_search_execute($keys = NULL, $conditions = NULL) {
+  $services = achieveservice_ws_get_services();
+
+  $result = array();
+
+  foreach($services as $service) {
+    if ($service['searchable']!='Yes') {
+      continue;
+    }
+
+    $output_xml = achieveservice_ws_run_service($service['name'], $keys);
+   
+    foreach($output_xml->getElementsByTagName('item') as $item) {
+      $link = '';
+      $title = 'Search Result';
+      $snippet = '';
+      $suser = '';
+      $date = '';
+
+      $tn = $item->getElementsByTagName('link');
+      if ($tn->length > 0) {
+        $link = $tn->item(0)->nodeValue;
+      }
+
+      $tn = $item->getElementsByTagName('title');
+      if ($tn->length > 0) {
+        $title = $tn->item(0)->nodeValue;
+      }
+
+      $tn = $item->getElementsByTagName('snippet');
+      if ($tn->length > 0) {
+        $snippet = $tn->item(0)->nodeValue;
+      }
+
+      $tn = $item->getElementsByTagName('user');
+      if ($tn->length > 0) {
+        $suser = $tn->item(0)->nodeValue;
+      }
+
+      $tn = $item->getElementsByTagName('date');
+      if ($tn->length > 0) {
+        $date = $tn->item(0)->nodeValue;
+      }
+ 
+      $result[] = array(
+        'link' => $link,
+        'title' => $title,
+        'snippet' => $snippet,
+        'user' => $suser,
+        'date' => strtotime($date,0),
+        'type' => FALSE,
+      );
+    }
+  }
+
+  return $result;
+}

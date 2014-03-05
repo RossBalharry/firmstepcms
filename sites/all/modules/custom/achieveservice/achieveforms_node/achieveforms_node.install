@@ -1,0 +1,30 @@
+<?php
+
+function achieveforms_node_install() {
+
+/*  $form_node = array(
+    'type' => 'achieveforms_node',
+    'name' => 'AchieveForms Node',
+    'base' => 'node_content',
+    'module' => 'achieveforms_node',
+    'description' => 'Place an AchieveForms form in a node',
+  );
+
+  $content_type = node_type_set_defaults($form_node);
+ 
+  node_type_save($content_type);
+*/
+
+
+  field_create_field(array(
+    'field_name'=>'achieveform_name',
+    'type'=>'text',
+  ));
+
+  field_create_instance(array(
+    'entity_type' => 'node',
+    'field_name' => 'achieveform_name',
+    'bundle' => 'achieveforms_node',
+  ));
+  
+}
